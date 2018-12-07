@@ -1,6 +1,6 @@
 # ob-admin
 
-    客户后台管理系统  通用  springboot+shiro+redis+mysql    Layui前端框架    高度模仿微信小程序官方管理后台
+    客户后台管理系统  通用  springboot+shiro+redis+mysql +vue.js Layui前端框架 高度模仿微信小程序官方管理后台UI（看着简洁 偏白色调）
 
     目前主要针对小程序.......
 
