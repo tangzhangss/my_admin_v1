@@ -1,2 +1,15 @@
-# wx-management
-微信小程序管理后台  通用  springboot+shiro+redis+mysql
+# wx-admin
+
+     客户后台管理系统  通用  springboot+shiro+redis+mysql    Layui前端框架    高度模仿微信小程序官方管理后台
+
+     目前主要针对向程序.......
+
+    主要使用：开发者 客户
+
+    开发者管理自己的客户以及客户的项目后台
+
+    客户管理自己的项目后台 
+    
+#### 希望众多开发者一起参与  完善  
+    
+
