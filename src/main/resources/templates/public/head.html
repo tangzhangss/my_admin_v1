@@ -1,10 +1,31 @@
-<head e th:fragment="head">
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head  th:fragment="head">
    <meta charset="UTF-8">
    <meta name="管理后台" content="微信,小程序,后台管理系统">
    <title>
        逐运人生 | 客户后台管理系统
    </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/head.css" charset="utf-8"/>
 </head>
+
+<nav  th:fragment="nav">
+    <div class="logo">
+        <img  src="/static/img/zyrs.png" alt="逐运人生"/>
+        <div>逐运人生 | 客户后台管理系统</div>
+    </div>
+
+    <div class="menu">
+        <div class="blog">博客</div>
+        <div class="msg">
+            <img  src="/static/img/info.png" alt="消息"/>
+        </div>
+        <div class="info">
+            <img  src="/static/img/zyrs.png" alt="用户头像"/>
+        </div>
+    </div>
+</nav>
+</html>
 
 
 
