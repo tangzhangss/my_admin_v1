@@ -1,4 +1,4 @@
-# wx-admin
+# ob-admin
 
     客户后台管理系统  通用  springboot+shiro+redis+mysql    Layui前端框架    高度模仿微信小程序官方管理后台
 
