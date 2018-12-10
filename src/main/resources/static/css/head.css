@@ -29,16 +29,79 @@ nav .menu{
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 0 40px;
+    padding: 0;
     background-color: #fff;
     color: #353535;
     width: 300px;
 }
+
 nav .menu .blog{
     cursor: pointer;
 }
-nav .menu img{
+nav .menu .info{
+    width:150px;
+    height: 60px;
+    line-height: 60px;
+    background-color: white;
+    padding: 0;
+
+}
+nav .menu .info li,nav .menu .info dl,nav .menu .info dd{
+    width: 100%;
+}
+/*layui 默认样式 修改*/
+.layui-nav .layui-nav-item a:hover, .layui-nav .layui-nav-item  a{
+    color: black;
+    padding: 0;
+}
+
+nav .menu .info li{
+    list-style: none;
+}
+.menu-item{
+    padding: 0 20px;
+    height:70px;
+    line-height: 70px;
+    box-sizing: border-box;
+}
+.menu-item:hover{
+    border-bottom: 4px solid rgba(0,0,0,0.5);
+}
+nav .menu .info li .menu-item-info{
+    color: black;
+    text-decoration: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+nav .menu .info li a .layui-icon{
+    color: #707070;
+}
+nav .menu .info img{
     width: 40px;
     height: 40px;
     cursor: pointer;
+}
+nav .menu .info .msg{
+    width: 30px;
+    height:30px;
+    cursor: pointer;
+}
+#myInfo-other{
+    width: 100%;
+    text-align: center;
+    padding:0 0;
+    border: white;
+    box-shadow: 1px 1px 5px 1px #dddddd;
+
+}
+#myInfo-other dd{
+    width:100%;
+}
+#myInfo-other a{
+    display: block;
+    line-height: 60px;
+    text-align: center;
+    width: 100%;
+    border-top: 1px solid #f1f1f1;
 }
