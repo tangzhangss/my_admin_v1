@@ -10,6 +10,8 @@
     <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
     <script  src="/static/layui/layui.js"> </script>
     <link rel="stylesheet" type="text/css" href="/static/css/head.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css" charset="utf-8"/>
+    <script  src="/static/js/util.js"> </script>
 
 </head>
 
@@ -22,12 +24,13 @@
     <div class="menu">
             <div class="blog menu-item"><a href="http://www.zyrs.xyz" target="_blank">博客</a></div>
 
-            <ul class="layui-nav info" >
+            <ul class="layui-nav info"  th:if="${current_user} != null">
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="menu-item-info">
                         <span class="layui-icon">&#xe667</span>
                         <div id="myInfo">
-                            <img src="//t.cn/RCzsdCq" class="layui-nav-img"/>
+                            <img  th:if="*{logo eq ''}" th:src="*{logo}"class="layui-nav-img"/>
+                            <img  th:if="*{logo ne ''}" src="/static/img/zyrs.png" class="layui-nav-img"/>
                             <span class="layui-icon">&#xe625;</span>
                         </div>
                     </a>

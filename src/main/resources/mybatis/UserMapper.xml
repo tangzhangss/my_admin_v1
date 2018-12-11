@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyrs.xyz.obadmin.mapper.UserMapper">
+
+    <sql id="column">
+        id,username,password,ob_id
+    </sql>
+
+    <select id="getUserByUsername" resultType="zyrs.xyz.obadmin.bean.User">
+
+        select <include refid="column"></include>  from tbl_user where username = #{username}
+    </select>
+
+</mapper>

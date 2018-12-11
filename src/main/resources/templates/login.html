@@ -80,6 +80,13 @@
     form button{
         width:150px;
     }
+    body{
+        background-color: #fff;
+    }
+    .bottom-img{
+        margin-top: 50px;
+        width: 100%;
+    }
 </style>
 <body>
 
@@ -109,9 +116,31 @@
                 <a href="">忘记密码</a>
             </div>
 
-            <button class="layui-btn  layui-btn-warm" type="submit">登录</button>
+            <div class="layui-btn  layui-btn-warm" onclick="formSubmit()">登录</div>
+            <script>
+                function formSubmit(){
+                    $.ajax({
+                        url:"/user_login",
+                        type:'POST',
+                        data:$("form").serialize(),
+                        success:function(data){
+                          console.log("登录成功返回信息:",data);
+
+                          if(data == 1){
+
+                              window.location.href = "/index"
+
+                          }else{
+                              layer.msg(data);
+                          }
+                        }
+                    })
+                    return false;
+                }
+            </script>
         </form>
     </div>
 </div>
+<img class="bottom-img" lay-src="/static/img/login/bottom.jpg"/>
 </body>
 </html>
