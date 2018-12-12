@@ -7,9 +7,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import zyrs.xyz.obadmin.bean.Menu;
+import zyrs.xyz.obadmin.bean.Ob;
 import zyrs.xyz.obadmin.bean.User;
+import zyrs.xyz.obadmin.service.ObService;
 import zyrs.xyz.obadmin.service.UserService;
 
+import java.util.List;
 import java.util.Map;
 
 @SessionAttributes("currennt_user")
@@ -19,6 +23,10 @@ public class IndexController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ObService obService;
+
     /**
      * 必须要本controller内部....的请求执行前才会起效
      * 在每次数据交互时都需要知道当前用户此cookie信息是否还存在，
@@ -44,9 +52,44 @@ public class IndexController {
         }
     }
 
+    /**
+     * 获取首页信息  左侧菜单. .直接请求第一个菜单地址
+     * @param map
+     * @return
+     */
     @RequestMapping("")
     public String index(Map<String,Object> map){
-        System.out.println(map.get("current_user"));
+        User user = (User) map.get("current_user");
+
+
+        //如果是管理员就直接获取管理员菜单...默认菜单
+        if(user.getLevel() == 1){
+
+           //获取项目  左侧菜单 包括二级
+           List<Menu> menuList =  obService.getMenuWithAdmin();
+           System.out.println("菜单+"+menuList+"   用户:"+user);
+
+           map.put("menuList",menuList);
+
+           return "index";
+        }
+
+         //根据用户id， 获取项目信息
+         List<Ob> obList  = obService.getObInfoByUserId(user.getId());
+
+        //多个项目 其他方式  弹出选择这类的
+        if(obList.size()>1){
+            return null;
+        }
+        //用户设置当前logo为项目的logo _更新session信息
+        user.setLogo(obList.get(0).getLogo());
+        map.put("current_user",user);
+
+        //获取项目  左侧菜单 包括二级
+        List<Menu> menuList =  obService.getMenuByObId(obList.get(0).getId());
+
+        System.out.println(menuList);
+
         return "index";
     }
 }

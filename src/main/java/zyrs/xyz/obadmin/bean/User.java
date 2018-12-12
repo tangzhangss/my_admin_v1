@@ -1,16 +1,21 @@
 package zyrs.xyz.obadmin.bean;
 
+import java.io.Serializable;
+
 /**
  * 用户表
  *
  * 一个用户可有多个项目
  */
-public class User {
+public class User implements Serializable {
+
+    //序列化ID
+    private static final long serialVersionUID = 1;
 
     private Integer id;//用户id
     private String username;//账号，手机号，只能是数字
     private String password;//密码
-    private Integer obId;//项目Id
+    private Integer level;//用户类型 1管理 2客户
 
     private String rememberMe;//记住密码
 
@@ -23,10 +28,18 @@ public class User {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", obId=" + obId +
+                ", level='" + level + '\'' +
                 ", rememberMe='" + rememberMe + '\'' +
                 ", logo='" + logo + '\'' +
                 '}';
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
     }
 
     public String getLogo() {
@@ -57,9 +70,6 @@ public class User {
         this.password = password;
     }
 
-    public void setObId(Integer obId) {
-        this.obId = obId;
-    }
 
     public Integer getId() {
         return id;
@@ -73,7 +83,4 @@ public class User {
         return password;
     }
 
-    public Integer getObId() {
-        return obId;
-    }
 }

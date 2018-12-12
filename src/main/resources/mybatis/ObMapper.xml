@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyrs.xyz.obadmin.mapper.ObMapper">
+
+    <select id="getObInfoByUserId" resultType="zyrs.xyz.obadmin.bean.Ob">
+        select  id,name,logo,descr,create_time,hold_date,hold_cost,hold_ins from tbl_object where user_id = #{id}
+    </select>
+
+   <select id="getMenuByObId" resultType="zyrs.xyz.obadmin.bean.Menu">
+       select m.id,m.name,m.menu_logo,ms.id,ms.name,ms.url from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent left join tbl_menu_object mo where mo.ob_id = #{id} order by m.level asc;
+   </select>
+
+    <select id="getMenuWithAdmin" resultType="zyrs.xyz.obadmin.bean.Menu">
+        select m.id,m.name,m.menu_logo,ms.id,ms.name,ms.url from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 order by m.level asc;
+    </select>
+</mapper>

@@ -3,7 +3,7 @@
 <mapper namespace="zyrs.xyz.obadmin.mapper.UserMapper">
 
     <sql id="column">
-        id,username,password,ob_id
+        id,username,password,level
     </sql>
 
     <select id="getUserByUsername" resultType="zyrs.xyz.obadmin.bean.User">

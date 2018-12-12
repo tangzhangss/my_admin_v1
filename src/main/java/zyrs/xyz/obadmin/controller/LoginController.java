@@ -25,6 +25,10 @@ public class LoginController {
     public String login(){
         return "login";
     }
+    @RequestMapping("")
+    public String index(){
+        return "redirect:/index";
+    }
 
     //处理异常
     //如果是双reaml验证则，仅会抛出org.apache.shiro.authc.AuthenticationException这个异常
