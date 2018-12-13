@@ -67,7 +67,7 @@ public class IndexController {
 
            //获取项目  左侧菜单 包括二级
            List<Menu> menuList =  obService.getMenuWithAdmin();
-           System.out.println("菜单+"+menuList+"   用户:"+user);
+           System.out.println("菜单"+menuList+"   用户:"+user);
 
            map.put("menuList",menuList);
 
