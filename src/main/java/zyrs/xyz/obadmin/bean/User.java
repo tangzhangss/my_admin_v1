@@ -21,6 +21,7 @@ public class User implements Serializable {
 
     private String  logo="";//当前项目的logo
 
+    private Integer selectedMenuId=0;//当前被选中的菜单id
 
     @Override
     public String toString() {
@@ -28,7 +29,7 @@ public class User implements Serializable {
                 "id=" + id +
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
-                ", level='" + level + '\'' +
+                ", level=" + level +
                 ", rememberMe='" + rememberMe + '\'' +
                 ", logo='" + logo + '\'' +
                 '}';

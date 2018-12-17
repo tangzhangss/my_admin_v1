@@ -1,3 +1,18 @@
 body{
     background-color: #f8f9fb;
+    font-size: 14px;
+}
+.container{
+    margin-top: 40px;
+    display: flex;
+}
+section{
+    width: auto;
+    text-align: center;
+    padding: 0 50px;
+}
+.section{
+    width:100%;
+    text-align: left;
+    margin: 0 auto;
 }

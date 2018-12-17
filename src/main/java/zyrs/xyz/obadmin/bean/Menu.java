@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.List;
 
 /**
- * 左侧菜单
+ * 左侧菜单 一级
  */
 public class Menu  implements Serializable {
     //序列化ID
@@ -16,38 +16,6 @@ public class Menu  implements Serializable {
     private String menuLogo;
 
     private List<MenuSecond> menuSecondList;
-
-
-    class MenuSecond{
-
-        private Integer id;
-        private String name;
-        private String url;
-
-        public Integer getId() {
-            return id;
-        }
-
-        public void setId(Integer id) {
-            this.id = id;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public void setName(String name) {
-            this.name = name;
-        }
-
-        public String getUrl() {
-            return url;
-        }
-
-        public void setUrl(String url) {
-            this.url = url;
-        }
-    }
 
     public Integer getId() {
         return id;
@@ -81,4 +49,13 @@ public class Menu  implements Serializable {
         this.menuSecondList = menuSecondList;
     }
 
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", menuLogo='" + menuLogo + '\'' +
+                ", menuSecondList=" + menuSecondList +
+                '}';
+    }
 }

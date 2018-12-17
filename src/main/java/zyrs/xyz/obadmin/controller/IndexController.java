@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import zyrs.xyz.obadmin.bean.Menu;
 import zyrs.xyz.obadmin.bean.Ob;
@@ -16,7 +17,7 @@ import zyrs.xyz.obadmin.service.UserService;
 import java.util.List;
 import java.util.Map;
 
-@SessionAttributes("currennt_user")
+@SessionAttributes({"currennt_user","menuList"})
 @Controller
 @RequestMapping("index")
 public class IndexController {
@@ -61,7 +62,6 @@ public class IndexController {
     public String index(Map<String,Object> map){
         User user = (User) map.get("current_user");
 
-
         //如果是管理员就直接获取管理员菜单...默认菜单
         if(user.getLevel() == 1){
 
@@ -69,9 +69,12 @@ public class IndexController {
            List<Menu> menuList =  obService.getMenuWithAdmin();
            System.out.println("菜单"+menuList+"   用户:"+user);
 
+           //设置被选中 菜单的id
+           map.put("selectedMenuId",menuList.get(0).getMenuSecondList().get(0).getId());
+
            map.put("menuList",menuList);
 
-           return "index";
+           return  "forward:"+menuList.get(0).getMenuSecondList().get(0).getUrl();
         }
 
          //根据用户id， 获取项目信息
@@ -90,6 +93,21 @@ public class IndexController {
 
         System.out.println(menuList);
 
-        return "index";
+        return "menu_poject_relation";
+    }
+
+    /**
+     * 业务 控制器路由
+     */
+    @RequestMapping("/route")
+    public String route(@RequestParam("control")String control,@RequestParam("url")String url,
+                        @RequestParam(value = "menuId",defaultValue = "0")Integer menuId,Map<String,Object> map){
+
+        //设置当前被选中菜单
+        if(menuId!=0){
+            map.put("selectedMenuId",menuId);
+        }
+
+        return "forward:/"+control+"/"+url;
     }
 }

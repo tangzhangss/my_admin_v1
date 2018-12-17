@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+    <aside  th:fragment="aside">
+
+        <div class="aside-item" th:each="menu : ${menuList}">
+             <img th:src="${menu.menuLogo}"/>
+             <span th:text="${menu.name}"></span>
+
+             <div class="item-one" th:each="option : ${menu.menuSecondList}">
+
+                 <a  th:class="${selectedMenuId}==${option.id}?'item-selected':''"  th:text="${option.name}"  th:onclick="menu_selected([[${option.url}]],[[${option.id}]])">
+                     交互错误!
+                 </a>
+             </div>
+        </div>
+
+        <script>
+            function menu_selected(url,id){
+              console.log(url,">",id);
+              window.location.href=url+"&menuId="+id;
+            }
+        </script>
+    </aside>
+</html>
