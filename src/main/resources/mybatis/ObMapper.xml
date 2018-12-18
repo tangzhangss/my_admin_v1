@@ -11,18 +11,23 @@
         <id property="id" column="id"/>
         <result property="name" column="name"/>
         <result property="menuLogo" column="menu_logo"/>
+        <result property="menuType" column="menu_type"/>
+        <result property="level" column="level"/>
+
 
         <collection property="menuSecondList" ofType="zyrs.xyz.obadmin.bean.MenuSecond">
             <id property="id" column="ms_id"/>
             <result property="name" column="ms_name"/>
             <result property="url" column="ms_url"/>
+            <result property="menuType" column="ms_type"/>
+            <result property="menuParent" column="menu_parent"/>
         </collection>
 
     </resultMap>
 
    <select id="getMenuByObId" resultMap="getMenuResultMap">
        select
-           m.id,m.name,m.menu_logo,ms.id ms_id,ms.name ms_name,ms.url ms_url
+           m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent
        from
           tbl_menu m
        left join
@@ -38,6 +43,6 @@
    </select>
 
     <select id="getMenuWithAdmin" resultMap="getMenuResultMap">
-        select m.id,m.name,m.menu_logo,ms.id ms_id,ms.name ms_name,ms.url ms_url from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 order by m.level asc;
+        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 order by m.level asc;
     </select>
 </mapper>

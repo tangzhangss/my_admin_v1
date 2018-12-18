@@ -16,3 +16,7 @@ section{
     text-align: left;
     margin: 0 auto;
 }
+/**不可操作**/
+.disabled{
+    background-color: #ccc;
+}

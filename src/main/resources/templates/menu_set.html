@@ -22,6 +22,28 @@
         width: 30px;
         height: 30px;
     }
+
+    #layer_modal form{
+        width: 90%;
+        margin: 20px auto;
+        box-sizing: border-box;
+    }
+    #layer_modal form label{
+        text-align: center;
+    }
+    #layer_modal form input{
+        width: auto;
+    }
+    #layer_modal form .menuLogo{
+        width: 700px;
+    }
+    #layer_modal form .redio-div{
+        display: flex;
+        align-items: center;
+    }
+    #layer_modal .operation{
+        margin-top:40px;
+    }
 </style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
@@ -34,33 +56,168 @@
 
             <div class="menuset-item" th:each="menu : ${menuList}">
 
-                ▍<span th:text="${menu.name}"></span><img onclick="openEditModal()"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+                ▍<span th:text="${menu.name}"></span><img th:onclick="openEditModal(1,[[${menu}]])"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
 
                 <div class="item-one" th:each="option : ${menu.menuSecondList}">
 
                     <a  th:text="${option.name}">
                         交互错误!
-                    </a><img  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+                    </a><img th:onclick="openEditModal(2,[[${option}]])"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
                 </div>
-                <img  src="/static/img/tools/add.png" class="item-one add-item"/>
+                <img th:onclick="openEditModal(2,undefined,[[${menu.id}]])"  src="/static/img/tools/add.png" class="item-one add-item"/>
             </div>
             <div class="menuset-item">
-                ▍<img  src="/static/img/tools/add.png" class="add-item"/>
+                ▍<img th:onclick="openEditModal(1)"  src="/static/img/tools/add.png" class="add-item"/>
             </div>
 
         </div>
     </section>
 </div>
-
-<script>
-     function openEditModal(){
-         layer.openModal($("#layer_modal"));
-     }
-</script>
 <!--修改 增加菜单 静态框-->
 <div id="layer_modal" style="display: none">
-   我是静态框...
+    <form class="layui-form" lay-filter="layer_modal">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">I D</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" readonly="readonly" v-bind:value="menu.id" placeholder="自动生成" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" required v-bind:value="menu.name" placeholder="请输入菜单名" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">类型</label>
+            <div class="layui-input-block">
+                <!--vue 和 layui的radio存在冲突 这里使用jquery操作-->
+                <input  type="radio"  name="menuType" value="1" title="管理员" class="radio1"/>
+                <input   type="radio" name="menuType" value="2" title="客户" class="radio2" checked/>
+            </div>
+        </div>
+
+        <div class="layui-form-item" v-if="mtype==1">
+            <label class="layui-form-label">Logo</label>
+            <div class="layui-input-block">
+                <input type="text" name="menuLogo"  v-bind:value="menu.menuLogo"   required placeholder="本地图片路径,如:/static/img/logo.png" autocomplete="off" class="layui-input menuLogo"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item" v-if="mtype==1">
+            <label class="layui-form-label">顺序</label>
+            <div class="layui-input-block">
+                <input type="text" name="level"  v-bind:value="menu.level"  required lay-verify="required|number" placeholder="数值越小，越靠前" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item" v-if="mtype==2">
+            <label class="layui-form-label">Url</label>
+            <div class="layui-input-block">
+                <input type="text" name="url"  v-bind:value="menu.url"  required  placeholder="点击行为" autocomplete="off" class="layui-input menuLogo"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item" v-if="mtype==2">
+            <label class="layui-form-label">上级</label>
+            <div class="layui-input-block">
+                <input type="text" name="menuParent"   v-bind:value="menu.menuParent"  required lay-verify="required|number" placeholder="id" autocomplete="off" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block operation">
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+            </div>
+        </div>
+    </form>
 </div>
 
+<script>
+    //初始化vue对象
+    const myMenu = new Vue({
+        el: '#layer_modal',
+        data: {
+            menu:'',
+            mtype:0//如果mtype为1 表示一级菜单 2 就表示 二级菜单_区分新增时操作
+        }
+    })
+
+    /**
+     * 打开 编辑 菜单 静态框   一级或则二级
+     * @param t
+     * @param v
+     */
+    function openEditModal(t,v,id){
+        console.log("modal操作:",t,'--',v);
+
+        myMenu.mtype = t;
+
+        if(v!=undefined){
+            myMenu.menu = v;
+
+            <!--vue 和 layui的radio存在冲突 layui对redio做了封装 这里使用jquery操作-->
+            $(".radio"+v.menuType).prop("checked",true);
+            layui.use('form',function(){
+                let form = layui.form;
+                form.render();
+            });
+        }else{
+            //清空 form的内容 避免存在上次保留
+            $("form")[0].reset();
+            //如果时子菜单还要设置父级的id
+            if(t == 2){
+                myMenu.menu={},
+                myMenu.menu.menuParent = id;
+                console.log("新增子菜单，上级:",myMenu.menu.menuParent);
+            }
+        }
+
+
+        mylayer.openModal($("#layer_modal"),'菜单编辑框');
+    }
+
+
+    layui.use('form', function(){
+        let form = layui.form;
+
+        //各种基于事件的操作
+        form.on("submit(*)", function(data){
+
+            //可以使用data.field获取表单数据 但是不能 用作参数 object 和 字符串都不行
+            // let formdata =JSON.stringify(data.field);
+            // console.log("提交编辑内容！菜单级别:",myMenu.mtype," 数据:",formdata);
+
+            if(myMenu.mtype == 1){
+                $.ajax({
+                    type:"POST",
+                    url:"/admin/add_or_update_menu",
+                    data:$("form").serialize(),
+                    success:function(res){
+                        console.log(res);
+                    }
+                })
+            }else if(myMenu.mtype == 2){
+                $.ajax({
+                    type:"POST",
+                    url:"/admin/add_or_update_menu_second",
+                    data:$("form").serialize(),
+                    success:function(res){
+                        console.log(res);
+                    }
+                })
+            }else{
+                mylayer.msg("系统错误!");
+            }
+
+            return false; //阻止表单跳转。如果需要表单跳转，去掉这段即可。
+        });
+    });
+
+</script>
 </body>
 </html>

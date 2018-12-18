@@ -14,8 +14,26 @@ public class Menu  implements Serializable {
     private Integer id;
     private String name;
     private String menuLogo;
-
+    private Integer menuType;
+    private Integer level;
     private List<MenuSecond> menuSecondList;
+
+
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
+    }
+
+    public Integer getLevel() {
+        return level;
+    }
+
+    public void setLevel(Integer level) {
+        this.level = level;
+    }
 
     public Integer getId() {
         return id;
@@ -55,6 +73,8 @@ public class Menu  implements Serializable {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", menuLogo='" + menuLogo + '\'' +
+                ", menuType=" + menuType +
+                ", level=" + level +
                 ", menuSecondList=" + menuSecondList +
                 '}';
     }

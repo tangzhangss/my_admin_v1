@@ -13,6 +13,8 @@ public class  MenuSecond implements Serializable {
     private Integer id;
     private String name;
     private String url;
+    private Integer menuType;
+    private Integer menuParent;
 
 
     public MenuSecond(){
@@ -43,12 +45,30 @@ public class  MenuSecond implements Serializable {
         this.url = url;
     }
 
+    public Integer getMenuType() {
+        return menuType;
+    }
+
+    public void setMenuType(Integer menuType) {
+        this.menuType = menuType;
+    }
+
+    public Integer getMenuParent() {
+        return menuParent;
+    }
+
+    public void setMenuParent(Integer menuParent) {
+        this.menuParent = menuParent;
+    }
+
     @Override
     public String toString() {
         return "MenuSecond{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
+                ", menuType=" + menuType +
+                ", menuParent=" + menuParent +
                 '}';
     }
 }

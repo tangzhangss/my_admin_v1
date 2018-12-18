@@ -23,11 +23,13 @@ CREATE TABLE IF NOT EXISTS `tbl_menu` (
   `menu_logo` varchar(255) DEFAULT '' COMMENT '菜单的logo 图片地址',
   `level` int(11) DEFAULT '1' COMMENT '菜单的排序，从上到小 1>',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='左侧一级菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='左侧一级菜单';
 
 -- 正在导出表  ob_admin.tbl_menu 的数据：~0 rows (大约)
 DELETE FROM `tbl_menu`;
 /*!40000 ALTER TABLE `tbl_menu` DISABLE KEYS */;
+INSERT INTO `tbl_menu` (`id`, `name`, `menu_type`, `menu_logo`, `level`) VALUES
+	(1, '左侧菜单设置', 1, '/static/img/aside/menuSet.png', 1);
 /*!40000 ALTER TABLE `tbl_menu` ENABLE KEYS */;
 
 
@@ -39,11 +41,14 @@ CREATE TABLE IF NOT EXISTS `tbl_menu_second` (
   `menu_type` tinyint(4) DEFAULT '1' COMMENT '菜单的类型，主要区别管理员和客户，因为管理员菜单不需要和账号匹配  1 管理员 2客户',
   `menu_parent` int(11) DEFAULT '0' COMMENT '上级菜单',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='左侧二级菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COMMENT='左侧二级菜单表';
 
--- 正在导出表  ob_admin.tbl_menu_second 的数据：~0 rows (大约)
+-- 正在导出表  ob_admin.tbl_menu_second 的数据：~2 rows (大约)
 DELETE FROM `tbl_menu_second`;
 /*!40000 ALTER TABLE `tbl_menu_second` DISABLE KEYS */;
+INSERT INTO `tbl_menu_second` (`id`, `name`, `url`, `menu_type`, `menu_parent`) VALUES
+	(1, '项目关联', '/index/route?control=admin&url=menu_poject_relation', 1, 1),
+	(2, '自身结构', '/index/route?control=admin&url=menu_set', 1, 1);
 /*!40000 ALTER TABLE `tbl_menu_second` ENABLE KEYS */;
 
 
