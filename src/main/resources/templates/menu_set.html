@@ -3,6 +3,26 @@
 
 <head th:replace  ="/public/head :: head"></head>
 
+<style>
+    .menuset-item{
+        margin-left: 50px;
+        line-height:50px;
+    }
+    .menuset-item .item-one{
+        margin-left: 70px;
+        border-bottom: 1px solid #ccc;
+    }
+    .menuset-item img{
+        width: 25px;
+        height:  25px;
+        margin-left: 10px;
+        cursor: pointer;
+    }
+    .menuset-item  .add-item{
+        width: 30px;
+        height: 30px;
+    }
+</style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
 
@@ -11,11 +31,36 @@
 
     <section>
         <div class="section">
-            我是主要内容哦！
+
+            <div class="menuset-item" th:each="menu : ${menuList}">
+
+                ▍<span th:text="${menu.name}"></span><img onclick="openEditModal()"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+
+                <div class="item-one" th:each="option : ${menu.menuSecondList}">
+
+                    <a  th:text="${option.name}">
+                        交互错误!
+                    </a><img  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+                </div>
+                <img  src="/static/img/tools/add.png" class="item-one add-item"/>
+            </div>
+            <div class="menuset-item">
+                ▍<img  src="/static/img/tools/add.png" class="add-item"/>
+            </div>
+
         </div>
     </section>
 </div>
 
+<script>
+     function openEditModal(){
+         layer.openModal($("#layer_modal"));
+     }
+</script>
+<!--修改 增加菜单 静态框-->
+<div id="layer_modal" style="display: none">
+   我是静态框...
+</div>
 
 </body>
 </html>

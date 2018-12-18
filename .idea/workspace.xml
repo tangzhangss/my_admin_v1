@@ -7,20 +7,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5107a34f-8857-479e-a051-5ace2f6cf80f" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuSecond.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/aside/menuSet.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/tools/add.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/tools/del.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/tools/edit.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/spring.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/app.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/public/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/public/head.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/aside.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/aside.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -48,71 +44,7 @@
     <select />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
-              <caret line="73" selection-start-line="73" selection-end-line="73" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/aside.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/head.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="45" />
-              <folding>
-                <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#nav#0;n#html#0;n#!!top" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="57">
-              <caret line="12" column="24" selection-start-line="12" selection-start-column="24" selection-end-line="12" selection-end-column="24" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/app.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="38">
-              <caret line="2" column="20" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -149,7 +81,6 @@
         <option value="$PROJECT_DIR$/src/main/resources/static/layui/css/modules/layer/util.css" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexCotroller.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/InitController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/js/util.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/login.html" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/MenuMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/MenuService.java" />
@@ -167,20 +98,28 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/public/nav.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/index.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/public/head.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/SecondMenu.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuSecond.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/app.css" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/aside.css" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/public/head.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/js/util.js" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" />
       </list>
     </option>
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
   </component>
   <component name="LogFilters">
     <option name="FILTER_ERRORS" value="false" />
@@ -197,9 +136,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="161" />
-    <option name="width" value="1264" />
-    <option name="height" value="735" />
+    <option name="x" value="89" />
+    <option name="y" value="9" />
+    <option name="width" value="1179" />
+    <option name="height" value="676" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -208,6 +148,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -246,33 +187,7 @@
               <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
-              <item name="bean" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
-              <item name="controller" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -297,6 +212,24 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="js" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -312,19 +245,19 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
+    <property name="JavaScriptWeakerCompletionTypeGuess" value="true" />
     <property name="RequestMappingsPanelOrder0" value="0" />
     <property name="RequestMappingsPanelOrder1" value="1" />
     <property name="RequestMappingsPanelWidth0" value="75" />
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545039626533" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545107238853" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -333,22 +266,22 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.57586205" />
     <property name="restartRequiresConfirmation" value="false" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="Settings.JavaScript" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\ob-admin\src\main\resources\static\img\aside" />
-      <recent name="D:\ob-admin\src\main\resources\static\img\login" />
-      <recent name="D:\ob-admin\src\main\resources\static\js" />
-      <recent name="D:\ob-admin\src\main\resources\static\img\logo" />
-      <recent name="D:\ob-admin\src\main\resources\static\layui\css" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\ob-admin\src\main\resources\templates" />
       <recent name="D:\ob-admin\src\main\resources\mybatis" />
       <recent name="D:\ob-admin\src\main\resources\static\layui\css\modules\layer" />
       <recent name="D:\ob-admin\target\wx-admin-0.0.1-SNAPSHOT\WEB-INF\classes\static\img" />
       <recent name="D:\ob-admin\src\main\resources\static\img" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\ob-admin\src\main\resources\static\img\tools" />
+      <recent name="D:\ob-admin\src\main\resources\static\img\aside" />
+      <recent name="D:\ob-admin\src\main\resources\static\img\login" />
+      <recent name="D:\ob-admin\src\main\resources\static\js" />
+      <recent name="D:\ob-admin\src\main\resources\static\img\logo" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -566,11 +499,12 @@
       <workItem from="1544663594671" duration="897000" />
       <workItem from="1544683959926" duration="606000" />
       <workItem from="1545007916683" duration="21089000" />
+      <workItem from="1545094339317" duration="7997000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="100027000" />
+    <option name="totallyTimeSpent" value="108024000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -582,10 +516,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="161" y="0" width="1264" height="735" extended-state="0" />
-    <editor active="true" />
+    <frame x="89" y="9" width="1179" height="676" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5689655" visible="true" weight="0.24252492" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5689655" visible="true" weight="0.21000893" />
       <window_info id="Structure" order="1" sideWeight="0.23058252" side_tool="true" weight="0.21212122" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -595,7 +528,7 @@
       <window_info id="Web" order="7" sideWeight="0.43103448" side_tool="true" weight="0.25666666" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.048172757" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33943427" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.19003691" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32477063" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -619,7 +552,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50095236" side_tool="true" visible="true" weight="0.075412415" />
-      <window_info anchor="right" id="Bean Validation" order="10" visible="true" weight="0.042358804" />
+      <window_info anchor="right" id="Bean Validation" order="10" visible="true" weight="0.044682752" />
       <window_info anchor="right" id="Maven" order="11" weight="0.32983378" />
     </layout>
     <layout-to-restore>
@@ -734,13 +667,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service.java" />
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/InitController.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/util.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/layui/css/layui.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
@@ -921,41 +847,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/aside.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="164">
-          <caret line="16" column="19" selection-start-line="16" selection-start-column="19" selection-end-line="16" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1328">
-          <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/head.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-266">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="38">
-          <caret line="2" column="20" selection-start-line="2" selection-start-column="3" selection-end-line="2" selection-end-column="20" />
         </state>
       </provider>
     </entry>
@@ -969,30 +864,75 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="57">
-          <caret line="27" column="40" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="45" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#nav#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
-          <caret line="73" selection-start-line="73" selection-end-line="73" />
+          <caret line="43" column="25" lean-forward="true" selection-start-line="43" selection-start-column="25" selection-end-line="43" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="38">
+          <caret line="2" column="19" lean-forward="true" selection-start-line="2" selection-start-column="19" selection-end-line="2" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/aside.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="19" column="38" lean-forward="true" selection-start-line="19" selection-start-column="38" selection-end-line="19" selection-end-column="38" />
+        <state relative-caret-position="171">
+          <caret line="9" column="25" selection-start-line="9" selection-start-column="25" selection-end-line="9" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/aside.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="264">
+          <caret line="23" column="26" selection-start-line="23" selection-start-column="26" selection-end-line="23" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="42" column="10" lean-forward="true" selection-start-line="42" selection-start-column="10" selection-end-line="42" selection-end-column="10" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#1;n#ul#0;n#div#1;n#nav#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1159">
+          <caret line="61" column="11" selection-start-line="61" selection-start-column="11" selection-end-line="61" selection-end-column="11" />
+          <folding>
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/util.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-190">
+          <caret line="8" column="3" lean-forward="true" selection-start-line="8" selection-start-column="3" selection-end-line="8" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2717">
+          <caret line="143" column="33" selection-start-line="143" selection-start-column="33" selection-end-line="143" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="228">
+          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
         </state>
       </provider>
     </entry>
