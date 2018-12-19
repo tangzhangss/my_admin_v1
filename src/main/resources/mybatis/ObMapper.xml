@@ -39,10 +39,34 @@
        where
              mo.ob_id = #{id}
        order by
-                m.level asc;
+                m.level asc, m.id asc, ms.id asc;;
    </select>
 
     <select id="getMenuWithAdmin" resultMap="getMenuResultMap">
-        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 order by m.level asc;
+        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 and (ms.menu_type = 1  or  ms.menu_type is null ) order by m.level asc, m.id asc, ms.id asc;
+    </select>
+
+    <select id="getMenu" resultMap="getMenuResultMap">
+        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent order by m.level asc;
+    </select>
+
+    <insert id="add_or_update_menu" parameterType="zyrs.xyz.obadmin.bean.Menu" useGeneratedKeys="true">
+        replace into tbl_menu value(#{id},#{name},#{menuType},#{menuLogo},#{level})
+    </insert>
+    <insert id="add_or_update_menuSecond" parameterType="zyrs.xyz.obadmin.bean.MenuSecond" useGeneratedKeys="true">
+        replace into tbl_menu_second value(#{id},#{name},#{url},#{menuType},#{menuParent})
+    </insert>
+
+    <!--删除菜单-->
+    <delete id="del_menu">
+        delete from tbl_menu where id = #{id}
+    </delete>
+    <delete id="del_menu_second">
+        delete from tbl_menu_second where id = #{id}
+    </delete>
+
+    <!--项目信息-->
+    <select id="get_all_project_list" resultType="zyrs.xyz.obadmin.bean.Ob">
+        select * from tbl_object
     </select>
 </mapper>

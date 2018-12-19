@@ -41,3 +41,25 @@ mylayer.openModal = function(jquery_attr,title,area){
         });
     });
 }
+/**
+ *图片上传
+ * elem 绑定元素  如:#demo
+ * fuc 回调函数
+ **/
+mylayer.upload=function(elem,fuc,fucerr){
+    layui.use('upload', function(){
+        let upload = layui.upload;
+        //执行实例
+        upload.render({
+            elem:elem,//绑定元素
+            url: '/util/upload_picture', //上传接口
+            done: function(res){
+                //上传完毕回调
+                fuc(res.data);
+            },error: function(res){
+                //请求异常回调
+                fucerr(res.data);
+            }
+        });
+    });
+}

@@ -9,7 +9,7 @@
         line-height:50px;
     }
     .menuset-item .item-one{
-        margin-left: 70px;
+        margin-left: 50px;
         border-bottom: 1px solid #ccc;
     }
     .menuset-item img{
@@ -19,8 +19,8 @@
         cursor: pointer;
     }
     .menuset-item  .add-item{
-        width: 30px;
-        height: 30px;
+        width: 40px;
+        height: 40px;
     }
 
     #layer_modal form{
@@ -48,21 +48,25 @@
 <body>
 <nav th:replace="/public/head::nav"></nav>
 
-<div class="container">
+<div class="container-box">
     <aside th:replace="/public/aside::aside"></aside>
 
     <section>
         <div class="section">
 
-            <div class="menuset-item" th:each="menu : ${menuList}">
+            <div class="menuset-item" th:each="menu : ${allMenuList}">
 
-                ▍<span th:text="${menu.name}"></span><img th:onclick="openEditModal(1,[[${menu}]])"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+                ▍<span th:text="${menu.name}"></span>
+                 <img th:onclick="openEditModal(1,[[${menu}]])"  src="/static/img/tools/edit.png"/>
+                 <img th:onclick="delMenu(1,[[${menu.id}]],[[${#lists.size(menu.menuSecondList)}]])" src="/static/img/tools/del.png"/>
 
                 <div class="item-one" th:each="option : ${menu.menuSecondList}">
 
                     <a  th:text="${option.name}">
                         交互错误!
-                    </a><img th:onclick="openEditModal(2,[[${option}]])"  src="/static/img/tools/edit.png"/><img  src="/static/img/tools/del.png"/>
+                    </a>
+                    <img th:onclick="openEditModal(2,[[${option}]])"  src="/static/img/tools/edit.png"/>
+                    <img th:onclick="delMenu(2,[[${option.id}]])" src="/static/img/tools/del.png"/>
                 </div>
                 <img th:onclick="openEditModal(2,undefined,[[${menu.id}]])"  src="/static/img/tools/add.png" class="item-one add-item"/>
             </div>
@@ -87,7 +91,7 @@
         <div class="layui-form-item">
             <label class="layui-form-label">名称</label>
             <div class="layui-input-block">
-                <input type="text" name="name" required v-bind:value="menu.name" placeholder="请输入菜单名" autocomplete="off" class="layui-input"/>
+                <input type="text" name="name" v-bind:value="menu.name" lay-verify="required"  placeholder="请输入菜单名" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
@@ -103,28 +107,28 @@
         <div class="layui-form-item" v-if="mtype==1">
             <label class="layui-form-label">Logo</label>
             <div class="layui-input-block">
-                <input type="text" name="menuLogo"  v-bind:value="menu.menuLogo"   required placeholder="本地图片路径,如:/static/img/logo.png" autocomplete="off" class="layui-input menuLogo"/>
+                <input type="text" name="menuLogo"  v-bind:value="menu.menuLogo" lay-verify="required"   placeholder="本地图片路径,如:/static/img/logo.png" autocomplete="off" class="layui-input menuLogo"/>
             </div>
         </div>
 
         <div class="layui-form-item" v-if="mtype==1">
             <label class="layui-form-label">顺序</label>
             <div class="layui-input-block">
-                <input type="text" name="level"  v-bind:value="menu.level"  required lay-verify="required|number" placeholder="数值越小，越靠前" autocomplete="off" class="layui-input"/>
+                <input type="text" name="level"  v-bind:value="menu.level"  lay-verify="required|number" placeholder="数值越小，越靠前" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
         <div class="layui-form-item" v-if="mtype==2">
             <label class="layui-form-label">Url</label>
             <div class="layui-input-block">
-                <input type="text" name="url"  v-bind:value="menu.url"  required  placeholder="点击行为" autocomplete="off" class="layui-input menuLogo"/>
+                <input type="text" name="url"  v-bind:value="menu.url"   lay-verify="required" placeholder="点击行为" autocomplete="off" class="layui-input menuLogo"/>
             </div>
         </div>
 
         <div class="layui-form-item" v-if="mtype==2">
             <label class="layui-form-label">上级</label>
             <div class="layui-input-block">
-                <input type="text" name="menuParent"   v-bind:value="menu.menuParent"  required lay-verify="required|number" placeholder="id" autocomplete="off" class="layui-input disabled"/>
+                <input type="text" name="menuParent"   v-bind:value="menu.menuParent"  lay-verify="required|number" placeholder="id" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 
@@ -148,6 +152,41 @@
     })
 
     /**
+     * 删除菜单
+     * t 菜单 1 2
+     * id 菜单id
+     * l 子菜单数量
+     * */
+     function delMenu(t,id,l){
+         console.log("删除菜单",t,id,l);
+        if(t == 1){
+            //删除一级菜单必须要先删除二级菜单
+            if(l==0){
+                if(confirm("你正在删除菜单?")){
+                    $.ajax({
+                        url:"/admin/del_menu",
+                        data:{"id":id},
+                        success(){
+                            window.location.reload();
+                        }
+                    })
+                }
+            }else{
+                mylayer.msg("请先删除下级菜单！");
+            }
+        }else if(t == 2){
+            if(confirm("你正在删除菜单?")){
+                $.ajax({
+                    url:"/admin/del_menu_second",
+                    data:{"id":id},
+                    success(){
+                        window.location.reload();
+                    }
+                })
+            }
+        }
+     }
+    /**
      * 打开 编辑 菜单 静态框   一级或则二级
      * @param t
      * @param v
@@ -159,7 +198,6 @@
 
         if(v!=undefined){
             myMenu.menu = v;
-
             <!--vue 和 layui的radio存在冲突 layui对redio做了封装 这里使用jquery操作-->
             $(".radio"+v.menuType).prop("checked",true);
             layui.use('form',function(){
@@ -198,7 +236,11 @@
                     url:"/admin/add_or_update_menu",
                     data:$("form").serialize(),
                     success:function(res){
-                        console.log(res);
+                        if(res == 1){
+                            window.location.href="/index";
+                        }else{
+                            mylayer.msg("系统错误!");
+                        }
                     }
                 })
             }else if(myMenu.mtype == 2){
@@ -207,7 +249,11 @@
                     url:"/admin/add_or_update_menu_second",
                     data:$("form").serialize(),
                     success:function(res){
-                        console.log(res);
+                        if(res == 1){
+                            window.location.href="/index";
+                        }else{
+                            mylayer.msg("系统错误!");
+                        }
                     }
                 })
             }else{

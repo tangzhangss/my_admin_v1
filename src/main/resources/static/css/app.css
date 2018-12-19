@@ -1,10 +1,12 @@
 body{
     background-color: #f8f9fb;
     font-size:20px;
+    padding: 0;
 }
-.container{
+.container-box{
     margin-top: 40px;
     display: flex;
+    padding: 0;
 }
 section{
     width: auto;
@@ -19,4 +21,7 @@ section{
 /**不可操作**/
 .disabled{
     background-color: #ccc;
+}
+a:hover{
+    text-decoration: none;
 }

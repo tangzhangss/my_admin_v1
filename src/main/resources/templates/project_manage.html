@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+<style>
+    .table{
+        margin-top: 20px;
+    }
+    form{
+        padding-top: 30px;
+    }
+    .layui-input, .layui-textarea{
+        width:200px;
+    }
+    .layui-form-label{
+        width: 200px;
+    }
+    .long{
+        width: 600px;
+    }
+    .operation{
+        margin-top: 30px;
+        float: right;
+        margin-right: 180px;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+            <button th:onclick="openEditProjectModal(1)" type="button" class="btn btn-info" style="background-color: #1aad19">添加项目</button>
+            <table class="table table-hover">
+               <tr>
+                <th>ID</th>
+                <th>名称</th>
+                <th>logo</th>
+                <th>主体</th>
+                <th>描述</th>
+                <th>创建时间</th>
+                <th>维护截止时间</th>
+                <th>维护费用(￥/年)</th>
+                <th>维护说明</th>
+               </tr>
+                <tr th:each="ob:${obList}">
+                    <td th:text="${ob.id}">0</td>
+                    <td th:text="${ob.name}">demo</td>
+                    <td th:text="${ob.logo}">logo</td>
+                    <td th:text="${ob.owner}">个人|企业</td>
+                    <td th:text="${ob.descr}">描述</td>
+                    <td th:text="${ob.createTime}">0000-00-00</td>
+                    <td th:text="${ob.holdDate}">0000-00-00</td>
+                    <td th:text="${ob.holdCost}">0000</td>
+                    <td th:text="${ob.holdIns}">说明</td>
+                </tr>
+
+            </table>
+        </div>
+    </section>
+</div>
+
+<!--修改 增加 项目 静态框-->
+<div id="layer_modal_project" style="display: none">
+    <form class="layui-form" lay-filter="layer_modal_project">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">I D</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" readonly="readonly" v-bind:value="project.id" placeholder="自动生成" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">名称</label>
+            <div class="layui-input-block">
+                <input type="text" name="name" v-bind:value="project.name" lay-verify="required"  placeholder="请输入项目名" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">Logo</label>
+            <div class="layui-input-block">
+                <input type="text" name="logo" id="project-logo"  v-bind:value="project.logo" lay-verify="required"   placeholder="网络图片地址|不能超过10M" autocomplete="off" class="layui-input long"/>
+                <button type="button" id="ob-upload" lay-data="{accept: 'images',acceptMime:'images'}"  class="layui-btn" style="margin-top: 5px">
+                    <i class="layui-icon">&#xe67c;</i>上传图片
+                </button>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">主体</label>
+            <div class="layui-input-block">
+                <input type="text" name="owner"  v-bind:value="project.owner" lay-verify="required"   placeholder="个人|企业（称呼）" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">描述</label>
+            <div class="layui-input-block">
+                <textarea name="descr" v-bind:value="project.descr" placeholder="请输入内容" class="layui-textarea long" maxlength="250"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">创建时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="createTime" readonly="readonly"  v-bind:value="project.createTime" lay-verify="required"   placeholder="自动生成" autocomplete="off" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">维护截至时间</label>
+            <div class="layui-input-block">
+                <input type="text" name="holdDate"  v-bind:value="project.holdDate" readonly="readonly"  lay-verify="required" placeholder="此处不可更改" autocomplete="off" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">维护费用(￥/年)</label>
+            <div class="layui-input-block">
+                <input type="text" name="holdCost"   v-bind:value="project.holdCost"  lay-verify="required|number" placeholder="费用" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">维护说明</label>
+            <div class="layui-input-block">
+                <textarea name="holdIns" v-bind:value="project.holdIns" placeholder="请输入内容" class="layui-textarea long" maxlength="250"></textarea>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block operation">
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    //开启layui上传图片组件
+    mylayer.upload("#ob-upload",function(res){
+        console.log("上传图片成功:",res);
+        $("#project-logo").val(res);
+    },function(res){
+        console.log("上传图片失败:",res);
+        mylayer.msg(res);
+    });
+
+    /**
+     *打开项目编辑midal
+     * t 1 add 2 update
+     * v ob对象
+     **/
+    function openEditProjectModal(t,v){
+        mylayer.openModal($("#layer_modal_project"),'项目编辑框',["1000px","800px"]);
+    }
+    layui.use('form', function(){
+        let form = layui.form;
+        //各种基于事件的操作
+        form.on("submit(*)", function(data) {
+            //可以使用data.field获取表单数据 但是不能 用作参数 object 和 字符串都不行
+            // let formdata =JSON.stringify(data.field);
+            // console.log("提交编辑内容！菜单级别:",myMenu.mtype," 数据:",formdata);
+        })
+    });
+</script>
+</body>
+</html>

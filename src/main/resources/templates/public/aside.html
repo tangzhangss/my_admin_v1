@@ -8,7 +8,6 @@
              <span th:text="${menu.name}"></span>
 
              <div class="item-one" th:each="option : ${menu.menuSecondList}">
-
                  <a  th:class="${selectedMenuId}==${option.id}?'item-selected':''"  th:text="${option.name}"  th:onclick="menu_selected([[${option.url}]],[[${option.id}]])">
                      交互错误!
                  </a>

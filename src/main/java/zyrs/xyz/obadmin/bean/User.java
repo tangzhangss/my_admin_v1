@@ -20,6 +20,8 @@ public class User implements Serializable {
     private String rememberMe;//记住密码
 
     private String  logo="";//当前项目的logo
+    private Integer obId;//当前项目的id
+
 
     private Integer selectedMenuId=0;//当前被选中的菜单id
 
@@ -32,7 +34,25 @@ public class User implements Serializable {
                 ", level=" + level +
                 ", rememberMe='" + rememberMe + '\'' +
                 ", logo='" + logo + '\'' +
+                ", obId=" + obId +
+                ", selectedMenuId=" + selectedMenuId +
                 '}';
+    }
+
+    public Integer getObId() {
+        return obId;
+    }
+
+    public void setObId(Integer obId) {
+        this.obId = obId;
+    }
+
+    public Integer getSelectedMenuId() {
+        return selectedMenuId;
+    }
+
+    public void setSelectedMenuId(Integer selectedMenuId) {
+        this.selectedMenuId = selectedMenuId;
     }
 
     public Integer getLevel() {

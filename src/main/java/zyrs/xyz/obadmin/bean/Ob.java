@@ -19,6 +19,15 @@ public class Ob implements Serializable {
     private Integer holdDate;//项目维护费用 年算
     private Integer holdCost;//项目要维护金额 年算
     private String holdIns;//项目说明
+    private String owner;//主体人|公司
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
 
     public void setId(Integer id) {
         this.id = id;
@@ -95,6 +104,7 @@ public class Ob implements Serializable {
                 ", holdDate=" + holdDate +
                 ", holdCost=" + holdCost +
                 ", holdIns='" + holdIns + '\'' +
+                ", owner='" + owner + '\'' +
                 '}';
     }
 }

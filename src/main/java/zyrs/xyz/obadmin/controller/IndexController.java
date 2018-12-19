@@ -17,7 +17,7 @@ import zyrs.xyz.obadmin.service.UserService;
 import java.util.List;
 import java.util.Map;
 
-@SessionAttributes({"currennt_user","menuList"})
+@SessionAttributes({"current_user","menuList"})
 @Controller
 @RequestMapping("index")
 public class IndexController {
@@ -61,21 +61,22 @@ public class IndexController {
     @RequestMapping("")
     public String index(Map<String,Object> map){
         User user = (User) map.get("current_user");
+        //菜单获取
+        List<Menu> menuList = null;
 
-        //如果是管理员就直接获取管理员菜单...默认菜单
+        //管理员
         if(user.getLevel() == 1){
+            //获取项目  左侧菜单 包括二级
+            menuList =  obService.getMenuWithAdmin();
 
-           //获取项目  左侧菜单 包括二级
-           List<Menu> menuList =  obService.getMenuWithAdmin();
-           System.out.println("菜单"+menuList+"   用户:"+user);
+            //设置被选中 菜单的id
+            map.put("selectedMenuId",menuList.get(0).getMenuSecondList().get(0).getId());
 
-           //设置被选中 菜单的id
-           map.put("selectedMenuId",menuList.get(0).getMenuSecondList().get(0).getId());
-
-           map.put("menuList",menuList);
+            map.put("menuList",menuList);
 
            return  "forward:"+menuList.get(0).getMenuSecondList().get(0).getUrl();
         }
+        //客户....
 
          //根据用户id， 获取项目信息
          List<Ob> obList  = obService.getObInfoByUserId(user.getId());
@@ -84,14 +85,17 @@ public class IndexController {
         if(obList.size()>1){
             return null;
         }
-        //用户设置当前logo为项目的logo _更新session信息
+        //用户设置当前logo为项目的logo _项目id_更新session信息
         user.setLogo(obList.get(0).getLogo());
+        user.setObId(obList.get(0).getId());
         map.put("current_user",user);
 
-        //获取项目  左侧菜单 包括二级
-        List<Menu> menuList =  obService.getMenuByObId(obList.get(0).getId());
+        //获取菜单
+        //根据用户id， 获取项目菜单信息
+        menuList =  obService.getMenuByObId(user.getObId());
 
-        System.out.println(menuList);
+        map.put("menuList",menuList);
+
 
         return "menu_poject_relation";
     }
