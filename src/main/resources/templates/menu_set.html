@@ -77,6 +77,7 @@
         </div>
     </section>
 </div>
+
 <!--修改 增加菜单 静态框-->
 <div id="layer_modal" style="display: none">
     <form class="layui-form" lay-filter="layer_modal">
@@ -162,7 +163,7 @@
         if(t == 1){
             //删除一级菜单必须要先删除二级菜单
             if(l==0){
-                if(confirm("你正在删除菜单?")){
+                if(confirm("你正在删除菜单【"+id+"】?")){
                     $.ajax({
                         url:"/admin/del_menu",
                         data:{"id":id},
@@ -175,7 +176,7 @@
                 mylayer.msg("请先删除下级菜单！");
             }
         }else if(t == 2){
-            if(confirm("你正在删除菜单?")){
+            if(confirm("你正在删除菜单【"+id+"】?")){
                 $.ajax({
                     url:"/admin/del_menu_second",
                     data:{"id":id},

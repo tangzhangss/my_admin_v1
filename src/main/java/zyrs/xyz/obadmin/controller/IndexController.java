@@ -51,6 +51,7 @@ public class IndexController {
                 map.put("current_user", myUser);
             }
         }
+
     }
 
     /**

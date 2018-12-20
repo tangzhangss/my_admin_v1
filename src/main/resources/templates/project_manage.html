@@ -5,6 +5,15 @@
 <style>
     .table{
         margin-top: 20px;
+        text-align: center;
+    }
+    .table th{
+        text-align: center;
+    }
+
+    .table img{
+        width: 80px;
+        height: 80px;
     }
     form{
         padding-top: 30px;
@@ -14,6 +23,9 @@
     }
     .layui-form-label{
         width: 200px;
+    }
+    .short{
+        width: 240px;
     }
     .long{
         width: 600px;
@@ -44,17 +56,35 @@
                 <th>维护截止时间</th>
                 <th>维护费用(￥/年)</th>
                 <th>维护说明</th>
+                <th>用户ID</th>
+                <th>状态</th>
+                <th>操作</th>
                </tr>
                 <tr th:each="ob:${obList}">
                     <td th:text="${ob.id}">0</td>
                     <td th:text="${ob.name}">demo</td>
-                    <td th:text="${ob.logo}">logo</td>
+                    <td>
+                        <img th:src="${ob.logo}"/>
+                    </td>
                     <td th:text="${ob.owner}">个人|企业</td>
                     <td th:text="${ob.descr}">描述</td>
-                    <td th:text="${ob.createTime}">0000-00-00</td>
-                    <td th:text="${ob.holdDate}">0000-00-00</td>
+                    <td th:text="${#dates.format(ob.createTime,'yyyy-MM-dd')}">0000-00-00</td>
+                    <td>
+                        <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}"> 0000-00-00</span>
+                        <span th:title="${ob.id}" class="glyphicon glyphicon-plus project-relay-btn" style="color: #1E9FFF;cursor: pointer" title="延期" data-toggle="modal" data-target="#relay-modal"></span>
+                    </td>
                     <td th:text="${ob.holdCost}">0000</td>
                     <td th:text="${ob.holdIns}">说明</td>
+                    <td th:text="${ob.userId}">账号ID</td>
+                    <td>
+                        <span th:if="${ob.status == 1}" style="color: #007DDB;">正常</span>
+                        <span th:if="${ob.status == 2}" style="color: orange;">到期</span>
+                        <span th:if="${ob.status == 3}" style="color: red;">放弃</span>
+                    </td>
+                    <td>
+                       <button class="btn  btn-primary" th:onclick="openEditProjectModal(2,[[${ob}]])" >修改</button>
+                        <button class="btn btn-danger" th:onclick="delProject(this,[[${ob.id}]])">删除</button>
+                    </td>
                 </tr>
 
             </table>
@@ -83,8 +113,8 @@
         <div class="layui-form-item">
             <label class="layui-form-label">Logo</label>
             <div class="layui-input-block">
-                <input type="text" name="logo" id="project-logo"  v-bind:value="project.logo" lay-verify="required"   placeholder="网络图片地址|不能超过10M" autocomplete="off" class="layui-input long"/>
-                <button type="button" id="ob-upload" lay-data="{accept: 'images',acceptMime:'images'}"  class="layui-btn" style="margin-top: 5px">
+                <input type="text" name="logo" id="project-logo"  v-bind:value="project.logo"  placeholder="网络图片地址|不能超过10M" autocomplete="off" class="layui-input long"/>
+                <button type="button" id="ob-upload" lay-data="{accept: 'images',acceptMime:'image/*'}"  class="layui-btn" style="margin-top: 5px">
                     <i class="layui-icon">&#xe67c;</i>上传图片
                 </button>
             </div>
@@ -107,14 +137,14 @@
         <div class="layui-form-item">
             <label class="layui-form-label">创建时间</label>
             <div class="layui-input-block">
-                <input type="text" name="createTime" readonly="readonly"  v-bind:value="project.createTime" lay-verify="required"   placeholder="自动生成" autocomplete="off" class="layui-input disabled"/>
+                <input type="text" name="createTime" readonly="readonly"  v-bind:value="project.createTime"   placeholder="自动生成" autocomplete="off" class="layui-input short disabled"/>
             </div>
         </div>
 
         <div class="layui-form-item">
             <label class="layui-form-label">维护截至时间</label>
             <div class="layui-input-block">
-                <input type="text" name="holdDate"  v-bind:value="project.holdDate" readonly="readonly"  lay-verify="required" placeholder="此处不可更改" autocomplete="off" class="layui-input disabled"/>
+                <input type="text" name="holdDate"  v-bind:value="project.holdDate" readonly="readonly"   placeholder="此处不可更改" autocomplete="off" class="layui-input short disabled"/>
             </div>
         </div>
 
@@ -128,9 +158,18 @@
         <div class="layui-form-item">
             <label class="layui-form-label">维护说明</label>
             <div class="layui-input-block">
-                <textarea name="holdIns" v-bind:value="project.holdIns" placeholder="请输入内容" class="layui-textarea long" maxlength="250"></textarea>
+                <textarea name="holdIns" v-bind:value="project.holdIns"  lay-verify="required" placeholder="请输入内容" class="layui-textarea long" maxlength="250"></textarea>
             </div>
         </div>
+        <div class="layui-form-item">
+         <label class="layui-form-label">用户ID</label>
+         <div class="layui-input-block">
+            <input type="text" name="userId"  lay-verify="required|number"  v-bind:value="project.userId" placeholder="所属账号ID" class="layui-input"/>
+        </div>
+       </div>
+
+        <!--项目状态  不显示  但是要原样传到 后台-->
+        <input  type="hidden" name="status"  v-bind:value="project.status" class="layui-input"/>
 
         <div class="layui-form-item">
             <div class="layui-input-block operation">
@@ -141,6 +180,27 @@
     </form>
 </div>
 
+<!--延期 静态框-->
+<div id="relay-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">请输入延期月数</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="email" class="form-control" id="project-relay-modal-input" placeholder="月|整数"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="project-relay-modal-save">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
 <script>
     //开启layui上传图片组件
     mylayer.upload("#ob-upload",function(res){
@@ -150,13 +210,34 @@
         console.log("上传图片失败:",res);
         mylayer.msg(res);
     });
-
+    //vue 对象
+    const  my_project = new Vue({
+        el: '#layer_modal_project',
+        data: {
+            project:{},
+            currentId:0,//当前项目id
+        }
+    })
     /**
      *打开项目编辑midal
      * t 1 add 2 update
      * v ob对象
      **/
     function openEditProjectModal(t,v){
+         console.log(t,v);
+        //增加的话 需要清空 静态框中内容 —— 因为静态框会保留上一次的值
+        if(t == 1){
+            //必须要初始化这两个值 不然会先 string - date转换错误
+            my_project.project= {
+                "createTime":formatDate(new Date()),
+                "holdDate":formatDate(new Date()),
+            };
+        }else{
+            v.createTime = formatDate(new Date(v.createTime));
+            v.holdDate = formatDate(new Date(v.holdDate));
+
+            my_project.project= v;
+        }
         mylayer.openModal($("#layer_modal_project"),'项目编辑框',["1000px","800px"]);
     }
     layui.use('form', function(){
@@ -166,8 +247,68 @@
             //可以使用data.field获取表单数据 但是不能 用作参数 object 和 字符串都不行
             // let formdata =JSON.stringify(data.field);
             // console.log("提交编辑内容！菜单级别:",myMenu.mtype," 数据:",formdata);
+            $.ajax({
+                type:"POST",
+                url:"/admin/add_or_update_project",
+                data:$("form").serialize(),
+                success:function(res){
+                    if(res == 1){
+                        window.location.reload();
+                    }else{
+                        mylayer.msg("系统错误!");
+                    }
+                }
+            })
+
+            return false;//取消 form提交动作
         })
     });
+    /**
+     * 删除项目
+     * obj 当前对象
+     * id  项目id
+     **/
+    function delProject(obj,id){
+
+        if(!confirm("您正在删除项目【"+id+"】?")){
+            return false;
+        }
+        $.ajax({
+            type:"get",
+            url:"/admin/delete_project",
+            data:{"id":id},
+            success:function(res){
+                if(res == 1){
+                    $(obj).parent().parent().remove();
+                }else{
+                    mylayer.msg("系统错误!");
+                }
+            }
+        })
+    }
+
+    /**
+     * 延期...从当前时间开始算
+     */
+    $(".project-relay-btn").click(function(){
+        my_project.currentId = $(this).attr("title");
+    })
+    $("#project-relay-modal-save").click(function(){
+       let v = $("#project-relay-modal-input").val();
+
+       console.log(my_project.currentId,v);
+
+       $.ajax({
+           url:"/admin/project_relay",
+           data:{"id":my_project.currentId,"count":v},
+           success:function(){
+               window.location.reload();
+           }
+       })
+    })
+
+
+
 </script>
 </body>
 </html>

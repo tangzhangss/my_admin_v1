@@ -67,6 +67,21 @@
 
     <!--项目信息-->
     <select id="get_all_project_list" resultType="zyrs.xyz.obadmin.bean.Ob">
-        select * from tbl_object
+        select * from tbl_object order by status asc,user_id asc
     </select>
+    <insert id="add_or_update_project" parameterType="zyrs.xyz.obadmin.bean.Ob" useGeneratedKeys="true">
+        replace into tbl_object value(#{id},#{owner},#{name},#{logo},#{descr},#{createTime},#{holdDate},#{holdCost},#{holdIns},#{userId},#{status})
+    </insert>
+    <delete id="delete_project">
+        delete  from tbl_object where id = #{id}
+    </delete>
+    <update id="project_relay">
+        update tbl_object set hold_date = DATE_ADD(hold_date, INTERVAL #{param2} MONTH) where id = #{param1}
+    </update>
+
+    <update id="flush_project_status">
+        update tbl_object set status = 1 where NOW() <![CDATA[ <]]> hold_date;
+        update tbl_object set status = 2 where NOW() > hold_date;
+        update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH);
+    </update>
 </mapper>

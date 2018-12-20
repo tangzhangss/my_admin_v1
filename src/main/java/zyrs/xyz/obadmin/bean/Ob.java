@@ -1,5 +1,7 @@
 package zyrs.xyz.obadmin.bean;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -16,10 +18,37 @@ public class Ob implements Serializable {
     private String logo;//项目logo
     private String descr;//项目描述
     private Date createTime;//项目创建时间
-    private Integer holdDate;//项目维护费用 年算
+    private Date holdDate;//项目维护费用 年算
     private Integer holdCost;//项目要维护金额 年算
     private String holdIns;//项目说明
     private String owner;//主体人|公司
+    private Integer userId;//项目所属人Id,账号ID
+    private Integer status;//项目状态 1 正常 2 到期
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
+    public Date getHoldDate() {
+        return holdDate;
+    }
+
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
+    public void setHoldDate(Date holdDate) {
+        this.holdDate = holdDate;
+    }
+
+    public Integer getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
     public String getOwner() {
         return owner;
@@ -45,14 +74,10 @@ public class Ob implements Serializable {
         this.descr = descr;
     }
 
+    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss" )
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
     }
-
-    public void setHoldDate(Integer holdDate) {
-        this.holdDate = holdDate;
-    }
-
     public void setHoldCost(Integer holdCost) {
         this.holdCost = holdCost;
     }
@@ -81,10 +106,6 @@ public class Ob implements Serializable {
         return createTime;
     }
 
-    public Integer getHoldDate() {
-        return holdDate;
-    }
-
     public Integer getHoldCost() {
         return holdCost;
     }
@@ -105,6 +126,8 @@ public class Ob implements Serializable {
                 ", holdCost=" + holdCost +
                 ", holdIns='" + holdIns + '\'' +
                 ", owner='" + owner + '\'' +
+                ", userId=" + userId +
+                ", status=" + status +
                 '}';
     }
 }

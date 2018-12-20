@@ -91,9 +91,34 @@ public class ObService {
 
     /**
      * 获取所有项目信息
+     *
+     * 刷新项目的状态 正常 过期 大于 30天 放弃
      * @return
      */
     public List<Ob> get_all_project_list(){
+        obMapper.flush_project_status();
+
         return obMapper.get_all_project_list();
+    }
+
+    /**
+     * 增加或者更新 项目
+     * @param ob 项目信息-对象
+     */
+    public void add_or_update_project(Ob ob) {
+        obMapper.add_or_update_project(ob);
+    }
+
+    public void delete_project(Integer id) {
+        obMapper.delete_project(id);
+    }
+
+    /**
+     * 并不支持重新开始算之后,接着算
+     * @param id
+     * @param count
+     */
+    public void project_relay(Integer id, Integer count) {
+        obMapper.project_relay(id,count);
     }
 }

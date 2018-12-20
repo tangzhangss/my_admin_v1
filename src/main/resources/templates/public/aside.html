@@ -14,7 +14,19 @@
              </div>
         </div>
 
+
+        <script th:inline="javascript">
+            //判断菜单有没有失效
+            let menuList= [[${menuList}]];
+
+            if(menuList==null || menuList == ''){
+                window.location.href="/index";
+            }
+        </script>
+
         <script>
+
+
             function menu_selected(url,id){
               console.log(url,">",id);
               window.location.href=url+"&menuId="+id;

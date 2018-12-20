@@ -31,4 +31,12 @@ public interface ObMapper{
     void del_menu(Integer id);
 
     List<Ob> get_all_project_list();
+
+    void add_or_update_project(Ob ob);
+
+    void delete_project(Integer id);
+
+    void project_relay(Integer id, Integer count);
+
+    void flush_project_status();
 }
