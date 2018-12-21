@@ -7,19 +7,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5107a34f-8857-479e-a051-5ace2f6cf80f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuProject.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5Util.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/static/img/aside/base.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/spring.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Ob.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Ob.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/static/js/util.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/js/util.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/app.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -50,48 +57,15 @@
     <favorites_list name="ob-admin" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#1681#1682#0" expanded="true" />
-                <element signature="e#1722#1723#0" expanded="true" />
-                <element signature="e#2366#2367#0" expanded="true" />
-                <element signature="e#2416#2417#0" expanded="true" />
-                <element signature="e#2463#2464#0" expanded="true" />
-                <element signature="e#2506#2507#0" expanded="true" />
-                <element signature="e#2706#2707#0" expanded="true" />
-                <element signature="e#2754#2755#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="318">
-              <caret line="40" column="29" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="29" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Interface" />
         <option value="JavaScript File" />
-        <option value="HTML File" />
         <option value="Class" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -99,6 +73,11 @@
     <findStrings>
       <find>menuLogo</find>
       <find>add_or_update_project</find>
+      <find>del_menu_project</find>
+      <find>系统</find>
+      <find>addMenuProject</find>
+      <find>系统错误</find>
+      <find>系统错误,请联系管理</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -107,13 +86,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/target/wx-admin-0.0.1-SNAPSHOT/WEB-INF/classes/static/css/head.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/layui/css/layui.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/head.css" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/LoginController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/InitController.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/RedisUtil.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/home.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/config/ShiroConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/realm/ShiroRealm.java" />
@@ -126,11 +98,8 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/InitController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/MenuMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/MenuService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/MenuMapper.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/WxAdminApplication.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/config/RedisConfig.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/LoginController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/public/nav.html" />
@@ -138,11 +107,7 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/SecondMenu.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuSecond.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/login.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/public/head.html" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/app.css" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/aside.css" />
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/AliyunOss.java" />
@@ -151,13 +116,27 @@
         <option value="$PROJECT_DIR$/src/main/resources/templates/public/aside.html" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/util.js" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Ob.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" />
         <option value="$PROJECT_DIR$/src/main/resources/application.properties" />
-        <option value="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5Util.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/login.html" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/app.css" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuProject.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/wxapp/wxapp_baseinfo.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/user_manage.html" />
       </list>
     </option>
   </component>
@@ -182,10 +161,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="254" />
-    <option name="y" value="6" />
-    <option name="width" value="1105" />
-    <option name="height" value="703" />
+    <option name="x" value="-72" />
+    <option name="y" value="26" />
+    <option name="width" value="1326" />
+    <option name="height" value="701" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -234,6 +213,24 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="obadmin" type="462c0819:PsiDirectoryNode" />
+              <item name="bean" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
+              <item name="controller" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="java" type="462c0819:PsiDirectoryNode" />
+              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
               <item name="service" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -265,14 +262,23 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="img" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -284,7 +290,7 @@
     <property name="RequestMappingsPanelWidth1" value="75" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545293096755" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1545381235556" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -296,19 +302,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\ob-admin\src\main\resources\templates" />
-      <recent name="D:\ob-admin\src\main\resources\mybatis" />
-      <recent name="D:\ob-admin\src\main\resources\static\layui\css\modules\layer" />
-      <recent name="D:\ob-admin\target\wx-admin-0.0.1-SNAPSHOT\WEB-INF\classes\static\img" />
-      <recent name="D:\ob-admin\src\main\resources\static\img" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="D:\ob-admin\src\main\resources\static\img\aside" />
       <recent name="D:\ob-admin\src\main\resources\static\img\tools" />
       <recent name="D:\ob-admin\src\main\resources\static\img\login" />
       <recent name="D:\ob-admin\src\main\resources\static\js" />
       <recent name="D:\ob-admin\src\main\resources\static\img\logo" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\ob-admin\src\main\resources\templates" />
+      <recent name="D:\ob-admin\src\main\resources\mybatis" />
+      <recent name="D:\ob-admin\src\main\resources\static\layui\css\modules\layer" />
+      <recent name="D:\ob-admin\target\wx-admin-0.0.1-SNAPSHOT\WEB-INF\classes\static\img" />
+      <recent name="D:\ob-admin\src\main\resources\static\img" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -530,11 +536,12 @@
       <workItem from="1545107858773" duration="18008000" />
       <workItem from="1545181713301" duration="27548000" />
       <workItem from="1545267404406" duration="18348000" />
+      <workItem from="1545355477609" duration="22668000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="171928000" />
+    <option name="totallyTimeSpent" value="194596000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -546,10 +553,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="254" y="6" width="1105" height="703" extended-state="0" />
-    <editor active="true" />
+    <frame x="-72" y="26" width="1326" height="701" extended-state="0" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.53010035" visible="true" weight="0.25167465" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.53010035" visible="true" weight="0.2756714" />
       <window_info id="Structure" order="1" sideWeight="0.23058252" side_tool="true" weight="0.21212122" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -558,8 +564,8 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Web" order="7" sideWeight="0.43103448" side_tool="true" weight="0.25666666" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.048172757" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.33391917" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33730835" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.20282187" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.32436976" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -570,7 +576,7 @@
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32846716" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.09878683" />
+      <window_info anchor="bottom" id="Messages" order="13" weight="0.15675676" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Application Servers" order="15" weight="0.36678833" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -587,7 +593,7 @@
       <window_info anchor="right" id="Maven" order="11" weight="0.32983378" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.53010035" visible="true" weight="0.29911074" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.53010035" visible="true" weight="0.2516892" />
       <window_info id="Structure" order="1" sideWeight="0.23058252" side_tool="true" weight="0.21212122" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -596,23 +602,23 @@
       <window_info id="Capture Tool" order="6" />
       <window_info id="Web" order="7" sideWeight="0.43103448" side_tool="true" weight="0.25666666" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.048172757" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.1462185" />
-      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.32436976" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.33730835" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.18716578" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.32436976" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" weight="0.27538726" />
-      <window_info anchor="bottom" id="Spring" order="7" weight="0.32846716" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.27450982" />
+      <window_info anchor="bottom" id="Spring" order="7" weight="0.327451" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32846716" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="10" weight="0.32846716" />
       <window_info anchor="bottom" id="Database Changes" order="11" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="12" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Messages" order="13" weight="0.09931507" />
+      <window_info anchor="bottom" id="Messages" order="13" visible="true" weight="0.29946524" />
       <window_info anchor="bottom" id="Docker" order="14" show_stripe_button="false" />
       <window_info anchor="bottom" id="Application Servers" order="15" weight="0.36678833" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.24932976" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.00926706" />
       <window_info anchor="right" id="Palette" order="3" />
       <window_info anchor="right" id="Capture Analysis" order="4" />
@@ -621,7 +627,7 @@
       <window_info anchor="right" id="Palette&#9;" order="7" />
       <window_info anchor="right" id="Theme Preview" order="8" />
       <window_info anchor="right" id="Coverage" order="9" sideWeight="0.50095236" side_tool="true" visible="true" weight="0.075412415" />
-      <window_info anchor="right" id="Bean Validation" order="10" visible="true" weight="0.036378335" />
+      <window_info anchor="right" id="Bean Validation" order="10" weight="0.036378335" />
       <window_info anchor="right" id="Maven" order="11" weight="0.32983378" />
     </layout-to-restore>
   </component>
@@ -633,33 +639,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$APPLICATION_HOME_DIR$/lib/platform-impl.jar!/resources/html5-schema/html5/block.rnc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
-          <caret line="190" column="22" selection-start-line="190" selection-start-column="16" selection-end-line="190" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/RedisUtil.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="209">
-          <caret line="11" column="3" lean-forward="true" selection-start-line="11" selection-start-column="3" selection-end-line="11" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/User.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean.java" />
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/config/ShiroConfig.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="342">
-          <caret line="33" selection-start-line="33" selection-end-line="33" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/js.js" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/js/layer.js" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/util.html" />
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/layui/css/modules/layer/default/layer.css">
@@ -669,16 +648,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/realm/ShiroRealm.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="16" column="7" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="14" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -716,26 +685,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="26" selection-start-line="8" selection-start-column="9" selection-end-line="8" selection-end-column="26" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/ServletInitializer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="95">
@@ -766,48 +715,10 @@
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/img/aside/menuSet.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuSecond.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="597">
-          <caret line="65" column="30" lean-forward="true" selection-start-line="65" selection-start-column="30" selection-end-line="65" selection-end-column="30" />
-          <folding>
-            <element signature="e#788#789#0" expanded="true" />
-            <element signature="e#819#820#0" expanded="true" />
-            <element signature="e#868#869#0" expanded="true" />
-            <element signature="e#908#909#0" expanded="true" />
-            <element signature="e#946#947#0" expanded="true" />
-            <element signature="e#979#980#0" expanded="true" />
-            <element signature="e#1032#1033#0" expanded="true" />
-            <element signature="e#1076#1077#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/head.css">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="31" column="14" selection-start-line="31" selection-start-column="14" selection-end-line="31" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/app.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="24" selection-start-line="24" selection-end-line="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="14" column="21" lean-forward="true" selection-start-line="14" selection-start-column="21" selection-end-line="14" selection-end-column="21" />
         </state>
       </provider>
     </entry>
@@ -873,27 +784,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="8" column="25" selection-start-line="8" selection-start-column="25" selection-end-line="8" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external/lib.es5.d.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="19">
           <caret line="812" column="4" selection-start-line="812" selection-start-column="4" selection-end-line="812" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="84">
-          <caret line="15" column="23" selection-start-line="15" selection-start-column="23" selection-end-line="15" selection-end-column="23" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -921,9 +815,81 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="19">
+          <caret line="1" column="113" selection-start-line="1" selection-start-column="113" selection-end-line="1" selection-end-column="113" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="57">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/realm/ShiroRealm.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="309">
+          <caret line="68" column="41" lean-forward="true" selection-start-line="63" selection-start-column="7" selection-end-line="68" selection-end-column="41" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5Util.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="7" column="27" lean-forward="true" selection-start-line="7" selection-start-column="27" selection-end-line="7" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="134">
+          <caret line="62" column="41" selection-start-line="62" selection-start-column="41" selection-end-line="62" selection-end-column="41" />
+          <folding>
+            <element signature="e#1399#1400#0" expanded="true" />
+            <element signature="e#1433#1434#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/UserMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="14" column="23" selection-start-line="14" selection-start-column="9" selection-end-line="14" selection-end-column="23" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="347">
+          <caret line="56" column="28" lean-forward="true" selection-start-line="56" selection-start-column="28" selection-end-line="56" selection-end-column="28" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#572#573#0" expanded="true" />
+            <element signature="e#1375#1376#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/app.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="358">
+          <caret line="35" column="26" lean-forward="true" selection-start-line="35" selection-start-column="26" selection-end-line="35" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/IndexController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1474">
+        <state relative-caret-position="323">
           <caret line="107" column="62" selection-start-line="107" selection-start-column="55" selection-end-line="107" selection-end-column="62" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -933,15 +899,81 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="10" lean-forward="true" selection-start-line="6" selection-start-column="10" selection-end-line="6" selection-end-column="10" />
+        <state relative-caret-position="308">
+          <caret line="22" column="43" selection-start-line="22" selection-start-column="43" selection-end-line="22" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project_manage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="261" column="48" selection-start-line="261" selection-start-column="48" selection-end-line="261" selection-end-column="48" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#span#0;n#td#7;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Menu.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="8" column="19" selection-start-line="8" selection-start-column="19" selection-end-line="10" selection-end-column="51" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuSecond.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-95">
+          <caret line="7" column="24" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="24" />
+          <folding>
+            <element signature="e#788#789#0" expanded="true" />
+            <element signature="e#819#820#0" expanded="true" />
+            <element signature="e#868#869#0" expanded="true" />
+            <element signature="e#908#909#0" expanded="true" />
+            <element signature="e#946#947#0" expanded="true" />
+            <element signature="e#979#980#0" expanded="true" />
+            <element signature="e#1032#1033#0" expanded="true" />
+            <element signature="e#1076#1077#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuProject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="247">
+          <caret line="19" column="24" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="24" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#401#402#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
+            <element signature="e#476#477#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#542#543#0" expanded="true" />
+            <element signature="e#567#568#0" expanded="true" />
+            <element signature="e#604#605#0" expanded="true" />
+            <element signature="e#632#633#0" expanded="true" />
+            <element signature="e#663#664#0" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#728#729#0" expanded="true" />
+            <element signature="e#758#759#0" expanded="true" />
+            <element signature="e#790#791#0" expanded="true" />
+            <element signature="e#818#819#0" expanded="true" />
+            <element signature="e#860#861#0" expanded="true" />
+            <element signature="e#894#895#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Ob.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1098">
-          <caret line="118" column="22" lean-forward="true" selection-start-line="118" selection-start-column="22" selection-end-line="118" selection-end-column="22" />
+        <state relative-caret-position="27">
+          <caret line="10" selection-start-line="10" selection-end-line="11" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#692#693#0" expanded="true" />
@@ -958,83 +990,96 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/login.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="86">
+          <caret line="140" column="48" lean-forward="true" selection-start-line="140" selection-start-column="48" selection-end-line="140" selection-end-column="48" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="56">
-          <caret line="79" lean-forward="true" selection-start-line="79" selection-end-line="79" />
+        <state relative-caret-position="192">
+          <caret line="263" column="44" selection-end-line="269" selection-end-column="7" />
           <folding>
             <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="6" lean-forward="true" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="16" column="23" selection-start-line="16" selection-start-column="23" selection-end-line="16" selection-end-column="23" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="122" column="29" selection-start-line="122" selection-start-column="29" selection-end-line="122" selection-end-column="29" />
+        <state relative-caret-position="287">
+          <caret line="181" column="28" selection-start-line="181" selection-start-column="28" selection-end-line="181" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2562#2563#0" expanded="true" />
-            <element signature="e#2607#2608#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project_manage.html">
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="298" column="43" selection-start-line="298" selection-start-column="43" selection-end-line="298" selection-end-column="43" />
+        <state relative-caret-position="10">
+          <caret line="60" column="14" selection-start-line="60" selection-start-column="14" selection-end-line="60" selection-end-column="14" />
           <folding>
-            <element signature="n#style#0;n#button#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#6;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#0;n#td#10;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#1;n#td#10;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#span#2;n#td#10;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#button#0;n#div#0;n#div#2;n#form#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
-            <element signature="e#7426#7433#1" expanded="true" />
+            <element signature="n#style#0;n#span#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/application.properties">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="19">
-          <caret line="1" column="113" selection-start-line="1" selection-start-column="113" selection-end-line="1" selection-end-column="113" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="79" column="13" lean-forward="true" selection-start-line="79" selection-start-column="13" selection-end-line="79" selection-end-column="13" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="318">
-          <caret line="40" column="29" selection-start-line="40" selection-start-column="9" selection-end-line="40" selection-end-column="29" />
+        <state relative-caret-position="250">
+          <caret line="51" column="11" selection-start-line="51" selection-start-column="11" selection-end-line="51" selection-end-column="11" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="91" column="13" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="253">
-          <caret line="116" column="11" selection-start-line="116" selection-start-column="11" selection-end-line="116" selection-end-column="11" />
+        <state relative-caret-position="193">
+          <caret line="135" column="32" selection-start-line="135" selection-start-column="32" selection-end-line="135" selection-end-column="32" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1681#1682#0" expanded="true" />
-            <element signature="e#1722#1723#0" expanded="true" />
-            <element signature="e#2366#2367#0" expanded="true" />
-            <element signature="e#2416#2417#0" expanded="true" />
-            <element signature="e#2463#2464#0" expanded="true" />
-            <element signature="e#2506#2507#0" expanded="true" />
-            <element signature="e#2706#2707#0" expanded="true" />
-            <element signature="e#2754#2755#0" expanded="true" />
+            <element signature="e#3189#3190#0" expanded="true" />
+            <element signature="e#3232#3233#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/user_manage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1501">
+          <caret line="20" column="33" lean-forward="true" selection-start-line="20" selection-start-column="33" selection-end-line="20" selection-end-column="33" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#1;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#2;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#td#4;n#tr#1;n#table#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#1;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

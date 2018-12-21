@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+<style>
+    .table{
+        margin-top: 20px;
+        text-align: center;
+    }
+    .table th{
+        text-align: center;
+    }
+
+    .table img{
+        width: 80px;
+        height: 80px;
+    }
+    form{
+        padding-top: 30px;
+    }
+    .layui-input,.layui-textarea{
+        width:200px;
+    }
+    .layui-form-label{
+        width: 200px;
+    }
+    .long{
+        width: 400px;
+    }
+    .operation{
+        margin-top: 30px;
+        float: right;
+        margin-right: 200px;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+            <button th:onclick="openEditUserModal()" type="button" class="btn btn-info" style="background-color: #1aad19">新增客户</button>
+            <table class="table table-hover">
+                <tr>
+                    <th>ID</th>
+                    <th>账户(联系)</th>
+                    <th>密码</th>
+                    <th>项目</th>
+                    <th>操作</th>
+                </tr>
+                <tr th:each="user:${userList}">
+                    <td class="primary-key" th:text="${user.id}">0</td>
+                    <td style="width: 200px;" th:text="${user.username}">demo</td>
+                    <td style="width: 400px;" th:text="${user.password}"></td>
+                    <td>
+                        <button class="btn  btn-info" th:onclick="" >管理</button>
+                    </td>
+                    <td style="width: 150px;" >
+                        <button class="btn  btn-primary" th:onclick="openEditUserModal([[${user}]])" >修改</button>
+                        <button class="btn btn-danger" th:onclick="delUser(this,[[${user.id}]])">删除</button>
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </section>
+</div>
+
+<!--修改 增加 项目 静态框-->
+<div id="layer_modal_user" style="display: none">
+    <form class="layui-form" lay-filter="layer_modal_project">
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">I D</label>
+            <div class="layui-input-block">
+                <input type="text" name="id" readonly="readonly" v-bind:value="user.id" placeholder="自动生成" class="layui-input disabled"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">账号|联系</label>
+            <div class="layui-input-block">
+                <input type="text" name="username"  v-bind:value="user.username" lay-verify="required|number"  placeholder="手机号码" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+
+        <div class="layui-form-item">
+            <label class="layui-form-label">密码</label>
+            <div class="layui-input-block">
+                <input type="text" name="password"  v-bind:value="user.password" lay-verify="required" placeholder="账号密码" autocomplete="off" class="layui-input long"/>
+            </div>
+        </div>
+
+        <!--项目状态  不显示  但是要原样传到 后台-->
+        <input  type="hidden" name="level"  v-bind:value="user.level" class="layui-input"/>
+
+        <div class="layui-form-item">
+            <div class="layui-input-block operation">
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <button class="layui-btn" lay-submit lay-filter="*">保存</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+
+    //vue 对象
+    const  my_user = new Vue({
+        el: '#layer_modal_user',
+        data: {
+            user:{},
+            currentId:0,//当前用户id
+        }
+    })
+    /**
+     *打开项目编辑midal
+     * v ob对象
+     **/
+    function openEditUserModal(v){
+        console.log(v);
+
+        if(v != undefined){
+            my_user.user= v;
+        }
+
+
+        mylayer.openModal($("#layer_modal_user"),'用户信息编辑框',["800px","400px"]);
+    }
+    layui.use('form', function(){
+        let form = layui.form;
+        //各种基于事件的操作
+        form.on("submit(*)", function(data) {
+            //可以使用data.field获取表单数据 但是不能 用作参数 object 和 字符串都不行
+            // let formdata =JSON.stringify(data.field);
+            // console.log("提交编辑内容！菜单级别:",myMenu.mtype," 数据:",formdata);
+            $.ajax({
+                type:"POST",
+                url:"/admin/add_or_update_user",
+                data:$("form").serialize(),
+                success:function(res){
+                    if(res == '1'){
+                        window.location.reload();
+                    }else{
+                        mylayer.msg(res);
+                    }
+                }
+            })
+
+            return false;//取消 form提交动作
+        })
+    });
+    /**
+     * 删除项目
+     * obj 当前对象
+     * id  项目id
+     **/
+    function delUser(obj,id){
+
+        if(!confirm("您正在删除客户【"+id+"】?")){
+            return false;
+        }
+        $.ajax({
+            type:"get",
+            url:"/admin/delete_user",
+            data:{"id":id},
+            success:function(res){
+                if(res == 1){
+                    $(obj).parent().parent().remove();
+                }else{
+                    mylayer.msg("系统错误!");
+                }
+            }
+        })
+    }
+</script>
+</body>
+</html>

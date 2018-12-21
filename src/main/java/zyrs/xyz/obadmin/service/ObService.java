@@ -4,9 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
-import zyrs.xyz.obadmin.bean.Menu;
-import zyrs.xyz.obadmin.bean.MenuSecond;
-import zyrs.xyz.obadmin.bean.Ob;
+import zyrs.xyz.obadmin.bean.*;
 import zyrs.xyz.obadmin.mapper.ObMapper;
 
 import java.util.List;
@@ -120,5 +118,36 @@ public class ObService {
      */
     public void project_relay(Integer id, Integer count) {
         obMapper.project_relay(id,count);
+    }
+
+    public List<MenuProject> getMenuProjectsList(){
+        return obMapper.getMenuProjectsList();
+    }
+
+    /**
+     * 增加 菜单 -项目 关联
+     * @param mid  菜单id
+     * @param oid  项目id
+     * @return
+     */
+    public int addMenuProject(Integer mid, Integer oid) {
+
+        //判断是否存在此项目
+        if(obMapper.getObCountInfoById(oid) < 1){
+            return 3;
+        }
+
+        //查看是否存在此关联
+        if(obMapper.getMenuProjectCountByMidAndOid(mid,oid) > 0){
+            return 2;
+        }
+
+        obMapper.addMenuProject(mid,oid);
+
+        return 1;
+    }
+
+    public void delMenuProject(Integer id) {
+        obMapper.delMenuProject(id);
     }
 }

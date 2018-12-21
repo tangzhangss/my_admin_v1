@@ -60,7 +60,7 @@ public class User implements Serializable {
     }
 
     public void setLevel(Integer level) {
-        this.level = level;
+        this.level = level==null?2:level;
     }
 
     public String getLogo() {

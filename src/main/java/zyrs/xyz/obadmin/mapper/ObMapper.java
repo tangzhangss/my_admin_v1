@@ -2,6 +2,7 @@ package zyrs.xyz.obadmin.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 import zyrs.xyz.obadmin.bean.Menu;
+import zyrs.xyz.obadmin.bean.MenuProject;
 import zyrs.xyz.obadmin.bean.MenuSecond;
 import zyrs.xyz.obadmin.bean.Ob;
 
@@ -39,4 +40,14 @@ public interface ObMapper{
     void project_relay(Integer id, Integer count);
 
     void flush_project_status();
+
+    List<MenuProject> getMenuProjectsList();
+
+    void addMenuProject(Integer mid, Integer oid);
+
+    Integer getMenuProjectCountByMidAndOid(Integer mid, Integer oid);
+
+    void delMenuProject(Integer id);
+
+    Integer getObCountInfoById(Integer oid);
 }

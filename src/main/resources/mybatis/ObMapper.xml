@@ -6,6 +6,7 @@
         select  id,name,logo,descr,create_time,hold_date,hold_cost,hold_ins from tbl_object where user_id = #{id}
     </select>
 
+    <!--菜单列表-->
     <resultMap id="getMenuResultMap" type="zyrs.xyz.obadmin.bean.Menu">
 
         <id property="id" column="id"/>
@@ -13,7 +14,6 @@
         <result property="menuLogo" column="menu_logo"/>
         <result property="menuType" column="menu_type"/>
         <result property="level" column="level"/>
-
 
         <collection property="menuSecondList" ofType="zyrs.xyz.obadmin.bean.MenuSecond">
             <id property="id" column="ms_id"/>
@@ -24,6 +24,21 @@
         </collection>
 
     </resultMap>
+
+    <!--菜单-项目  1对多列表-->
+    <resultMap id="getMenuProjectResultMap" type="zyrs.xyz.obadmin.bean.MenuProject">
+         <!--必须以菜单的id为主-->
+        <id property="mid" column="id"/>
+        <result property="id" column="mp_id"/>
+        <result property="mname" column="name"/>
+
+        <collection property="obList" ofType="zyrs.xyz.obadmin.bean.Ob">
+            <result property="name" column="o_name"/>
+            <result property="logo" column="o_logo"/>
+        </collection>
+
+    </resultMap>
+
 
    <select id="getMenuByObId" resultMap="getMenuResultMap">
        select
@@ -72,6 +87,9 @@
     <insert id="add_or_update_project" parameterType="zyrs.xyz.obadmin.bean.Ob" useGeneratedKeys="true">
         replace into tbl_object value(#{id},#{owner},#{name},#{logo},#{descr},#{createTime},#{holdDate},#{holdCost},#{holdIns},#{userId},#{status})
     </insert>
+    <select id="getObCountInfoById" resultType="java.lang.Integer">
+        select count(id) from tbl_object where id = #{id}
+    </select>
     <delete id="delete_project">
         delete  from tbl_object where id = #{id}
     </delete>
@@ -80,8 +98,23 @@
     </update>
 
     <update id="flush_project_status">
-        update tbl_object set status = 1 where NOW() <![CDATA[ <]]> hold_date;
+        update tbl_object set status = 1 where NOW() <![CDATA[<]]> hold_date;
         update tbl_object set status = 2 where NOW() > hold_date;
         update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH);
     </update>
+
+
+    <!--获取菜单-项目列表-->
+    <select id="getMenuProjectsList" resultMap="getMenuProjectResultMap">
+        select m.id,m.name,mp.id mp_id,o.name o_name,o.logo o_logo from  tbl_menu_project as mp right join tbl_menu_second as m   on mp.mid=m.id left join tbl_object as o on mp.oid = o.id where m.menu_type <![CDATA[<>]]> 1 order by id asc
+    </select>
+    <select id="getMenuProjectCountByMidAndOid" resultType="java.lang.Integer">
+         select count(id) from tbl_menu_project where mid = #{param1} and oid=#{param2}
+    </select>
+    <insert id="addMenuProject">
+        insert  tbl_menu_project (mid,oid)  value(#{param1},#{param2})
+    </insert>
+    <delete id="delMenuProject">
+        delete  from tbl_menu_project where id = #{id}
+    </delete>
 </mapper>

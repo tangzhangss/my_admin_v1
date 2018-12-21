@@ -45,6 +45,7 @@
     <section>
         <div class="section">
             <button th:onclick="openEditProjectModal(1)" type="button" class="btn btn-info" style="background-color: #1aad19">添加项目</button>
+            <div class="ob_prompt">▶考虑到维护的持续性_维护时间仅是解决上一次结束时间延期_并不是当前时间</div>
             <table class="table table-hover">
                <tr>
                 <th>ID</th>
@@ -54,6 +55,7 @@
                 <th>描述</th>
                 <th>创建时间</th>
                 <th>维护截止时间</th>
+                <th>延期</th>
                 <th>维护费用(￥/年)</th>
                 <th>维护说明</th>
                 <th>用户ID</th>
@@ -61,7 +63,7 @@
                 <th>操作</th>
                </tr>
                 <tr th:each="ob:${obList}">
-                    <td th:text="${ob.id}">0</td>
+                    <td  class="primary-key" th:text="${ob.id}">0</td>
                     <td th:text="${ob.name}">demo</td>
                     <td>
                         <img th:src="${ob.logo}"/>
@@ -71,6 +73,8 @@
                     <td th:text="${#dates.format(ob.createTime,'yyyy-MM-dd')}">0000-00-00</td>
                     <td>
                         <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}"> 0000-00-00</span>
+                     </td>
+                    <td>
                         <span th:title="${ob.id}" class="glyphicon glyphicon-plus project-relay-btn" style="color: #1E9FFF;cursor: pointer" title="延期" data-toggle="modal" data-target="#relay-modal"></span>
                     </td>
                     <td th:text="${ob.holdCost}">0000</td>
@@ -255,7 +259,7 @@
                     if(res == 1){
                         window.location.reload();
                     }else{
-                        mylayer.msg("系统错误!");
+                        mylayer.msg("系统错误,请联系管理员解决!");
                     }
                 }
             })
@@ -297,6 +301,11 @@
        let v = $("#project-relay-modal-input").val();
 
        console.log(my_project.currentId,v);
+
+       if(!/^[0-9]+$/.test(v)){
+           mylayer.msg("请输入有效的整数值!");
+           return ;
+       }
 
        $.ajax({
            url:"/admin/project_relay",

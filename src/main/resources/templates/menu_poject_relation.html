@@ -3,6 +3,35 @@
 
 <head th:replace  ="/public/head :: head"></head>
 
+<style>
+    .layui-show{
+        display: flex!important;
+        flex-wrap: wrap;
+    }
+    .menu_project .item-one{
+        background-color: white;
+        padding: 10px;
+        text-align: center;
+        box-shadow: 1px 1px 5px 2px #ccc;
+        height: 70px;
+        line-height: 70px;
+        margin: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        width: 200px;
+    }
+    .menu_project .item-one img{
+        width: 50px;
+        height: 50px;
+        border-radius: 50px;
+
+    }
+    .addMenuProject{
+        color: #1E9FFF;
+        cursor: pointer;
+    }
+</style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
 
@@ -11,11 +40,111 @@
 
     <section>
         <div class="section">
-            我是主要内容哦！
+
+            <div class="layui-collapse menu_project">
+                 <div class="layui-colla-item" th:each="mp:${menuProjects}">
+                     <h2 class="layui-colla-title">
+                         <span class="title" th:text="${mp.mname}">二级菜单标题</span>
+                     </h2>
+                     <div class="layui-colla-content layui-show">
+                         <div class="item-one" th:each="pro:${mp.obList}">
+                             <img th:src="${pro.logo}"/>
+                             <span th:text="${pro.name}"></span>
+                             <span class="glyphicon glyphicon-remove" style="color: red; cursor: pointer;" th:onclick="deleteMenuProject(this,[[${mp.id}]])"></span>
+                         </div>
+                         <div class="item-one addMenuProject" data-toggle="modal" data-target="#add-project-modal"  th:onclick="openAddMenuProjectModal([[${mp.mid}]])">
+                             <span class="glyphicon glyphicon-plus"></span>
+                         </div>
+                     </div>
+                 </div>
+            </div>
         </div>
     </section>
 </div>
 
+<!--添加 项目 菜单-->
+<div id="add-project-modal" class="modal fade" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">添加菜单到项目</h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <input type="text" title="0" class="form-control" id="add-project-modal-input" placeholder="项目ID"/>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="add-project-modal-save">提交</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+
+<script>
+    //注意：折叠面板 依赖 element 模块，否则无法进行功能性操作
+    layui.use('element', function(){
+        var element = layui.element;
+
+        //…
+    });
+
+    /**
+     * 打开 新增项目到菜单下的静态框 初始化操作
+     * @param id
+     */
+    function openAddMenuProjectModal(id){
+        $("#add-project-modal-input").attr("title",id);
+    }
+    $("#add-project-modal-save").click(function(){
+        let mid =  $("#add-project-modal-input").attr("title");
+        let oid = $("#add-project-modal-input").val();
+
+        console.log("新增项目到菜单，",oid,mid);
+
+        if(!/^[0-9]+$/.test(oid)){
+            mylayer.msg("请输入有效的整数值!");
+            return ;
+        }
+
+        $.ajax({
+            type:'POST',
+            url:"/admin/add_menu_project",
+            data:{"mid":mid,"oid":oid},
+            success:function(res){
+                if(res == "1"){
+                    window.location.reload();
+                }else{
+                    mylayer.msg(res);
+                }
+            }
+        })
+    })
+
+    /**
+     * 删除菜单下的项目
+     * @param obj this
+     * @param id 项目id
+     */
+    function deleteMenuProject(obj,id){
+        if(confirm("您将取消此菜单-项目的关联?")){
+            $.ajax({
+                url:"/admin/del_menu_project",
+                data:{"id":id},
+                success:function(res){
+                    if(res == 1){
+                        $(obj).parent().remove();
+                    }else{
+                        mylayer.msg("系统错误,请联系管理员解决!");
+                    }
+                }
+            })
+        }
+    }
+
+</script>
 
 </body>
 </html>

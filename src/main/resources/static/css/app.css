@@ -25,3 +25,14 @@ section{
 a:hover{
     text-decoration: none;
 }
+
+/**主键**/
+.primary-key{
+    font-weight: 700;
+}
+/**提示**/
+.ob_prompt{
+    color: #bbbbbb;
+    display: inline-block;
+    line-height: 40px;
+}
