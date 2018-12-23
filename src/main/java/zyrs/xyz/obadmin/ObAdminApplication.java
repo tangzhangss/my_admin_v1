@@ -6,9 +6,9 @@ import org.springframework.cache.annotation.EnableCaching;
 
 @EnableCaching
 @SpringBootApplication
-public class WxAdminApplication {
+public class ObAdminApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(WxAdminApplication.class, args);
+        SpringApplication.run(ObAdminApplication.class, args);
     }
 }
