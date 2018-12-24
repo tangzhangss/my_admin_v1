@@ -181,3 +181,248 @@ java.io.IOException: 远程主机强迫关闭了一个现有的连接。
 	at java.lang.Thread.run(Thread.java:745)
 2018/12/24 - 20:16:31 INFO  io.lettuce.core.protocol.ConnectionWatchdog- Reconnecting, last destination was localhost/127.0.0.1:6379
 2018/12/24 - 20:16:32 WARN  io.lettuce.core.protocol.ConnectionWatchdog- Cannot reconnect: io.netty.channel.AbstractChannel$AnnotatedConnectException: Connection refused: no further information: localhost/127.0.0.1:6379
+2018/12/24 - 20:23:50 INFO  zyrs.xyz.obadmin.ObAdminApplication- Starting ObAdminApplication on tz-PC with PID 6224 (D:\ob-admin\target\classes started by Administrator in D:\ob-admin)
+2018/12/24 - 20:23:50 INFO  zyrs.xyz.obadmin.ObAdminApplication- No active profile set, falling back to default profiles: default
+2018/12/24 - 20:23:52 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Multiple Spring Data modules found, entering strict repository configuration mode!
+2018/12/24 - 20:23:52 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Bootstrapping Spring Data repositories in DEFAULT mode.
+2018/12/24 - 20:23:52 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Finished Spring Data repository scanning in 23ms. Found 0 repository interfaces.
+2018/12/24 - 20:23:53 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'shiroConfig' of type [zyrs.xyz.obadmin.config.ShiroConfig$$EnhancerBySpringCGLIB$$9f949620] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:53 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'redisConfig' of type [zyrs.xyz.obadmin.config.RedisConfig$$EnhancerBySpringCGLIB$$ea631d6a] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:53 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$3a4323f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:53 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties' of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' of type [org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$3678836f] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'dataSource' of type [com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:54 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:58 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:58 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:58 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'userMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:58 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'userMapper' of type [com.sun.proxy.$Proxy55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:23:58 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'shiroRealm' of type [zyrs.xyz.obadmin.realm.ShiroRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:24:00 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'rememberMeCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:24:00 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'rememberMeManager' of type [org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:24:00 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:24:01 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/24 - 20:24:01 INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/24 - 20:24:01 INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/24 - 20:24:01 INFO  org.apache.catalina.core.AprLifecycleListener- The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\Programming Tools\JAVA\jdk\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\Programming Tools\JAVA\jdk\bin;E:\Programming Tools\JAVA\jdk\jre\bin;E:\programing\php7;;E:\programing\Microsoft VS Code\bin;.]
+2018/12/24 - 20:24:01 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/24 - 20:24:01 INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 10941 ms
+2018/12/24 - 20:24:03 INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/24 - 20:24:04 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/24 - 20:24:04 INFO  zyrs.xyz.obadmin.ObAdminApplication- Started ObAdminApplication in 15.061 seconds (JVM running for 16.768)
+2018/12/24 - 20:24:10 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018/12/24 - 20:24:10 INFO  org.springframework.web.servlet.DispatcherServlet- Initializing Servlet 'dispatcherServlet'
+2018/12/24 - 20:24:10 INFO  org.springframework.web.servlet.DispatcherServlet- Completed initialization in 11 ms
+2018/12/24 - 20:24:10 WARN  org.apache.shiro.mgt.AbstractRememberMeManager- There was a failure while trying to retrieve remembered principals.  This could be due to a configuration problem or corrupted principals.  This could also be due to a recently changed encryption key, if you are using a shiro.ini file, this property would be 'securityManager.rememberMeManager.cipherKey' see: http://shiro.apache.org/web.html#Web-RememberMeServices. The remembered identity will be forgotten and not used for this request.
+2018/12/24 - 20:24:10 WARN  org.apache.shiro.mgt.DefaultSecurityManager- Delegate RememberMeManager instance of type [org.apache.shiro.web.mgt.CookieRememberMeManager] threw an exception during getRememberedPrincipals().
+org.apache.shiro.crypto.CryptoException: Unable to execute 'doFinal' with cipher instance [javax.crypto.Cipher@7d90bf0f].
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:462)
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:445)
+	at org.apache.shiro.crypto.JcaCipherService.decrypt(JcaCipherService.java:390)
+	at org.apache.shiro.crypto.JcaCipherService.decrypt(JcaCipherService.java:382)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.decrypt(AbstractRememberMeManager.java:482)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.convertBytesToPrincipals(AbstractRememberMeManager.java:419)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.getRememberedPrincipals(AbstractRememberMeManager.java:386)
+	at org.apache.shiro.mgt.DefaultSecurityManager.getRememberedIdentity(DefaultSecurityManager.java:604)
+	at org.apache.shiro.mgt.DefaultSecurityManager.resolvePrincipals(DefaultSecurityManager.java:492)
+	at org.apache.shiro.mgt.DefaultSecurityManager.createSubject(DefaultSecurityManager.java:342)
+	at org.apache.shiro.subject.Subject$Builder.buildSubject(Subject.java:846)
+	at org.apache.shiro.web.subject.WebSubject$Builder.buildWebSubject(WebSubject.java:148)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.createSubject(AbstractShiroFilter.java:292)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:359)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:791)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1417)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: javax.crypto.BadPaddingException: Given final block not properly padded
+	at com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:966)
+	at com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:824)
+	at com.sun.crypto.provider.AESCipher.engineDoFinal(AESCipher.java:436)
+	at javax.crypto.Cipher.doFinal(Cipher.java:2121)
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:459)
+	... 48 common frames omitted
+2018/12/24 - 20:24:16 INFO  zyrs.xyz.obadmin.controller.LoginController- 登录用户:User{id=null, username='15520449931', password='188632', level=null, rememberMe='on', logo='', obId=null, selectedMenuId=0}
+2018/12/24 - 20:24:16 INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2018/12/24 - 20:24:16 INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2018/12/24 - 20:24:16 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- ==>  Preparing: select id,username,password,level from tbl_user where username = ? 
+2018/12/24 - 20:24:16 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- ==> Parameters: 15520449931(String)
+2018/12/24 - 20:24:16 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- <==      Total: 1
+2018/12/24 - 20:24:16 INFO  zyrs.xyz.obadmin.controller.LoginController- 15520449931_登录成功_
+2018/12/24 - 20:24:17 INFO  io.lettuce.core.EpollProvider- Starting without optional epoll library
+2018/12/24 - 20:24:17 INFO  io.lettuce.core.KqueueProvider- Starting without optional kqueue library
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenuWithAdmin- ==>  Preparing: select m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 and (ms.menu_type = 1 or ms.menu_type is null ) order by m.level asc, m.id asc, ms.id asc; 
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenuWithAdmin- ==> Parameters: 
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenuWithAdmin- <==      Total: 4
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- ==>  Preparing: select m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent order by m.level asc; 
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- ==> Parameters: 
+2018/12/24 - 20:24:18 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- <==      Total: 6
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==>  Preparing: update tbl_object set status = 1 where NOW() < hold_date; update tbl_object set status = 2 where NOW() > hold_date; update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH); 
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==> Parameters: 
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- <==    Updates: 1
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==>  Preparing: select * from tbl_object order by status asc,user_id asc 
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==> Parameters: 
+2018/12/24 - 20:24:23 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- <==      Total: 1
+2018/12/24 - 20:24:26 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- ==>  Preparing: select id,username,password,level from tbl_user where level <> 1 
+2018/12/24 - 20:24:26 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- ==> Parameters: 
+2018/12/24 - 20:24:26 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- <==      Total: 1
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==>  Preparing: update tbl_object set status = 1 where NOW() < hold_date; update tbl_object set status = 2 where NOW() > hold_date; update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH); 
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==> Parameters: 
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- <==    Updates: 1
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==>  Preparing: select * from tbl_object order by status asc,user_id asc 
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==> Parameters: 
+2018/12/24 - 20:24:47 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- <==      Total: 1
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==>  Preparing: update tbl_object set status = 1 where NOW() < hold_date; update tbl_object set status = 2 where NOW() > hold_date; update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH); 
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==> Parameters: 
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- <==    Updates: 1
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==>  Preparing: select * from tbl_object order by status asc,user_id asc 
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==> Parameters: 
+2018/12/24 - 20:25:10 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- <==      Total: 1
+2018/12/24 - 20:26:21 INFO  zyrs.xyz.obadmin.ObAdminApplication- Starting ObAdminApplication on tz-PC with PID 5952 (D:\ob-admin\target\classes started by Administrator in D:\ob-admin)
+2018/12/24 - 20:26:21 INFO  zyrs.xyz.obadmin.ObAdminApplication- No active profile set, falling back to default profiles: default
+2018/12/24 - 20:26:23 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Multiple Spring Data modules found, entering strict repository configuration mode!
+2018/12/24 - 20:26:23 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Bootstrapping Spring Data repositories in DEFAULT mode.
+2018/12/24 - 20:26:23 INFO  org.springframework.data.repository.config.RepositoryConfigurationDelegate- Finished Spring Data repository scanning in 37ms. Found 0 repository interfaces.
+2018/12/24 - 20:26:23 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'shiroConfig' of type [zyrs.xyz.obadmin.config.ShiroConfig$$EnhancerBySpringCGLIB$$ae7dcb5e] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:23 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'redisConfig' of type [zyrs.xyz.obadmin.config.RedisConfig$$EnhancerBySpringCGLIB$$f94c52a8] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:23 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration' of type [org.springframework.transaction.annotation.ProxyTransactionManagementConfiguration$$EnhancerBySpringCGLIB$$128d677d] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'hashedCredentialsMatcher' of type [org.apache.shiro.authc.credential.HashedCredentialsMatcher] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'mybatis-org.mybatis.spring.boot.autoconfigure.MybatisProperties' of type [org.mybatis.spring.boot.autoconfigure.MybatisProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration' of type [org.mybatis.spring.boot.autoconfigure.MybatisAutoConfiguration$$EnhancerBySpringCGLIB$$4561b8ad] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceConfiguration$Hikari] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'spring.datasource-org.springframework.boot.autoconfigure.jdbc.DataSourceProperties' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceProperties] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'dataSource' of type [com.zaxxer.hikari.HikariDataSource] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:24 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker' of type [org.springframework.boot.autoconfigure.jdbc.DataSourceInitializerInvoker] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:25 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'sqlSessionFactory' of type [org.apache.ibatis.session.defaults.DefaultSqlSessionFactory] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:25 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'sqlSessionTemplate' of type [org.mybatis.spring.SqlSessionTemplate] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:25 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'userMapper' of type [org.mybatis.spring.mapper.MapperFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:25 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'userMapper' of type [com.sun.proxy.$Proxy55] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:25 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'shiroRealm' of type [zyrs.xyz.obadmin.realm.ShiroRealm] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:26 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'rememberMeCookie' of type [org.apache.shiro.web.servlet.SimpleCookie] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:26 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'rememberMeManager' of type [org.apache.shiro.web.mgt.CookieRememberMeManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:26 INFO  org.springframework.context.support.PostProcessorRegistrationDelegate$BeanPostProcessorChecker- Bean 'securityManager' of type [org.apache.shiro.web.mgt.DefaultWebSecurityManager] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2018/12/24 - 20:26:27 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat initialized with port(s): 8080 (http)
+2018/12/24 - 20:26:27 INFO  org.apache.catalina.core.StandardService- Starting service [Tomcat]
+2018/12/24 - 20:26:27 INFO  org.apache.catalina.core.StandardEngine- Starting Servlet Engine: Apache Tomcat/9.0.13
+2018/12/24 - 20:26:27 INFO  org.apache.catalina.core.AprLifecycleListener- The APR based Apache Tomcat Native library which allows optimal performance in production environments was not found on the java.library.path: [E:\Programming Tools\JAVA\jdk\bin;C:\Windows\Sun\Java\bin;C:\Windows\system32;C:\Windows;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;E:\Programming Tools\JAVA\jdk\bin;E:\Programming Tools\JAVA\jdk\jre\bin;E:\programing\php7;;E:\programing\Microsoft VS Code\bin;.]
+2018/12/24 - 20:26:27 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring embedded WebApplicationContext
+2018/12/24 - 20:26:27 INFO  org.springframework.web.context.ContextLoader- Root WebApplicationContext: initialization completed in 6164 ms
+2018/12/24 - 20:26:29 INFO  org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor- Initializing ExecutorService 'applicationTaskExecutor'
+2018/12/24 - 20:26:29 INFO  org.springframework.boot.web.embedded.tomcat.TomcatWebServer- Tomcat started on port(s): 8080 (http) with context path ''
+2018/12/24 - 20:26:29 INFO  zyrs.xyz.obadmin.ObAdminApplication- Started ObAdminApplication in 9.801 seconds (JVM running for 10.934)
+2018/12/24 - 20:26:31 INFO  org.apache.catalina.core.ContainerBase.[Tomcat].[localhost].[/]- Initializing Spring DispatcherServlet 'dispatcherServlet'
+2018/12/24 - 20:26:31 INFO  org.springframework.web.servlet.DispatcherServlet- Initializing Servlet 'dispatcherServlet'
+2018/12/24 - 20:26:31 INFO  org.springframework.web.servlet.DispatcherServlet- Completed initialization in 19 ms
+2018/12/24 - 20:26:31 WARN  org.apache.shiro.mgt.AbstractRememberMeManager- There was a failure while trying to retrieve remembered principals.  This could be due to a configuration problem or corrupted principals.  This could also be due to a recently changed encryption key, if you are using a shiro.ini file, this property would be 'securityManager.rememberMeManager.cipherKey' see: http://shiro.apache.org/web.html#Web-RememberMeServices. The remembered identity will be forgotten and not used for this request.
+2018/12/24 - 20:26:31 WARN  org.apache.shiro.mgt.DefaultSecurityManager- Delegate RememberMeManager instance of type [org.apache.shiro.web.mgt.CookieRememberMeManager] threw an exception during getRememberedPrincipals().
+org.apache.shiro.crypto.CryptoException: Unable to execute 'doFinal' with cipher instance [javax.crypto.Cipher@55a661b5].
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:462)
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:445)
+	at org.apache.shiro.crypto.JcaCipherService.decrypt(JcaCipherService.java:390)
+	at org.apache.shiro.crypto.JcaCipherService.decrypt(JcaCipherService.java:382)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.decrypt(AbstractRememberMeManager.java:482)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.convertBytesToPrincipals(AbstractRememberMeManager.java:419)
+	at org.apache.shiro.mgt.AbstractRememberMeManager.getRememberedPrincipals(AbstractRememberMeManager.java:386)
+	at org.apache.shiro.mgt.DefaultSecurityManager.getRememberedIdentity(DefaultSecurityManager.java:604)
+	at org.apache.shiro.mgt.DefaultSecurityManager.resolvePrincipals(DefaultSecurityManager.java:492)
+	at org.apache.shiro.mgt.DefaultSecurityManager.createSubject(DefaultSecurityManager.java:342)
+	at org.apache.shiro.subject.Subject$Builder.buildSubject(Subject.java:846)
+	at org.apache.shiro.web.subject.WebSubject$Builder.buildWebSubject(WebSubject.java:148)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.createSubject(AbstractShiroFilter.java:292)
+	at org.apache.shiro.web.servlet.AbstractShiroFilter.doFilterInternal(AbstractShiroFilter.java:359)
+	at org.apache.shiro.web.servlet.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:125)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:99)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:92)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.HiddenHttpMethodFilter.doFilterInternal(HiddenHttpMethodFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:200)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:107)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:193)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:166)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:199)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:96)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:490)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:139)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:92)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:343)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:408)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:66)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:791)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1417)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:49)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1142)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:617)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: javax.crypto.BadPaddingException: Given final block not properly padded
+	at com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:966)
+	at com.sun.crypto.provider.CipherCore.doFinal(CipherCore.java:824)
+	at com.sun.crypto.provider.AESCipher.engineDoFinal(AESCipher.java:436)
+	at javax.crypto.Cipher.doFinal(Cipher.java:2121)
+	at org.apache.shiro.crypto.JcaCipherService.crypt(JcaCipherService.java:459)
+	... 48 common frames omitted
+2018/12/24 - 20:26:36 INFO  zyrs.xyz.obadmin.controller.LoginController- 登录用户:User{id=null, username='15520449931', password='188632', level=null, rememberMe='on', logo='', obId=null, selectedMenuId=0}
+2018/12/24 - 20:26:36 INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Starting...
+2018/12/24 - 20:26:36 INFO  com.zaxxer.hikari.HikariDataSource- HikariPool-1 - Start completed.
+2018/12/24 - 20:26:36 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- ==>  Preparing: select id,username,password,level from tbl_user where username = ? 
+2018/12/24 - 20:26:36 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- ==> Parameters: 15520449931(String)
+2018/12/24 - 20:26:36 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.getUserByUsername- <==      Total: 1
+2018/12/24 - 20:26:36 INFO  zyrs.xyz.obadmin.controller.LoginController- 15520449931_登录成功_
+2018/12/24 - 20:26:37 INFO  io.lettuce.core.EpollProvider- Starting without optional epoll library
+2018/12/24 - 20:26:37 INFO  io.lettuce.core.KqueueProvider- Starting without optional kqueue library
+2018/12/24 - 20:26:37 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- ==>  Preparing: select m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent order by m.level asc; 
+2018/12/24 - 20:26:37 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- ==> Parameters: 
+2018/12/24 - 20:26:37 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.getMenu- <==      Total: 6
+2018/12/24 - 20:26:40 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- ==>  Preparing: select id,username,password,level from tbl_user where level <> 1 
+2018/12/24 - 20:26:40 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- ==> Parameters: 
+2018/12/24 - 20:26:40 DEBUG zyrs.xyz.obadmin.mapper.UserMapper.get_all_user_list- <==      Total: 1
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==>  Preparing: update tbl_object set status = 1 where NOW() < hold_date; update tbl_object set status = 2 where NOW() > hold_date; update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH); 
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- ==> Parameters: 
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.flush_project_status- <==    Updates: 1
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==>  Preparing: select * from tbl_object order by status asc,user_id asc 
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- ==> Parameters: 
+2018/12/24 - 20:26:45 DEBUG zyrs.xyz.obadmin.mapper.ObMapper.get_all_project_list- <==      Total: 1

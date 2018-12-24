@@ -1,17 +1,18 @@
 body{
     background-color: #f8f9fb;
-    font-size:20px;
+    font-size:14px;
     padding: 0;
 }
 .container-box{
     margin-top: 40px;
     display: flex;
     padding: 0;
+    overflow: hidden;
 }
 section{
     width: auto;
-    text-align: center;
-    padding: 0 50px;
+    text-align: left;
+    padding: 0 4%;
 }
 .section{
     width:100%;

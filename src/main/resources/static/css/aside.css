@@ -8,9 +8,9 @@ aside{
     overflow: hidden;
 }
 .aside-item{
-    line-height: 70px;
+    line-height: 50px;
     width: 100%;
-    font-size:20px;
+    font-size:18px;
 }
 .aside-item .item-one{
     line-height: 40px;
