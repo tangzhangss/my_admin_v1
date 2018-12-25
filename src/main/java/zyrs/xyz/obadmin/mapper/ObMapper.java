@@ -50,4 +50,6 @@ public interface ObMapper{
     void delMenuProject(Integer id);
 
     Integer getObCountInfoById(Integer oid);
+
+    Ob getObInfoById(Integer oid);
 }

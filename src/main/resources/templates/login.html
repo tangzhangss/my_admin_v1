@@ -123,8 +123,8 @@
             </div>
 
             <div class="layui-btn  layui-btn-warm" onclick="formSubmit()">登录</div>
-            <script>
 
+            <script>
                 function formSubmit(){
                     $.ajax({
                         url:"/user_login",
@@ -133,10 +133,15 @@
                         success:function(data){
                           console.log("登录成功返回信息:",data);
 
-                          if(data == 1){
-
+                          //客户返回的是客户id_用于选择管理项目
+                          if(/^[1-9]+$/.test(data)){
+                              console.log("客户选择需要管理的项目...");
+                              //设置可选择项目
+                              setSelectedProject(data);
+                              //弹出静态框
+                              $('#project_select_modal').modal();
+                          }else  if(data == 0){
                               window.location.href = "/index"
-
                           }else{
                               mylayer.msg(data);
                           }
@@ -148,6 +153,8 @@
         </form>
     </div>
 </div>
+<!--项目选择 静态框-->
+<div th:replace  ="/public/tool :: project_select_modal"></div>
 <img class="bottom-img" src="/static/img/login/bottom.jpg"/>
 
 <div class="right">copyright © 2018-2024  合作微信|电话 15520449931  ^_^</div>

@@ -7,7 +7,7 @@
     </sql>
 
     <select id="getUserByUsername" resultType="zyrs.xyz.obadmin.bean.User">
-        select <include refid="column"></include>  from tbl_user where username = #{username}
+        select <include refid="column"></include>,prev_oid ob_id  from tbl_user where username = #{username}
     </select>
 
     <!--获取所有 客户 信息-->
@@ -22,4 +22,9 @@
     <delete id="deleteUserById">
         delete from tbl_user where id=#{id}
     </delete>
+
+    <!--修改上一次打开项目id-->
+    <update id="updatePrevObId">
+         update  tbl_user set prev_oid = #{param2} where id = #{param1}
+    </update>
 </mapper>

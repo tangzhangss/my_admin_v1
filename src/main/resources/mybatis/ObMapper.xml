@@ -3,7 +3,7 @@
 <mapper namespace="zyrs.xyz.obadmin.mapper.ObMapper">
 
     <select id="getObInfoByUserId" resultType="zyrs.xyz.obadmin.bean.Ob">
-        select  id,name,logo,descr,create_time,hold_date,hold_cost,hold_ins from tbl_object where user_id = #{id}
+        select  id,name,logo,owner from tbl_object where user_id = #{id}
     </select>
 
     <!--菜单列表-->
@@ -50,11 +50,13 @@
        on
           m.id = ms.menu_parent
        left join
-            tbl_menu_object mo
+            tbl_menu_project mp
+       on
+         ms.id = mp.mid
        where
-             mo.ob_id = #{id}
+           mp.oid = #{id}
        order by
-                m.level asc, m.id asc, ms.id asc;;
+            m.level asc, m.id asc, ms.id asc;
    </select>
 
     <select id="getMenuWithAdmin" resultMap="getMenuResultMap">
@@ -103,6 +105,9 @@
         update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH);
     </update>
 
+    <select id="getObInfoById" resultType="zyrs.xyz.obadmin.bean.Ob">
+        select  id,logo from tbl_object where id = #{id}
+    </select>
 
     <!--获取菜单-项目列表-->
     <select id="getMenuProjectsList" resultMap="getMenuProjectResultMap">

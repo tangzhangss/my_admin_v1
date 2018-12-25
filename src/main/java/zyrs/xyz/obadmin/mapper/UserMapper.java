@@ -15,4 +15,6 @@ public interface UserMapper {
     void deleteUserById(Integer id);
 
     void addOrUpdateUser(User user);
+
+    void updatePrevObId(Integer id,Integer oid);
 }

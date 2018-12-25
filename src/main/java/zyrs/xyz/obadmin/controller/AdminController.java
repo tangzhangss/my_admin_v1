@@ -201,5 +201,9 @@ public class AdminController {
         return 1;
     }
 
-
+    @ResponseBody
+    @RequestMapping("get_ob_info_by_userId")
+    public List<Ob> getObInfoByUserId(@RequestParam("id")Integer id){
+        return obService.getObInfoByUserId(id);
+    }
 }

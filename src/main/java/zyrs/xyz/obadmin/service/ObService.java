@@ -17,12 +17,10 @@ public class ObService {
 
     /**
      * 获取项目的左侧菜单列表
-     * @param id  用户id
+     * @param id  项目id
      * @return
      */
-    @Cacheable(value="cache", key = "targetClass + '_getMenu'")
     public List<Menu> getMenuByObId(Integer id){
-
         return  obMapper.getMenuByObId(id);
     }
 
@@ -149,5 +147,14 @@ public class ObService {
 
     public void delMenuProject(Integer id) {
         obMapper.delMenuProject(id);
+    }
+
+    /**
+     * 获取 项目的 id logo
+     * @param oid 项目id
+     * @return
+     */
+    public Ob getObInfoById(Integer oid) {
+        return obMapper.getObInfoById(oid);
     }
 }

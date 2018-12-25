@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div  th:fragment="project_select_modal">
+    <style>
+        .project-select-box{
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+        }
+        .project-select-box .one img{
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            margin-right: 10px;
+        }
+
+        .project-select-box .one{
+            padding:20px;
+            display: flex;
+            color: #707070;
+            box-shadow: 1px 1px 5px 2px #ccc;
+        }
+        .project-select-box .one .t{
+            color: black;
+        }
+    </style>
+    <!--延期 静态框-->
+    <div id="project_select_modal" class="modal fade" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title">项目选择</h4>
+                </div>
+                <div class="modal-body">
+                  <div class="project-select-box">
+                    <div class="one" v-for="ob in obList">
+                           <img v-bind:src="ob.logo"  v-on:click="openProjectAdmin(ob.id)"/>
+                           <div v-on:click="openProjectAdmin(ob.id)">
+                               <p class="t">{{ob.name}}</p>
+                               <p>[{{ob.owner}}]</p>
+                           </div>
+                   </div>
+                  </div>
+               </div><!-- /.modal-content -->
+            </div>
+        </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <script>
+            const  my_project = new Vue({
+                el:"#project_select_modal",
+                data:{
+                    obList:[],//某个用户所有项目信息
+                },
+                methods:{
+                    openProjectAdmin:function(id){
+                        console.log("打开项目:",id);
+                        window.location.href="/index?oid="+id
+                    }
+                }
+            })
+            /**
+             * 用户 '管理' 选择项目_如果只有一个项目_也一样
+             * @param id 用户id
+             */
+            function setSelectedProject(id){
+                $.ajax({
+                    url:"/admin/get_ob_info_by_userId",
+                    data:{"id":id},
+                    success:function(res){
+                        console.log("项目信息:",res);
+                        my_project.obList = res;
+                    }
+                })
+            }
+        </script>
+   </div>
+</html>

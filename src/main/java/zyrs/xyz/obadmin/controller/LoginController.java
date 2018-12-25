@@ -8,18 +8,22 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import zyrs.xyz.obadmin.bean.User;
+import zyrs.xyz.obadmin.service.UserService;
 
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@SessionAttributes("currennt_user")
 @Controller
 public class LoginController {
 
     Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping("/login")
     public String login(){
@@ -58,7 +62,6 @@ public class LoginController {
     public Integer user_login(User user){
         logger.info("登录用户:"+user);
 
-
         Subject currentUser = SecurityUtils.getSubject();
 
         if(!currentUser.isAuthenticated()){
@@ -76,12 +79,18 @@ public class LoginController {
 
                 logger.info(user.getUsername()+"_登录成功_");
 
+                //获取用户的id  返回0 就是管理员
+                User tuser = userService.getUserByUserName(user.getUsername());
+                if(tuser.getLevel() == 1){
+                    return 0;
+                }else{
+                    return tuser.getId();
+                }
             }catch(AuthenticationException ae){
                 throw new AuthenticationException(ae.getClass().getName());
             }
         }
-
-        return 1;
+        return 0;
     }
 
 

@@ -1,6 +1,7 @@
 package zyrs.xyz.obadmin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import zyrs.xyz.obadmin.bean.User;
@@ -15,7 +16,6 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    @Cacheable(value="cache", key = "targetClass + methodName + #p0")
     public User getUserByUserName(String username) {
        return userMapper.getUserByUsername(username);
     }
@@ -55,5 +55,9 @@ public class UserService {
      */
     public void deleteUserById(Integer id) {
         userMapper.deleteUserById(id);
+    }
+
+    public void updatePrevObId(Integer id, Integer oid) {
+        userMapper.updatePrevObId(id,oid);
     }
 }

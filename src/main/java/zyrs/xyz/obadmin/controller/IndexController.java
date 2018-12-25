@@ -45,28 +45,31 @@ public class IndexController {
             Subject currentUser = SecurityUtils.getSubject();
             //System.out.println("认证："+currentUser.isAuthenticated()+"-记住我："+currentUser.isRemembered());
             if(currentUser.getPrincipal() != null){
+
                 //重新查询用户数据
                 User myUser =userService.getUserByUserName((String) currentUser.getPrincipal());
                 //保存用户信息
                 map.put("current_user", myUser);
+
+                System.out.println("自动登录:"+myUser);
             }
         }
-
     }
 
     /**
      * 获取首页信息  左侧菜单. .直接请求第一个菜单地址
-     * @param map
+     * @param  oid 项目id 如果是 客户登录选择项目要或者管理点击客户项目 根据此参数进入客户的管理界面
      * @return
      */
     @RequestMapping("")
-    public String index(Map<String,Object> map){
+    public String index(Map<String,Object> map,@RequestParam(value = "oid",defaultValue = "0")Integer oid){
+
         User user = (User) map.get("current_user");
         //菜单获取
         List<Menu> menuList = null;
 
         //管理员
-        if(user.getLevel() == 1){
+        if(oid == 0 && user.getLevel() == 1){
             //获取项目  左侧菜单 包括二级
             menuList =  obService.getMenuWithAdmin();
 
@@ -77,28 +80,39 @@ public class IndexController {
 
            return  "forward:"+menuList.get(0).getMenuSecondList().get(0).getUrl();
         }
-        //客户....
 
-         //根据用户id， 获取项目信息
-         List<Ob> obList  = obService.getObInfoByUserId(user.getId());
+         //客户登录时oid也是0_客户 目前没法实现记住我登录，因为项目ID不再user里面_先选后进  非默认...
+         //改:加一个字段记录上一次项目id 并赋值给obid
+         oid = oid==0?user.getObId():oid;
 
-        //多个项目 其他方式  弹出选择这类的
-        if(obList.size()>1){
-            return null;
-        }
-        //用户设置当前logo为项目的logo _项目id_更新session信息
-        user.setLogo(obList.get(0).getLogo());
-        user.setObId(obList.get(0).getId());
-        map.put("current_user",user);
+         if(oid==null){
+             return "forward:/login";
+         }
+
+         //说明当前项目更换记录
+         if(oid != user.getObId()){
+             userService.updatePrevObId(user.getId(),oid);
+         }
+
+         //根据项目ID， 获取项目信息
+         Ob ob = obService.getObInfoById(oid);
+
+         //用户设置当前logo为项目的logo _项目id_更新session信息
+         user.setLogo(ob.getLogo());
+         user.setObId(ob.getId());
+
+         map.put("current_user",user);
 
         //获取菜单
-        //根据用户id， 获取项目菜单信息
-        menuList =  obService.getMenuByObId(user.getObId());
+        //根据项目id， 获取项目菜单信息
+        menuList =  obService.getMenuByObId(oid);
 
         map.put("menuList",menuList);
 
+        //设置被选中 菜单的id
+        map.put("selectedMenuId",menuList.get(0).getMenuSecondList().get(0).getId());
 
-        return "menu_poject_relation";
+        return "forward:"+menuList.get(0).getMenuSecondList().get(0).getUrl();
     }
 
     /**
