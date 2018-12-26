@@ -1,10 +1,7 @@
 package zyrs.xyz.obadmin.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import zyrs.xyz.obadmin.bean.Menu;
-import zyrs.xyz.obadmin.bean.MenuProject;
-import zyrs.xyz.obadmin.bean.MenuSecond;
-import zyrs.xyz.obadmin.bean.Ob;
+import zyrs.xyz.obadmin.bean.*;
 
 import java.util.List;
 
@@ -52,4 +49,8 @@ public interface ObMapper{
     Integer getObCountInfoById(Integer oid);
 
     Ob getObInfoById(Integer oid);
+
+    void modifyLogo(Integer id, String logo);
+
+    void addOrUpdateWxapp(Wxapp wxapp);
 }

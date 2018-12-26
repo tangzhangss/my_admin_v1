@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyrs.xyz.obadmin.mapper.WxappMapper">
+   <sql id="column">
+      id,appid,secret,ob_id
+   </sql>
+
+    <select id="getWxappInfoByObId" resultType="zyrs.xyz.obadmin.bean.Wxapp">
+        select <include refid="column"></include> from tbl_wxapp where ob_id  = #{obId}
+    </select>
+</mapper>

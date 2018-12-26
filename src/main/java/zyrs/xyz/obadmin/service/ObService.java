@@ -157,4 +157,12 @@ public class ObService {
     public Ob getObInfoById(Integer oid) {
         return obMapper.getObInfoById(oid);
     }
+
+    public void modifyLogo(Integer id, String logo) {
+        obMapper.modifyLogo(id,logo);
+    }
+
+    public void addOrUpdateWxapp(Wxapp wxapp) {
+        obMapper.addOrUpdateWxapp(wxapp);
+    }
 }

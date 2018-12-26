@@ -23,9 +23,9 @@ CREATE TABLE IF NOT EXISTS `tbl_menu` (
   `menu_logo` varchar(255) DEFAULT '' COMMENT '菜单的logo 图片地址',
   `level` int(11) DEFAULT '1' COMMENT '菜单的排序，从上到小 1>',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COMMENT='左侧一级菜单';
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COMMENT='左侧一级菜单';
 
--- 正在导出表  ob_admin.tbl_menu 的数据：~0 rows (大约)
+-- 正在导出表  ob_admin.tbl_menu 的数据：~1 rows (大约)
 DELETE FROM `tbl_menu`;
 /*!40000 ALTER TABLE `tbl_menu` DISABLE KEYS */;
 INSERT INTO `tbl_menu` (`id`, `name`, `menu_type`, `menu_logo`, `level`) VALUES
@@ -61,9 +61,9 @@ CREATE TABLE IF NOT EXISTS `tbl_menu_second` (
   `menu_type` tinyint(4) DEFAULT '1' COMMENT '菜单的类型，主要区别管理员和客户，因为管理员菜单不需要和账号匹配  1 管理员 2客户',
   `menu_parent` int(11) DEFAULT '0' COMMENT '上级菜单',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COMMENT='左侧二级菜单表';
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COMMENT='左侧二级菜单表';
 
--- 正在导出表  ob_admin.tbl_menu_second 的数据：~4 rows (大约)
+-- 正在导出表  ob_admin.tbl_menu_second 的数据：~5 rows (大约)
 DELETE FROM `tbl_menu_second`;
 /*!40000 ALTER TABLE `tbl_menu_second` DISABLE KEYS */;
 INSERT INTO `tbl_menu_second` (`id`, `name`, `url`, `menu_type`, `menu_parent`) VALUES
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `tbl_object` (
 DELETE FROM `tbl_object`;
 /*!40000 ALTER TABLE `tbl_object` DISABLE KEYS */;
 INSERT INTO `tbl_object` (`id`, `owner`, `name`, `logo`, `descr`, `create_time`, `hold_date`, `hold_cost`, `hold_ins`, `user_id`, `status`) VALUES
-	(1, '创荣科技', '全V健康', 'http://ob-admin.oss-cn-beijing.aliyuncs.com/picture/15520449931/1545282462028_64.jpg?x-oss-process=style/ob-picture-style', '全V健康就诊卡管理', '2018-12-20 10:06:36', '2019-04-20 16:00:43', 0, '全职维护', 12, 1);
+	(1, '创荣科技', '全V健康', 'http://ob-admin.oss-cn-beijing.aliyuncs.com/picture/17781694763/1545811485412_64.jpg?x-oss-process=style/ob-picture-style', '全V健康就诊卡管理', '2018-12-20 10:06:36', '2019-04-20 16:00:43', 0, '全职维护', 12, 1);
 /*!40000 ALTER TABLE `tbl_object` ENABLE KEYS */;
 
 
@@ -115,8 +115,25 @@ DELETE FROM `tbl_user`;
 /*!40000 ALTER TABLE `tbl_user` DISABLE KEYS */;
 INSERT INTO `tbl_user` (`id`, `username`, `password`, `level`, `prev_oid`) VALUES
 	(10, '15520449931', 'f3c4cc9c1d0903b690f668f9e401ab34', 1, NULL),
-	(12, '17781694763', '4280d89a5a03f812751f504cc10ee8a5', 2, 1);
+	(12, '123456', '4280d89a5a03f812751f504cc10ee8a5', 2, 1);
 /*!40000 ALTER TABLE `tbl_user` ENABLE KEYS */;
+
+
+-- 导出  表 ob_admin.tbl_wxapp 结构
+CREATE TABLE IF NOT EXISTS `tbl_wxapp` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `appid` varchar(50) NOT NULL DEFAULT '0',
+  `secret` varchar(50) NOT NULL DEFAULT '0',
+  `ob_id` int(11) NOT NULL DEFAULT '0' COMMENT '对应项目的id',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- 正在导出表  ob_admin.tbl_wxapp 的数据：~1 rows (大约)
+DELETE FROM `tbl_wxapp`;
+/*!40000 ALTER TABLE `tbl_wxapp` DISABLE KEYS */;
+INSERT INTO `tbl_wxapp` (`id`, `appid`, `secret`, `ob_id`) VALUES
+	(1, 'wxb8155eccd3eaeda4', '4d54e6176b0906d5a7a08bd30c3aa32c', 1);
+/*!40000 ALTER TABLE `tbl_wxapp` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

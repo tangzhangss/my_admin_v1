@@ -4,7 +4,31 @@
 <head th:replace  ="/public/head :: head"></head>
 
 <style>
-
+    label{
+        margin-right: 20px;
+    }
+    #logo-select{
+        margin-top: 5px;
+        background-color: white;
+        border: 1px solid #ccc;
+        color: #707070;
+    }
+    .wxapp-box{
+        margin-top: 20px;
+        border-top: 1px solid #e7e7e7;
+        padding-top: 10px;
+    }
+    .wxapp-box label{
+        display: block;
+    }
+    .wxapp-box input{
+        width:800px;
+        height: 40px;
+        margin: 6.6px 0;
+    }
+    #save_wxapp{
+        float: right;
+    }
 </style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
@@ -14,7 +38,75 @@
 
     <section>
         <div class="section">
-            baseinfo...
+            <div>
+                <label>项目</label> <span th:text="${ob.name}">xxxxxx</span> <label style="margin-left: 100px;">维护截至时间</label> <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}">xxxxxx</span>
+            </div>
+            <div style="  border-top: 1px solid #e7e7e7;">
+                <label>项目Logo</label><br/>
+                <img th:src="${ob.logo}" class="img-circle" style="width: 100px;height: 100px;"/><br/>
+                <button type="button" class="layui-btn" id="logo-select">
+                    <i class="layui-icon">&#xe67c;</i>上传
+                </button>
+                <script th:inline="javascript">
+
+                    //开启layui上传图片组件
+                    mylayer.upload("#logo-select",function(res){
+                        console.log("上传图片成功:",res);
+                         let oid=[[${ob.id}]];
+                         $.ajax({
+                             url:"ob/modify_logo",
+                             data:{"id":oid,"logo":res},
+                             success:function(){
+                                 window.location.reload();
+                             }
+                         })
+                    },function(res){
+                        console.log("上传图片失败:",res);
+                        mylayer.msg(res);
+                    });
+                </script>
+            </div>
+
+            <div class="wxapp-box" id="wxapp-box">
+                <div class="col">
+                    <label >AppID(小程序ID)</label>
+                    <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
+                </div>
+                <div class="col">
+                    <label>AppSecret(小程序密钥)</label>
+                    <input type="text" class="secret form-control"  placeholder="secret" v-bind:value="wxapp.secret"/>
+                </div>
+
+                <button  class="btn btn-info" id="save_wxapp">提交</button>
+            </div>
+            <script th:inline="javascript">
+                var my_wxapp = new Vue({
+                   el:"#wxapp-box",
+                   data:{
+                       wxapp:{
+                           "appid":"",
+                           "secret":'',
+                           "id":null
+                       }
+                   }
+                });
+                if([[${wxapp}]]!=null){
+                    my_wxapp.wxapp = [[${wxapp}]];
+                }
+
+                $("#save_wxapp").click(function(){
+                    let appid = $(".appid").val();
+                    let secret  = $(".secret").val();
+                    let obId=[[${ob.id}]];
+                    $.ajax({
+                        url:"ob/add_or_update_wxapp",
+                        data:{"appid":appid,"secret":secret,"id": my_wxapp.wxapp.id,"obId":obId},
+                        success:function(){
+                            mylayer.msg("操作成功!");
+                        }
+                    })
+                })
+            </script>
         </div>
     </section>
 </div>
