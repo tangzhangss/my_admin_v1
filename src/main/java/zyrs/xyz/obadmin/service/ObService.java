@@ -162,7 +162,5 @@ public class ObService {
         obMapper.modifyLogo(id,logo);
     }
 
-    public void addOrUpdateWxapp(Wxapp wxapp) {
-        obMapper.addOrUpdateWxapp(wxapp);
-    }
+
 }

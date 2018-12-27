@@ -24,7 +24,20 @@
     .wxapp-box input{
         width:800px;
         height: 40px;
-        margin: 6.6px 0;
+        margin: 6.6px 0px;
+    }
+    .wxapp-box .radio{
+        width:20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 20px;
+    }
+    .wxapp-box .radio-select{
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
     }
     #save_wxapp{
         float: right;
@@ -41,7 +54,7 @@
             <div>
                 <label>项目</label> <span th:text="${ob.name}">xxxxxx</span> <label style="margin-left: 100px;">维护截至时间</label> <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}">xxxxxx</span>
             </div>
-            <div style="  border-top: 1px solid #e7e7e7;">
+            <div style="  border-top: 1px solid #e7e7e7;padding-top: 10px;">
                 <label>项目Logo</label><br/>
                 <img th:src="${ob.logo}" class="img-circle" style="width: 100px;height: 100px;"/><br/>
                 <button type="button" class="layui-btn" id="logo-select">
@@ -69,6 +82,14 @@
 
             <div class="wxapp-box" id="wxapp-box">
                 <div class="col">
+                    <label>小程序状态</label>
+                    <div class="radio-select">
+                        <span>使用中:</span> <input  type="radio"  v-on:click="changeStatus(1)" v-bind:checked="wxapp.status==1?'checked':''" name="status" class="radio">
+                        <span>审核中: </span><input name="status" v-on:click="changeStatus(2)" v-bind:checked="wxapp.status==2?'checked':''" type="radio" class="radio">
+                    </div>
+
+                </div>
+                <div class="col">
                     <label >AppID(小程序ID)</label>
                     <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
                 </div>
@@ -81,14 +102,20 @@
             </div>
             <script th:inline="javascript">
                 var my_wxapp = new Vue({
-                   el:"#wxapp-box",
-                   data:{
+                    el:"#wxapp-box",
+                    data:{
                        wxapp:{
                            "appid":"",
                            "secret":'',
-                           "id":null
+                           "id":null,
+                           "status":1
                        }
-                   }
+                    },
+                    methods:{
+                        changeStatus:function(status){
+                            my_wxapp.wxapp.status = status;
+                        }
+                    }
                 });
                 if([[${wxapp}]]!=null){
                     my_wxapp.wxapp = [[${wxapp}]];
@@ -100,7 +127,7 @@
                     let obId=[[${ob.id}]];
                     $.ajax({
                         url:"ob/add_or_update_wxapp",
-                        data:{"appid":appid,"secret":secret,"id": my_wxapp.wxapp.id,"obId":obId},
+                        data:{"appid":appid,"secret":secret,"id": my_wxapp.wxapp.id,"obId":obId,"status":my_wxapp.wxapp.status},
                         success:function(){
                             mylayer.msg("操作成功!");
                         }

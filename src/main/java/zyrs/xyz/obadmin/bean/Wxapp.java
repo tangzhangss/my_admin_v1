@@ -8,6 +8,7 @@ public class Wxapp {
     private Integer id;
     private String appid;
     private String secret;
+    private Integer status;//使用中 1 审核中 2
 
     private Integer obId; //项目id
 
@@ -43,12 +44,21 @@ public class Wxapp {
         this.obId = obId;
     }
 
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
+    }
+
     @Override
     public String toString() {
         return "Wxapp{" +
                 "id=" + id +
                 ", appid='" + appid + '\'' +
                 ", secret='" + secret + '\'' +
+                ", status=" + status +
                 ", obId=" + obId +
                 '}';
     }

@@ -6,4 +6,7 @@ import zyrs.xyz.obadmin.bean.Wxapp;
 @Mapper
 public interface WxappMapper {
     Wxapp getWxappInfoByObId(Integer obId);
+
+
+    void addOrUpdateWxapp(Wxapp wxapp);
 }

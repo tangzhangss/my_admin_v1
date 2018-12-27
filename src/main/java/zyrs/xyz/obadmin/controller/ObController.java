@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import zyrs.xyz.obadmin.bean.Ob;
 import zyrs.xyz.obadmin.bean.Wxapp;
 import zyrs.xyz.obadmin.service.ObService;
+import zyrs.xyz.obadmin.service.WxappService;
 
 @Controller
 @RequestMapping("/ob")
@@ -14,6 +15,8 @@ public class ObController {
 
     @Autowired
     private ObService obService;
+    @Autowired
+    private WxappService wxappService;
 
 
 
@@ -26,7 +29,7 @@ public class ObController {
     @RequestMapping("add_or_update_wxapp")
     @ResponseBody
     public void addOrUpdateWxapp(Wxapp wxapp){
-        obService.addOrUpdateWxapp(wxapp);
+        wxappService.addOrUpdateWxapp(wxapp);
     }
 
 }

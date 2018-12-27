@@ -52,5 +52,4 @@ public interface ObMapper{
 
     void modifyLogo(Integer id, String logo);
 
-    void addOrUpdateWxapp(Wxapp wxapp);
 }

@@ -22,4 +22,8 @@ public class WxappService {
     public Wxapp getWxappInfoByObId(Integer obId) {
         return wxappMapper.getWxappInfoByObId(obId);
     }
+
+    public void addOrUpdateWxapp(Wxapp wxapp) {
+        wxappMapper.addOrUpdateWxapp(wxapp);
+    }
 }

@@ -128,8 +128,5 @@
     <update id="modifyLogo">
         update tbl_object set logo = #{param2} where id = #{param1}
     </update>
-    <!--更新项目的appid secret-->
-    <insert id="addOrUpdateWxapp" parameterType="zyrs.xyz.obadmin.bean.Wxapp">
-        replace into tbl_wxapp value(#{id},#{appid},#{secret},#{obId})
-    </insert>
+
 </mapper>
