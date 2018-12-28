@@ -35,4 +35,11 @@ public class WxappController {
 
         return "wxapp/baseinfo";
     }
+
+    @RequestMapping("banner")
+    public String banner(Map<String,Object> map){
+
+
+        return "wxapp/banner";
+    }
 }

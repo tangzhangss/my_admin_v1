@@ -9,15 +9,8 @@
     <list default="true" id="5107a34f-8857-479e-a051-5ace2f6cf80f" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/spring.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Wxapp.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Wxapp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/WxappMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/WxappMapper.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/WxappService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/WxappService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/mybatis/WxappMapper.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/mybatis/WxappMapper.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -53,14 +46,66 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="56" column="76" lean-forward="true" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
+            <state relative-caret-position="1064">
+              <caret line="56" column="76" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
               <folding>
                 <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
                 <element signature="n#style#0;n#div#1;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project_manage.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="893">
+              <caret line="47" column="60" selection-start-line="47" selection-start-column="60" selection-end-line="47" selection-end-column="60" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="418">
+              <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2069">
+              <caret line="200" column="28" lean-forward="true" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="33" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/WxappMapper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="171">
+              <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="30" selection-start-line="30" selection-end-line="30" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#689#690#0" expanded="true" />
+                <element signature="e#750#751#0" expanded="true" />
+                <element signature="e#859#860#0" expanded="true" />
+                <element signature="e#911#912#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -112,7 +157,6 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/MD5Util.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/css/app.css" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/menu_set.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/MenuProject.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/menu_poject_relation.html" />
@@ -142,7 +186,6 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/User.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/UserMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/UserService.java" />
-        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/ObMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/mybatis/WxappMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/ObMapper.java" />
@@ -152,6 +195,8 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Wxapp.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/project_manage.html" />
+        <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" />
       </list>
     </option>
   </component>
@@ -180,11 +225,11 @@
       </MavenImportingSettings>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="103" />
-    <option name="y" value="3" />
-    <option name="width" value="1249" />
-    <option name="height" value="735" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="17" />
+    <option name="y" value="1" />
+    <option name="width" value="1255" />
+    <option name="height" value="652" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -216,56 +261,7 @@
               <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
-              <item name="mapper" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="java" type="462c0819:PsiDirectoryNode" />
-              <item name="obadmin" type="462c0819:PsiDirectoryNode" />
-              <item name="service" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="mybatis" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
@@ -274,22 +270,13 @@
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="resources" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
-              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="resources" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-              <item name="wxapp" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -723,11 +710,14 @@
       <workItem from="1545806787741" duration="7560000" />
       <workItem from="1545877570329" duration="1143000" />
       <workItem from="1545879569876" duration="1642000" />
+      <workItem from="1545891944676" duration="693000" />
+      <workItem from="1545988400126" duration="280000" />
+      <workItem from="1545988895186" duration="676000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="224884000" />
+    <option name="totallyTimeSpent" value="226533000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -739,10 +729,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="103" y="3" width="1249" height="735" extended-state="0" />
-    <editor active="true" />
+    <frame x="17" y="1" width="1255" height="652" extended-state="1" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8181818" visible="true" weight="0.15306981" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.8181818" visible="true" weight="0.2577406" />
       <window_info id="Structure" order="1" weight="0.25" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Web" order="3" side_tool="true" />
@@ -754,7 +743,7 @@
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.26622295" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.35907337" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.34046346" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
@@ -872,13 +861,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret line="19" column="24" selection-start-line="19" selection-start-column="19" selection-end-line="19" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret line="8" column="6" selection-end-line="24" selection-end-column="7" />
         </state>
       </provider>
     </entry>
@@ -1038,20 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2469">
-          <caret line="263" column="11" lean-forward="true" selection-end-line="268" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project_manage.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="533">
-          <caret line="215" column="7" lean-forward="true" selection-start-line="207" selection-end-line="215" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/UtilController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="133">
@@ -1080,13 +1048,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="250">
           <caret line="53" selection-start-line="53" selection-end-line="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/WxappMapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="171">
-          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
         </state>
       </provider>
     </entry>
@@ -1150,18 +1111,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#859#860#0" expanded="true" />
-            <element signature="e#911#912#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/Wxapp.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="109">
@@ -1171,8 +1120,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="31" column="40" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+        <state relative-caret-position="608">
+          <caret line="42" column="30" selection-start-line="42" selection-start-column="30" selection-end-line="42" selection-end-column="30" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1181,12 +1130,54 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/baseinfo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="56" column="76" lean-forward="true" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
+        <state relative-caret-position="1064">
+          <caret line="56" column="76" selection-start-line="56" selection-start-column="76" selection-end-line="56" selection-end-column="76" />
           <folding>
             <element signature="n#style#0;n#label#1;n#div#0;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#div#1;n#div#0;n#section#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/project_manage.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="893">
+          <caret line="47" column="60" selection-start-line="47" selection-start-column="60" selection-end-line="47" selection-end-column="60" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/mapper/WxappMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="171">
+          <caret line="10" column="39" selection-start-line="10" selection-start-column="39" selection-end-line="10" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/ObController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="30" selection-start-line="30" selection-end-line="30" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#689#690#0" expanded="true" />
+            <element signature="e#750#751#0" expanded="true" />
+            <element signature="e#859#860#0" expanded="true" />
+            <element signature="e#911#912#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/wxapp/banner.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="418">
+          <caret line="23" column="7" selection-start-line="23" selection-start-column="7" selection-end-line="23" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/menu_set.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2069">
+          <caret line="200" column="28" lean-forward="true" selection-start-line="200" selection-start-column="28" selection-end-line="200" selection-end-column="33" />
         </state>
       </provider>
     </entry>
