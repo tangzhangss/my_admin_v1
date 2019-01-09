@@ -41,8 +41,8 @@
                     <a href="javascript:;" class="menu-item-info">
                         <span class="layui-icon">&#xe667</span>
                         <div id="myInfo">
-                            <img  th:if="*{logo eq ''}" th:src="*{logo}"class="layui-nav-img"/>
-                            <img  th:if="*{logo ne ''}" src="/static/img/zyrs.png" class="layui-nav-img"/>
+                            <img  th:if="${current_user.logo ne ''}" th:src="${current_user.logo}"class="layui-nav-img"/>
+                            <img  th:if="${current_user.logo eq ''}" src="/static/img/zyrs.png" class="layui-nav-img"/>
                             <span class="layui-icon">&#xe625;</span>
                         </div>
                     </a>

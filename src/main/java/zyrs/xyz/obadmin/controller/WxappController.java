@@ -9,6 +9,7 @@ import zyrs.xyz.obadmin.bean.User;
 import zyrs.xyz.obadmin.bean.Wxapp;
 import zyrs.xyz.obadmin.service.ObService;
 import zyrs.xyz.obadmin.service.WxappService;
+import zyrs.xyz.obadmin.utils.HttpRequest;
 
 import java.util.Map;
 
@@ -17,8 +18,8 @@ import java.util.Map;
 @RequestMapping("wxapp")
 public class WxappController {
 
-     @Autowired
-     private WxappService wxappService;
+    @Autowired
+    private WxappService wxappService;
     @Autowired
     private ObService obService;
 
@@ -39,7 +40,9 @@ public class WxappController {
     @RequestMapping("banner")
     public String banner(Map<String,Object> map){
 
+        wxappService.getAccessToken("wxb8155eccd3eaeda4","4d54e6176b0906d5a7a08bd30c3aa32c");
 
         return "wxapp/banner";
     }
+
 }
