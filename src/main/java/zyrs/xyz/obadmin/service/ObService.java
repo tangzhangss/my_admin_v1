@@ -17,6 +17,7 @@ public class ObService {
 
     /**
      * 获取项目的左侧菜单列表
+     * 可能管理员管理——客户的项目 所以这个菜单不能缓存
      * @param id  项目id
      * @return
      */

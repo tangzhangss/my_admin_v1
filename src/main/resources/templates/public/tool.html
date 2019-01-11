@@ -72,6 +72,10 @@
                     success:function(res){
                         console.log("项目信息:",res);
                         my_project.obList = res;
+
+                        if(res.length == 1){
+                            window.location.href="/index?oid="+res[0].id
+                        }
                     }
                 })
             }

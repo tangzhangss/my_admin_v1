@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+.statistics{
+    background-color: white;
+    padding:10px 30px;
+    width: 1000px;
+}
+.statistics-daily{
+    background-color: white;
+    padding:10px 30px;
+    width: 1000px;
+    margin-bottom: 20px;
+    display: flex;
+}
+.statistics-daily .one{
+    width: 500px;
+}
+.statistics-daily .one  div{
+    width: 230px;
+    text-align: center;
+    margin-top: 20px;
+}
+.statistics-daily .one  div .title2{
+    color: #cccccc;
+    font-size: 15px;
+}
+.statistics-daily .one  div >p{
+    margin-top: 10px;
+    font-size:30px;
+}
+.statistics-daily .one .l{
+    float: left;
+    border-right:1px solid #ccc ;
+}
+.statistics-daily .one .r{
+    float: right;
+}
+.title{
+    font-size: 20px;
+}
+#echart-tool{
+   width: 1000px;
+   height:400px;
+   color:#1aad19;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#echart-tool .layui-icon{
+    font-size: 100px;
+}
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <script src="/static/js/echarts.min.js"></script>
+        <div class="section">
+            <div class="statistics-daily">
+                <div class="one">
+                    <p class="title">昨天概括</p>
+                    <div class="l">
+                        <p class="title2">新增用户数</p>
+                        <p class="user_info_val">...</p>
+                    </div>
+                    <div class="r">
+                        <p class="title2">活跃用户数</p>
+                        <p class="user_info_val">...</p>
+                    </div>
+                </div>
+                <div class="one">
+                    <p class="title">前天概括</p>
+                    <div class="l">
+                        <p class="title2">新增用户数</p>
+                        <p class="user_info_val">...</p>
+                    </div>
+                    <div class="r">
+                        <p class="title2">活跃用户数</p>
+                        <p class="user_info_val">...</p>
+                    </div>
+                </div>
+            </div>
+            <div class="statistics">
+
+
+
+                 <p class="title">最近30天用户统计</p>
+                 <!--加载中..-->
+                 <div id="echart-tool">
+                     <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
+                 </div>
+                 <div id="echart" style="width: 1000px;height:400px;display:none;">
+
+                 </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<script type="text/javascript">
+    // 基于准备好的dom，初始化echarts实例
+    var myChart = echarts.init(document.getElementById('echart'),"vintage");
+
+    //获取统计信息
+    $.ajax({
+        url:"/wxapp/statistics_user_info",
+        success:function(res){
+            let xAxisData = [];
+            let seriesData = [];
+            let share_pv = [];
+            let share_uv = [];
+
+            let monthStatistic = res[0];
+
+            monthStatistic.forEach((val,index)=>{
+                try{//这里可能最后一天(第二天早上 9点左右) 微信接口调用错误
+                    xAxisData.push(val.list[0].ref_date.substr(4,2)+"-"+val.list[0].ref_date.substr(6,2));
+                    seriesData.push(val.list[0].visit_total);
+                    share_uv.push(val.list[0].share_uv);
+                    share_pv.push(val.list[0].share_pv);
+                }catch (e) {
+                    console.log(e);
+                }
+
+            })
+
+
+            $("#echart").css({
+                "display":"block"
+            })
+            $("#echart-tool").css({
+                "display":"none"
+            })
+            myChart.setOption({
+                color: [' #1aad19'],
+                legend: {
+                    data:['累计用户数',"转发人数","转发次数"]
+                },
+                yAxis: {
+                    type: 'value'
+                },
+                series:[{
+                    name:'累计用户数',
+                    type: 'line',
+                    data:seriesData
+                  },{
+                    name:'转发人数',
+                    type: 'line',
+                    data:share_pv,
+                    color:["#f39836"]
+                  },{
+                    name:'转发次数',
+                    type: 'line',
+                    data:share_uv,
+                    color:["#6792f3"]
+                 }
+                ],
+                xAxis:[{
+                    type: 'category',
+                    data:xAxisData
+                }]
+            })
+
+            let dailyStatistic = res[1];
+
+            $(".user_info_val:eq(0)").text(dailyStatistic.visit_uv_new[0].value);
+            $(".user_info_val:eq(1)").text(dailyStatistic.visit_uv[0].value);
+            $(".user_info_val:eq(2)").text(dailyStatistic.visit_uv_new[1].value);
+            $(".user_info_val:eq(3)").text(dailyStatistic.visit_uv[1].value);
+        }
+    })
+</script>
+
+</body>
+</html>

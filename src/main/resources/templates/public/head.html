@@ -61,6 +61,13 @@
             $("#myInfo-other").hide();
         })
     </script>
+
+    <!--全局消息提示框-->
+    <script th:inline="javascript">
+         if([[${errmsg}]] != null){
+             mylayer.msg([[${errmsg}]]);
+         }
+    </script>
 </nav>
 
 </html>

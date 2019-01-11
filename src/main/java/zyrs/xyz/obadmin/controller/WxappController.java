@@ -3,14 +3,22 @@ package zyrs.xyz.obadmin.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import zyrs.xyz.obadmin.bean.Ob;
 import zyrs.xyz.obadmin.bean.User;
 import zyrs.xyz.obadmin.bean.Wxapp;
+import zyrs.xyz.obadmin.bean.WxappResult;
 import zyrs.xyz.obadmin.service.ObService;
 import zyrs.xyz.obadmin.service.WxappService;
 import zyrs.xyz.obadmin.utils.HttpRequest;
+import zyrs.xyz.obadmin.utils.WxappApiUtil;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 @SessionAttributes({"current_user","menuList"})
@@ -37,12 +45,37 @@ public class WxappController {
         return "wxapp/baseinfo";
     }
 
-    @RequestMapping("banner")
-    public String banner(Map<String,Object> map){
+    //跳转统计页面_微信接口太慢了改用vue.js
+    @RequestMapping("statistics")
+    public String statistics(Map<String,Object> map, @RequestParam(value = "month",defaultValue = "0")int month){
+        return "wxapp/statistics";
+    }
 
-        wxappService.getAccessToken("wxb8155eccd3eaeda4","4d54e6176b0906d5a7a08bd30c3aa32c");
 
-        return "wxapp/banner";
+    /**
+     * 小程序用户 数据统计
+     */
+    @ResponseBody
+    @RequestMapping("statistics_user_info")
+    public List<Object> statisticsUserInfo(Map<String,Object> map){
+        User user = (User)map.get("current_user");
+        //获取当前小程序的appid和secret
+        Wxapp wxapp = wxappService.getWxappInfoByObId(user.getObId());
+
+        //获取30天内的用户数据概括
+        List<WxappResult> wxappStatisticList =  WxappApiUtil.getWeanalysisAppidDailySummaryTrend(wxapp.getAppid(),wxapp.getSecret());
+
+        List<Object> res = new ArrayList<>();
+
+        res.add(wxappStatisticList);
+
+        //获取前天的用户留存
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE,-2);
+        String date =  new SimpleDateFormat( "yyyyMMdd" ).format(calendar.getTime());
+        WxappResult wxappStatisticDaily2 = WxappApiUtil.getWeanlysisAppidDailyRetainInfo(wxapp.getAppid(),wxapp.getSecret(),date);
+        res.add(wxappStatisticDaily2);
+        return res;
     }
 
 }

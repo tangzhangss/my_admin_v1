@@ -16,7 +16,7 @@ function widnowInit(){
             "width":"1400px"
         })
     }
-    console.log("当前窗口大小:",windowWidth);
+    //console.log("当前窗口大小:",windowWidth);
 
 }
 //初始化
