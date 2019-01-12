@@ -21,7 +21,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
-@SessionAttributes({"current_user","menuList"})
+@SessionAttributes({"current_user","menuList","statistics"})
 @Controller
 @RequestMapping("wxapp")
 public class WxappController {
@@ -59,23 +59,35 @@ public class WxappController {
     @RequestMapping("statistics_user_info")
     public List<Object> statisticsUserInfo(Map<String,Object> map){
         User user = (User)map.get("current_user");
-        //获取当前小程序的appid和secret
-        Wxapp wxapp = wxappService.getWxappInfoByObId(user.getObId());
 
-        //获取30天内的用户数据概括
-        List<WxappResult> wxappStatisticList =  WxappApiUtil.getWeanalysisAppidDailySummaryTrend(wxapp.getAppid(),wxapp.getSecret());
+        List<Object> statistics = (List<Object>) map.get("statistics");
 
-        List<Object> res = new ArrayList<>();
+        if(statistics == null){
+            //获取当前小程序的appid和secret
+            Wxapp wxapp = wxappService.getWxappInfoByObId(user.getObId());
 
-        res.add(wxappStatisticList);
+            //获取30天内的用户数据概括
+            List<WxappResult> wxappStatisticList =  WxappApiUtil.getWeanalysisAppidDailySummaryTrend(wxapp.getAppid(),wxapp.getSecret());
 
-        //获取前天的用户留存
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DATE,-2);
-        String date =  new SimpleDateFormat( "yyyyMMdd" ).format(calendar.getTime());
-        WxappResult wxappStatisticDaily2 = WxappApiUtil.getWeanlysisAppidDailyRetainInfo(wxapp.getAppid(),wxapp.getSecret(),date);
-        res.add(wxappStatisticDaily2);
-        return res;
+            List<Object> res = new ArrayList<>();
+
+            res.add(wxappStatisticList);
+
+            //获取前天的用户留存
+            Calendar calendar = Calendar.getInstance();
+            calendar.add(Calendar.DATE,-2);
+            String date =  new SimpleDateFormat( "yyyyMMdd" ).format(calendar.getTime());
+            WxappResult wxappStatisticDaily2 = WxappApiUtil.getWeanlysisAppidDailyRetainInfo(wxapp.getAppid(),wxapp.getSecret(),date);
+            res.add(wxappStatisticDaily2);
+
+            map.put("statistics",res);//本次操作一直缓存...不重新发送请求
+
+            return res;
+        }
+
+
+
+        return statistics;
     }
 
 }
