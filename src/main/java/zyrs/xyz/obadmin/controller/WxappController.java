@@ -90,4 +90,20 @@ public class WxappController {
         return statistics;
     }
 
+
+    /**
+     * 跳转轮播图页面....
+     */
+    @RequestMapping("banner")
+    public String banner(Map<String,Object> map){
+        return "wxapp/banner";
+    }
+
+    /**
+     * 跳转商户平台页面....
+     */
+    @RequestMapping("merchant")
+    public String merchant(Map<String,Object> map){
+        return "wxapp/merchant";
+    }
 }

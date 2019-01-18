@@ -44,54 +44,59 @@
 
     <section>
         <div class="section">
-            <button th:onclick="openEditProjectModal(1)" type="button" class="btn btn-info" style="background-color: #1aad19">添加项目</button>
-            <div class="ob_prompt">▶考虑到维护的持续性_维护时间仅是接上一次结束时间延期_并不是当前时间</div>
-            <table class="table table-hover">
-               <tr>
-                <th>ID</th>
-                <th>名称</th>
-                <th>logo</th>
-                <th>主体</th>
-                <th>描述</th>
-                <th>创建时间</th>
-                <th>维护截止时间</th>
-                <th>延期</th>
-                <th>维护费用(￥/年)</th>
-                <th>维护说明</th>
-                <th>用户ID</th>
-                <th>状态</th>
-                <th>操作</th>
-               </tr>
-                <tr th:each="ob:${obList}">
-                    <td  class="primary-key" th:text="${ob.id}">0</td>
-                    <td th:text="${ob.name}">demo</td>
-                    <td>
-                        <img th:src="${ob.logo}"/>
-                    </td>
-                    <td th:text="${ob.owner}">个人|企业</td>
-                    <td th:text="${ob.descr}">描述</td>
-                    <td th:text="${#dates.format(ob.createTime,'yyyy-MM-dd')}">0000-00-00</td>
-                    <td>
-                        <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}"> 0000-00-00</span>
-                     </td>
-                    <td>
-                        <span th:title="${ob.id}" class="glyphicon glyphicon-plus project-relay-btn" style="color: #1E9FFF;cursor: pointer" title="延期" data-toggle="modal" data-target="#relay-modal"></span>
-                    </td>
-                    <td th:text="${ob.holdCost}">0000</td>
-                    <td th:text="${ob.holdIns}">说明</td>
-                    <td th:text="${ob.userId}">账号ID</td>
-                    <td>
-                        <span th:if="${ob.status == 1}" style="color: #007DDB;">正常</span>
-                        <span th:if="${ob.status == 2}" style="color: orange;">到期</span>
-                        <span th:if="${ob.status == 3}" style="color: red;">放弃</span>
-                    </td>
-                    <td>
-                       <button class="btn  btn-primary" th:onclick="openEditProjectModal(2,[[${ob}]])" >修改</button>
-                        <button class="btn btn-danger" th:onclick="delProject(this,[[${ob.id}]])">删除</button>
-                    </td>
-                </tr>
+            <div class="border-section">★考虑到维护的持续性_维护时间仅是接上一次结束时间延期_并不是当前时间</div>
 
-            </table>
+            <div class="border-section">
+                <button th:onclick="openEditProjectModal(1)" type="button" class="btn btn-info" style="background-color: #1aad19">添加项目</button>
+
+                <table class="table table-hover">
+                    <tr>
+                        <th>ID</th>
+                        <th>名称</th>
+                        <th>logo</th>
+                        <th>主体</th>
+                        <th>描述</th>
+                        <th>创建时间</th>
+                        <th>维护截止时间</th>
+                        <th>延期</th>
+                        <th>维护费用(￥/年)</th>
+                        <th>维护说明</th>
+                        <th>用户ID</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:each="ob:${obList}">
+                        <td  class="primary-key" th:text="${ob.id}">0</td>
+                        <td th:text="${ob.name}">demo</td>
+                        <td>
+                            <img th:src="${ob.logo}"/>
+                        </td>
+                        <td th:text="${ob.owner}">个人|企业</td>
+                        <td th:text="${ob.descr}">描述</td>
+                        <td th:text="${#dates.format(ob.createTime,'yyyy-MM-dd')}">0000-00-00</td>
+                        <td>
+                            <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}"> 0000-00-00</span>
+                        </td>
+                        <td>
+                            <span th:title="${ob.id}" class="glyphicon glyphicon-plus project-relay-btn" style="color: #1E9FFF;cursor: pointer" title="延期" data-toggle="modal" data-target="#relay-modal"></span>
+                        </td>
+                        <td th:text="${ob.holdCost}">0000</td>
+                        <td th:text="${ob.holdIns}">说明</td>
+                        <td th:text="${ob.userId}">账号ID</td>
+                        <td>
+                            <span th:if="${ob.status == 1}" style="color: #007DDB;">正常</span>
+                            <span th:if="${ob.status == 2}" style="color: orange;">到期</span>
+                            <span th:if="${ob.status == 3}" style="color: red;">放弃</span>
+                        </td>
+                        <td>
+                            <button class="btn  btn-primary" th:onclick="openEditProjectModal(2,[[${ob}]])" >修改</button>
+                            <button class="btn btn-danger" th:onclick="delProject(this,[[${ob.id}]])">删除</button>
+                        </td>
+                    </tr>
+
+                </table>
+            </div>
+
         </div>
     </section>
 </div>

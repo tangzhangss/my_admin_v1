@@ -15,7 +15,7 @@ body{
 section{
     width: auto;
     text-align: left;
-    padding: 0 4%;
+    padding: 0 5%;
 }
 .section{
     width:100%;
@@ -34,9 +34,14 @@ a:hover{
 .primary-key{
     font-weight: 700;
 }
+/**右侧模块**/
+.border-section{
+    border: 1px solid #ededed;
+    background-color: white;
+    padding:10px 30px;
+    margin-bottom: 20px;
+}
 /**提示**/
 .ob_prompt{
-    color: #bbbbbb;
-    display: inline-block;
-    line-height: 40px;
+
 }
