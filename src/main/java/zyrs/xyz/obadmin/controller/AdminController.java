@@ -22,7 +22,7 @@ import java.util.Map;
  */
 @SessionAttributes({"current_user","menuList"})
 @Controller
-@RequestMapping("admin")
+@RequestMapping("/admin")
 public class AdminController {
 
     @Autowired
@@ -31,7 +31,7 @@ public class AdminController {
     private UserService userService;
 
 
-    @RequestMapping("/project_manage")
+    @RequestMapping("project_manage")
     public String  project_manage(Map<String,Object> map){
 
         //获取所有项目的信息
@@ -41,7 +41,7 @@ public class AdminController {
         return "project_manage";
     }
 
-    @RequestMapping("/user_manage")
+    @RequestMapping("user_manage")
     public String  user_manage(Map<String,Object> map){
 
         //获取所有 \客户\ 的信息

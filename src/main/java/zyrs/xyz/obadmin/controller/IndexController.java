@@ -19,7 +19,7 @@ import java.util.Map;
 
 @SessionAttributes({"current_user","menuList"})
 @Controller
-@RequestMapping("index")
+@RequestMapping("/index")
 public class IndexController {
 
     @Autowired

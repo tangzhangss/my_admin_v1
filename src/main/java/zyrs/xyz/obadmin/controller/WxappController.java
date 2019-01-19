@@ -23,7 +23,7 @@ import java.util.Map;
 
 @SessionAttributes({"current_user","menuList","statistics"})
 @Controller
-@RequestMapping("wxapp")
+@RequestMapping("/wxapp")
 public class WxappController {
 
     @Autowired

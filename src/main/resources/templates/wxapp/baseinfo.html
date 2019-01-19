@@ -67,7 +67,7 @@
                         console.log("上传图片成功:",res);
                          let oid=[[${ob.id}]];
                          $.ajax({
-                             url:"ob/modify_logo",
+                             url:"/ob/modify_logo",
                              data:{"id":oid,"logo":res},
                              success:function(){
                                  window.location.reload();
@@ -126,7 +126,7 @@
                     let secret  = $(".secret").val();
                     let obId=[[${ob.id}]];
                     $.ajax({
-                        url:"ob/add_or_update_wxapp",
+                        url:"/ob/add_or_update_wxapp",
                         data:{"appid":appid,"secret":secret,"id": my_wxapp.wxapp.id,"obId":obId,"status":my_wxapp.wxapp.status},
                         success:function(){
                             mylayer.msg("操作成功!");
