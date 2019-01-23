@@ -5,41 +5,34 @@
 
 <style>
 .statistics{
-    width: 1000px;
-
+    width: 100%;
 }
 .statistics-daily{
-    width: 1000px;
+    width: 100%;
     display: flex;
 }
 .statistics-daily .one{
-    width: 500px;
+    width: 50%;
 }
-.statistics-daily .one  div{
-    width: 230px;
-    text-align: center;
-    margin-top: 20px;
-}
-.statistics-daily .one  div .title2{
+.statistics-daily .one .data  .title2{
     color: #cccccc;
     font-size: 15px;
 }
-.statistics-daily .one  div >p{
+.statistics-daily .one .data  p{
     margin-top: 10px;
     font-size:30px;
+    text-align: center;
 }
-.statistics-daily .one .l{
-    float: left;
-    border-right:1px solid #ccc ;
-}
-.statistics-daily .one .r{
-    float: right;
+.statistics-daily .one .data{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
 }
 .title{
     font-size: 20px;
 }
 #echart-tool{
-   width: 1000px;
+   width: 100%;
    height:400px;
    color:#1aad19;
     display: flex;
@@ -62,37 +55,39 @@
             <div class="statistics-daily border-section">
                 <div class="one">
                     <p class="title">昨天概括</p>
-                    <div class="l">
+                    <div class="data">
+                     <div class="l">
                         <p class="title2">新增用户数</p>
                         <p class="user_info_val">...</p>
-                    </div>
-                    <div class="r">
+                     </div>
+                     <div class="r">
                         <p class="title2">活跃用户数</p>
                         <p class="user_info_val">...</p>
+                     </div>
                     </div>
                 </div>
                 <div class="one">
                     <p class="title">前天概括</p>
-                    <div class="l">
-                        <p class="title2">新增用户数</p>
-                        <p class="user_info_val">...</p>
+                    <div class="data">
+                        <div class="l">
+                            <p class="title2">新增用户数</p>
+                            <p class="user_info_val">...</p>
+                        </div>
+                        <div class="r">
+                            <p class="title2">活跃用户数</p>
+                            <p class="user_info_val">...</p>
+                        </div>
                     </div>
-                    <div class="r">
-                        <p class="title2">活跃用户数</p>
-                        <p class="user_info_val">...</p>
-                    </div>
+
                 </div>
             </div>
             <div class="statistics border-section">
-
-
-
                  <p class="title">最近30天用户统计</p>
                  <!--加载中..-->
                  <div id="echart-tool">
                      <i class="layui-icon layui-icon-loading layui-anim layui-anim-rotate layui-anim-loop"></i>
                  </div>
-                 <div id="echart" style="width: 1000px;height:400px;display:none;">
+                 <div id="echart" style="margin: 0 auto;width: 1000px;height:400px;display:none;">
 
                  </div>
             </div>
