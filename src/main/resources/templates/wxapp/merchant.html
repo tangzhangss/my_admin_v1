@@ -4,6 +4,26 @@
 <head th:replace  ="/public/head :: head"></head>
 
 <style>
+.merchant-box{
+    width:1000px;
+    overflow: hidden;
+}
+#merchant-save{
+  float: right;
+  background-color: #1aad19;
+  border: none;
+    width: 120px;
+}
+#merchant-save:hover{
+    filter:brightness(0.9);
+}
+
+.red{
+   color: red;
+ }
+.merchant-form button{
+    margin-bottom: 10px;
+}
 
 </style>
 <body>
@@ -14,12 +34,76 @@
 
     <section>
         <div class="section">
-            我是商户平台页面...
+            <div class="border-section">
+                <p>★在使用微信支付前,请到 <a target="_blank" href="https://mp.weixin.qq.com" style="color: green;">微信公众平台</a> 去申请<span style="color: red;">小程序微信支付</span>业务</p>
+            </div>
+            <div class="border-section merchant-box">
+                <form class="merchant-form">
+                    <div class="form-group">
+                       <label><span class="red">*</span>受理商ID(mchid)</label>
+                      <input type="text" th:value="${merchant!=null?merchant.mchid:''}" class="form-control"  name="mchid" placeholder="appid成对绑定的支付商户号，收款资金会进入该商户号"/>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="red">*</span>商户支付密钥(mchkey)</label>
+                        <input type="text" th:value="${merchant!=null?merchant.mchkey:''}" class="form-control"  name="mchkey" placeholder="对应商户支付密钥"/>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="red">*</span>交易类型(trade_type)</label>
+                        <input type="text" th:value="${merchant!=null?merchant.tradeType:'JSAPI'}" class="form-control"  name="tradeType" readonly/>
+                    </div>
+                    <div class="form-group">
+                        <label><span class="red">*</span>商品类型(body)</label>
+                        <input type="text" th:value="${merchant!=null?merchant.body:''}" class="form-control"  name="body" placeholder="微信支付时标题"/>
+                    </div>
+
+                    <div class="form-group">
+                        <label>CERT证书文件</label><button type="button" class="btn btn-default merchant-upload1">上传</button>
+                        <input type="text" th:value="${merchant!=null?merchant.sslcertPath:''}" class="form-control merchant-upload-input1"  name="sslcertPath"  placeholder="下载证书 cert.zip 中的 apiclient_cert.pem 文件"/>
+                    </div>
+                    <div class="form-group">
+                        <label>KEY密钥文件</label><button type="button" class="btn btn-default merchant-upload2">上传</button>
+                        <input type="text" th:value="${merchant!=null?merchant.sslkeyPath:''}" class="form-control merchant-upload-input2"  name="sslkeyPath"  placeholder="下载证书 cert.zip 中的 apiclient_key.pem 文件"/>
+                    </div>
+                    <div class="form-group">
+                        <label>ROOT文件</label><button type="button" class="btn btn-default merchant-upload3">上传</button>
+                        <input type="text" th:value="${merchant!=null?merchant.rootPath:''}" class="form-control merchant-upload-input3"  name="rootPath"  placeholder="下载证书 cert.zip 中的  rootca.pem 文件"/>
+                    </div>
+                    <input type="hidden" name="oid" th:value="${current_user.obId}"/>
+                    <button type="button" class="btn btn-primary" id="merchant-save">提交</button>
+                </form>
+            </div>
         </div>
     </section>
 </div>
 
 <script>
+
+    //开启layui上传图片组件
+    mylayer.uploadLocalCertFile(".merchant-upload1",function(res){
+        $(".merchant-upload-input1").val(res);
+        mylayer.msg("上传成功!");
+    });
+    mylayer.uploadLocalCertFile(".merchant-upload2",function(res){
+        $(".merchant-upload-input2").val(res);
+        mylayer.msg("上传成功!");
+    });
+    mylayer.uploadLocalCertFile(".merchant-upload3",function(res){
+        $(".merchant-upload-input3").val(res);
+        mylayer.msg("上传成功!");
+    });
+
+    //保存修改
+    $("#merchant-save").click(function(){
+        let data = $(".merchant-form").serialize();
+        $.ajax({
+            url:'/wxapp/update_merchant',
+            data:data,
+            success:function(e){
+                mylayer.msg(e);
+            }
+        })
+    })
+
 </script>
 </body>
 </html>

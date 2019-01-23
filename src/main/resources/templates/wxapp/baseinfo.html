@@ -14,6 +14,7 @@
         color: #707070;
     }
     .wxapp-box{
+        width: 940px;
         margin-top: 20px;
         border-top: 1px solid #e7e7e7;
         padding-top: 10px;
@@ -22,7 +23,6 @@
         display: block;
     }
     .wxapp-box input{
-        width:800px;
         height: 40px;
         margin: 6.6px 0px;
     }
@@ -41,6 +41,7 @@
     }
     #save_wxapp{
         float: right;
+        margin: 50px 0;
     }
 </style>
 <body>
@@ -51,55 +52,58 @@
 
     <section>
         <div class="section">
-            <div>
-                <label>项目</label> <span th:text="${ob.name}">xxxxxx</span> <label style="margin-left: 100px;">维护截至时间</label> <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}">xxxxxx</span>
-            </div>
-            <div style="  border-top: 1px solid #e7e7e7;padding-top: 10px;">
-                <label>项目Logo</label><br/>
-                <img th:src="${ob.logo}" class="img-circle" style="width: 100px;height: 100px;"/><br/>
-                <button type="button" class="layui-btn" id="logo-select">
-                    <i class="layui-icon">&#xe67c;</i>上传
-                </button>
-                <script th:inline="javascript">
+            <div class="border-section">
+                <div>
+                    <label>项目</label> <span th:text="${ob.name}">xxxxxx</span> <label style="margin-left: 100px;">维护截至时间</label> <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}">xxxxxx</span>
+                </div>
+                <div style="  border-top: 1px solid #e7e7e7;padding-top: 10px;">
+                    <label>Logo</label><br/>
+                    <img th:src="${ob.logo}" class="img-circle" style="width: 100px;height: 100px;"/><br/>
+                    <button type="button" class="layui-btn" id="logo-select">
+                        <i class="layui-icon">&#xe67c;</i>上传
+                    </button>
+                    <script th:inline="javascript">
 
-                    //开启layui上传图片组件
-                    mylayer.upload("#logo-select",function(res){
-                        console.log("上传图片成功:",res);
-                         let oid=[[${ob.id}]];
-                         $.ajax({
-                             url:"/ob/modify_logo",
-                             data:{"id":oid,"logo":res},
-                             success:function(){
-                                 window.location.reload();
-                             }
-                         })
-                    },function(res){
-                        console.log("上传图片失败:",res);
-                        mylayer.msg(res);
-                    });
-                </script>
-            </div>
+                        //开启layui上传图片组件
+                        mylayer.upload("#logo-select",function(res){
+                            console.log("上传图片成功:",res);
+                            let oid=[[${ob.id}]];
+                            $.ajax({
+                                url:"/ob/modify_logo",
+                                data:{"id":oid,"logo":res},
+                                success:function(){
+                                    window.location.reload();
+                                }
+                            })
+                        },function(res){
+                            console.log("上传图片失败:",res);
+                            mylayer.msg(res);
+                        });
+                    </script>
+                </div>
 
-            <div class="wxapp-box" id="wxapp-box">
-                <div class="col">
-                    <label>小程序状态</label>
-                    <div class="radio-select">
-                        <span>使用中:</span> <input  type="radio"  v-on:click="changeStatus(1)" v-bind:checked="wxapp.status==1?'checked':''" name="status" class="radio">
-                        <span>审核中: </span><input name="status" v-on:click="changeStatus(2)" v-bind:checked="wxapp.status==2?'checked':''" type="radio" class="radio">
+                <div class="wxapp-box" id="wxapp-box">
+                    <div class="col">
+                        <label>小程序状态</label>
+                        <div class="radio-select">
+                            <span>使用中:</span> <input  type="radio"  v-on:click="changeStatus(1)" v-bind:checked="wxapp.status==1?'checked':''" name="status" class="radio">
+                            <span>审核中: </span><input name="status" v-on:click="changeStatus(2)" v-bind:checked="wxapp.status==2?'checked':''" type="radio" class="radio">
+                        </div>
+
+                    </div>
+                    <div class="col">
+                        <label >AppID(小程序ID)</label>
+                        <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
+                    </div>
+                    <div class="col">
+                        <label>AppSecret(小程序密钥)</label>
+                        <input type="text" class="secret form-control"  placeholder="secret" v-bind:value="wxapp.secret"/>
                     </div>
 
+                    <button  class="btn btn-info" id="save_wxapp">提交</button>
                 </div>
-                <div class="col">
-                    <label >AppID(小程序ID)</label>
-                    <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
-                </div>
-                <div class="col">
-                    <label>AppSecret(小程序密钥)</label>
-                    <input type="text" class="secret form-control"  placeholder="secret" v-bind:value="wxapp.secret"/>
-                </div>
-
-                <button  class="btn btn-info" id="save_wxapp">提交</button>
             </div>
+
             <script th:inline="javascript">
                 var my_wxapp = new Vue({
                     el:"#wxapp-box",

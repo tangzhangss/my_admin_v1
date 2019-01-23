@@ -4,7 +4,70 @@
 <head th:replace  ="/public/head :: head"></head>
 
 <style>
-
+.banner-box{
+    width: 1000px;
+}
+.table{
+    margin-top: 20px;
+}
+    .banner .number{
+        font-weight: 700;
+        font-size: 25px;
+    }
+   .banner span{
+       display: inline-block;
+       margin-right: 20px;
+   }
+    .banner .banner-input{
+        width: 100px;
+        display: inline-block;
+        margin-right: 20px;
+    }
+   .banner .add-pic{
+       float: right;
+   }
+    .banner .descr{
+        color: #777;
+        border: none;
+    }
+    .banner-child-upload{
+        height: 30px;
+        line-height: 30px;
+        margin-left: 10px;
+        padding:0;
+        text-align: center;
+        width: 60px;
+        margin-bottom:5px;
+    }
+    .banner .child .one{
+        width:200px;
+        height:100px;
+        display: inline-block;
+        position: relative;
+    }
+    .banner .child .url{
+        width: 100%;
+        height: 100%;
+    }
+   .banner .child img:hover{
+      filter:brightness(0.8);
+   }
+    .banner .child .del{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        cursor: pointer;
+    }
+   .banner .child .edit{
+      width: 30px;
+      height: 30px;
+      position: absolute;
+      left:45%;
+      top: 38%;
+       cursor: pointer;
+   }
 </style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
@@ -14,12 +77,261 @@
 
     <section>
         <div class="section">
-            我是轮播图页面...
+            <div class="border-section">
+                <p>★轮播图模块与编码相关,客户请不要增删修改</p>
+                <p>★更改图片之外其他的业务请联系管理人员更改 or 让开发人员确认更改</p>
+            </div>
+            <div class="border-section banner-box">
+                <button type="button" class="btn btn-success" style="background-color: #1aad19;" data-toggle="modal" data-target="#banner-modal">新增轮播图</button>
+
+                <table class="table" id="banner-box">
+                    <th:block th:each="banner:${bannerList}">
+                       <tr class="banner">
+                           <td>
+                               <div>
+                                   <span class="number" th:text="${banner.number}">------</span> <span class="glyphicon glyphicon-remove" style="color: red;cursor: pointer" title="删除此模块" th:onclick="deleteBannerModal([[${banner.id}]],[[${banner.number}]])"></span>
+                                   <span>宽度:</span><input class="form-control banner-input"  th:onchange="bannerChange(this,'width',[[${banner.id}]])" th:value="${banner.width}"/>
+                                   <span>高度:</span><input class="form-control banner-input"  th:onchange="bannerChange(this,'height',[[${banner.id}]])" th:value="${banner.height}"/>
+                                   <button th:onclick="openBannerChildEdit([[${banner.id}]])" type="button" class="btn btn-info add-pic"  data-toggle="modal" data-target="#banner-chlid-modal">添加图片</button>
+
+                                   <p>
+                                       <input th:value="${banner.descr}" th:onchange="bannerChange(this,'descr',[[${banner.id}]])" class="descr" />
+                                   </p>
+                               </div>
+                               <div class="child">
+                                   <th:block th:each="bannerChild:${banner.bannerChild}">
+                                       <div class="one">
+                                           <img class="url" th:src="${bannerChild.url}"/>
+                                           <div style="display: none" class="operation">
+                                               <img src="/static/img/wxapp/del.png" class="del" th:onclick="delBannerChild([[${bannerChild.id}]])"/>
+                                               <img src="/static/img/wxapp/edit.png" class="edit" th:onclick="updateBannerChildEdit([[${bannerChild}]],[[${banner.id}]])"/>
+                                           </div>
+                                       </div>
+                                   </th:block>
+                               </div>
+                           </td>
+                       </tr>
+
+                    </th:block>
+                </table>
+            </div>
         </div>
     </section>
-</div>
 
+</div>
+<!--增加 轮播图 静态框...只能修改说明\高度\宽度 内容其他内容不可以修改-->
+ <div id="banner-modal" class="modal fade"  role="dialog" tabindex="-1">
+     <div class="modal-dialog" role="document">
+        <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">轮播图模块</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="banner-form">
+                            <input type="hidden" name="obId" th:value="${current_user.obId}"/>
+                            <div class="form-group">
+                                <label>编号</label>
+                                <input type="text" class="form-control"  name="number"  placeholder="字符串_仔细确认不要一样"/>
+                            </div>
+                            <div class="form-group">
+                                <label>说明</label>
+                                <input type="text" class="form-control"  name="descr"  placeholder="轮播图使用场景说明,240字以内"/>
+                            </div>
+                            <div class="form-group form-inline">
+                                <label>宽度</label>
+                                <input type="text" value="100%" name="width" class="form-control"  placeholder="建议:100% or 100vw"/>
+
+                                <label>高度</label>
+                                <input type="text" name="height" class="form-control" placeholder="建议:400rpx"/>
+                            </div>
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                        <button type="button" class="btn btn-primary" id="banner-save">保存</button>
+                    </div>
+         </div>
+     </div>
+</div>
+<!--增加 轮播图 图片 add or update-->
+<div id="banner-chlid-modal" class="modal fade"  role="dialog" tabindex="-1">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title">轮播图图片编辑</h4>
+            </div>
+            <div class="modal-body">
+                <form class="banner-child-form">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input readonly type="text" class="form-control"  name="id" placeholder="系统自动生成" v-bind:value="banner.id"/>
+                    </div>
+                    <div class="form-group">
+                        <label>图片</label><button type="button" class="btn btn-default banner-child-upload" id="banner-child-upload" lay-data="{accept: 'images',acceptMime:'image/*'}">上传</button>
+                        <input type="text" class="form-control banner-child-url"  name="url"  placeholder="请上传本地图片或者输入网络图片地址" v-bind:value="banner.url"/>
+                    </div>
+                    <div class="form-group">
+                        <label>target(self/miniProgram)</label>
+                        <input type="text" class="form-control"  name="target"  placeholder="在哪个目标上发生跳转，默认当前小程序"  v-bind:value="banner.target"/>
+                    </div>
+                    <div class="form-group">
+                        <label>navurl</label>
+                        <input type="text" class="form-control"  name="navurl"  placeholder="target=self 时的跳转地址 eg: /page/index/idex" v-bind:value="banner.navurl"/>
+                    </div>
+                    <div class="form-group">
+                        <label>appId</label>
+                        <input type="text" class="form-control"  name="appId"  placeholder="target=miniProgram 时的小程序|游戏 appid" v-bind:value="banner.appId"/>
+                    </div>
+                    <div class="form-group">
+                        <label>path</label>
+                        <input type="text" class="form-control"  name="path"  placeholder="target=miniProgram 时的跳转地址 eg: /page/index/idex" v-bind:value="banner.path"/>
+                    </div>
+                    <div class="form-group">
+                        <label>extraData</label>
+                        <input type="text" class="form-control"  name="extraData"  placeholder="target=miniProgram 时的跳转携带参数  {} js 对象格式" v-bind:value="banner.extraData"/>
+                    </div>
+                    <!--打开静态框时设置-->
+                    <input type="text" name="bid" class="form-control"  v-bind:value="banner.bid"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">取消</button>
+                <button type="button" class="btn btn-primary" id="banner-chlid-save">保存</button>
+            </div>
+        </div>
+    </div>
+</div>
 <script>
+    const bannerChildModal = new Vue({
+        el:"#banner-chlid-modal",
+        data:{
+            banner:{
+                target:"self",
+                bid:0
+            }
+        }
+    })
+
+    //新增轮播图
+    $("#banner-save").click(function(){
+
+       let data = $(".banner-form").serialize();
+
+       $.ajax({
+           url:'/wxapp/new_banner_modal',
+           data:data,
+           success:function(e){
+               mylayer.msg(e);
+
+               setTimeout(()=>{
+                   window.location.reload()
+               },1000);
+           }
+       })
+    })
+
+    //轮播图主题信息改变
+    function bannerChange(that, type,id){
+        let val = $(that).val();
+        $.ajax({
+            url:"/wxapp/modify_banner_modal",
+            data:{"val":val,"type":type,"id":id},
+            success:function (res) {
+                mylayer.msg(res);
+            }
+        })
+    }
+
+    //添加图片
+    function openBannerChildEdit(id){
+       //清空信息
+        bannerChildModal.banner={
+            target:"self",
+            bid:0
+        };
+
+        bannerChildModal.banner.bid=id;
+
+        console.log(bannerChildModal.banner);
+    }
+
+    //删除模块
+    function deleteBannerModal(id,number){
+
+        if(!confirm("您正在删除编号【"+number+"】的轮播图模块?")){
+            return false;
+        }
+        $.ajax({
+            url:"/wxapp/delete_banner_modal",
+            data:{"id":id},
+            success:function (res) {
+                mylayer.msg(res);
+                setTimeout(()=>{
+                    window.location.reload()
+                },1000);
+            }
+        })
+    }
+
+    //开启layui上传图片组件
+    mylayer.upload("#banner-child-upload",function(res){
+        $(".banner-child-url").val(res);
+        mylayer.msg("上传成功!");
+    });
+
+
+    //新增or 更新 轮播图 图片
+    $("#banner-chlid-save").click(function(){
+
+        let data = $(".banner-child-form").serialize();
+        $.ajax({
+            url:'/wxapp/new_banner_child',
+            data:data,
+            success:function(e){
+                mylayer.msg(e);
+
+                setTimeout(()=>{
+                    window.location.reload()
+                },1000);
+            }
+        })
+    })
+
+    $(".banner .child .one").mouseenter(function(){
+        $(this).children(".operation").show();
+    }).mouseleave(function(){
+        $(this).children(".operation").hide();
+    })
+
+    //更新 图片
+    function updateBannerChildEdit(bannerChild,bid){
+
+        console.log(bannerChild);
+
+        bannerChildModal.banner = bannerChild;
+        bannerChildModal.banner.bid = bid;
+
+        $('#banner-chlid-modal').modal('toggle');
+
+    }
+    //删除图片
+    function delBannerChild(id){
+        $.ajax({
+            url:'/wxapp/del_banner_child',
+            data:{"id":id},
+            success:function(e){
+
+                mylayer.msg(e);
+
+                setTimeout(()=>{
+                    window.location.reload()
+                },1000);
+            }
+        })
+    }
 </script>
 </body>
 </html>

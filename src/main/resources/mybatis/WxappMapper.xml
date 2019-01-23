@@ -12,4 +12,70 @@
     <insert id="addOrUpdateWxapp" parameterType="zyrs.xyz.obadmin.bean.Wxapp">
         replace into tbl_wxapp value(#{id},#{appid},#{secret},#{obId},#{status})
     </insert>
+
+    <!--轮播图模块-->
+    <insert id="addNewBannerModal">
+        replace into tbl_banner value(#{id},#{number},#{descr},#{width},#{height},#{obId})
+    </insert>
+    <update id="modifyBannerModalWithDescr">
+        update tbl_banner set descr=#{param2} where id = #{param1}
+    </update>
+    <update id="modifyBannerModalWithWidth">
+        update tbl_banner set width=#{param2} where id = #{param1}
+    </update>
+    <update id="modifyBannerModalWithHeight">
+        update tbl_banner set height=#{param2} where id = #{param1}
+    </update>
+    <delete id="deleteBannerModal">
+        delete from tbl_banner where id = #{id};
+        delete from tbl_banner_child where bid = #{id};
+    </delete>
+
+    <!--轮播图-图片-->
+    <insert id="addNewBannerChild">
+        replace into tbl_banner_child value(#{id},#{url},#{target},#{navurl},#{appId},#{path},#{extraData},#{bid})
+    </insert>
+
+    <delete id="deleteBannerChild">
+        delete from tbl_banner_child where id = #{id};
+    </delete>
+
+
+    <!--轮播图-->
+    <resultMap id="getWxappBannerByOidResultMap" type="zyrs.xyz.obadmin.bean.Banner">
+        <!--必须以菜单的id为主-->
+        <id property="id" column="id"/>
+        <result property="number" column="number"/>
+        <result property="descr" column="descr"/>
+        <result property="width" column="width"/>
+        <result property="height" column="height"/>
+
+        <collection property="bannerChild" ofType="zyrs.xyz.obadmin.bean.BannerChild">
+            <result property="id" column="bcid"/>
+            <result property="url" column="url"/>
+            <result property="target" column="target"/>
+            <result property="navurl" column="navurl"/>
+            <result property="appId" column="appId"/>
+            <result property="path" column="path"/>
+            <result property="extraData" column="extra_data"/>
+        </collection>
+    </resultMap>
+    <select id="getWxappBannerByOid" resultMap="getWxappBannerByOidResultMap">
+         select
+                b.id,b.number,b.descr,b.width,b.height,bc.id bcid,bc.url,bc.target,bc.navurl,bc.appId,bc.path,bc.extra_data
+           from tbl_banner b
+
+             left join  tbl_banner_child  bc on b.id = bc.bid  where b.obId = #{obId}
+    </select>
+
+
+    <!--商户平台-->
+    <insert id="updateMerchant">
+        replace into tbl_wxapp_merchant value(#{mchid},#{mchkey},#{tradeType},#{body},#{sslcertPath},#{sslkeyPath},#{rootPath},#{oid})
+    </insert>
+
+    <select id="getWxappMerchantInfo" resultType="zyrs.xyz.obadmin.bean.WxappMerchant">
+        select * from tbl_wxapp_merchant where oid = #{obId}
+    </select>
+
 </mapper>

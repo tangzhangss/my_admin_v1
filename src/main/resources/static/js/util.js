@@ -63,6 +63,28 @@ mylayer.upload=function(elem,fuc,fucerr){
         });
     });
 }
+/**
+ * 上传到服务器本地  cert.文件
+ */
+mylayer.uploadLocalCertFile=function(elem,fuc,fucerr){
+    layui.use('upload', function(){
+        let upload = layui.upload;
+        //执行实例
+        upload.render({
+            elem:elem,//绑定元素
+            url: '/util/upload_local_cert_file', //上传接口
+            accept:"file",
+            data:{"path":"/etc/cert"},//文件上传路径
+            done: function(res){
+                //上传完毕回调
+                fuc(res.data);
+            },error: function(res){
+                //请求异常回调
+                fucerr(res.data);
+            }
+        });
+    });
+}
 
 /**
  * 自定义时间格式

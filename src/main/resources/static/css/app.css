@@ -40,6 +40,10 @@ a:hover{
     background-color: white;
     padding:10px 30px;
     margin-bottom: 20px;
+    overflow: hidden;
+}
+.select-fixed-width{
+    width: 1000px;
 }
 /**提示**/
 .ob_prompt{
