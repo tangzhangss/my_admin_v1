@@ -12,7 +12,7 @@
     display: flex;
 }
 .statistics-daily .one{
-    width: 50%;
+    width: 100%;
 }
 .statistics-daily .one .data  .title2{
     color: #cccccc;
@@ -54,31 +54,25 @@
         <div class="section">
             <div class="statistics-daily border-section">
                 <div class="one">
-                    <p class="title">昨天概括</p>
+                    <p class="title">昨日概括</p>
                     <div class="data">
-                     <div class="l">
-                        <p class="title2">新增用户数</p>
+                     <div>
+                        <p class="title2">访问人数</p>
                         <p class="user_info_val">...</p>
                      </div>
-                     <div class="r">
-                        <p class="title2">活跃用户数</p>
+                     <div>
+                        <p class="title2">新增用户</p>
                         <p class="user_info_val">...</p>
                      </div>
-                    </div>
-                </div>
-                <div class="one">
-                    <p class="title">前天概括</p>
-                    <div class="data">
-                        <div class="l">
-                            <p class="title2">新增用户数</p>
+                        <div>
+                            <p class="title2">打开次数</p>
                             <p class="user_info_val">...</p>
                         </div>
-                        <div class="r">
-                            <p class="title2">活跃用户数</p>
+                        <div>
+                            <p class="title2">访问次数</p>
                             <p class="user_info_val">...</p>
                         </div>
                     </div>
-
                 </div>
             </div>
             <div class="statistics border-section">
@@ -103,6 +97,8 @@
     $.ajax({
         url:"/wxapp/statistics_user_info",
         success:function(res){
+            console.log(res);
+
             let xAxisData = [];
             let seriesData = [];
             let share_pv = [];
@@ -158,13 +154,10 @@
                     data:xAxisData
                 }]
             })
-
-            let dailyStatistic = res[1];
-
-            $(".user_info_val:eq(0)").text(dailyStatistic.visit_uv_new[1].value);
-            $(".user_info_val:eq(1)").text(dailyStatistic.visit_uv[1].value);
-            $(".user_info_val:eq(2)").text(dailyStatistic.visit_uv_new[0].value);
-            $(".user_info_val:eq(3)").text(dailyStatistic.visit_uv[0].value);
+            $(".user_info_val:eq(0)").text(res[1].list[0].visit_uv);
+            $(".user_info_val:eq(1)").text(res[1].list[0].visit_uv_new);
+            $(".user_info_val:eq(2)").text(res[1].list[0].session_cnt);
+            $(".user_info_val:eq(3)").text(res[1].list[0].visit_pv);
         }
     })
 </script>

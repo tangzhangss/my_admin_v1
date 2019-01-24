@@ -37,9 +37,32 @@ public class WxappApiUtil {
     }
 
     /**
+     * 获取微信小程序  日访问 趋势
+     * @param appid 小程序appid
+     * @param secret  小程序secret
+     * @param date  日期  yyyyMMdd
+     * @return
+     */
+    public static WxappResult getWeanlysisAppidDailyVisitTrend(String appid, String secret,String date){
+        String access_token = getAccessToken(appid, secret).getAccess_token();
+        String param = "{\"begin_date\":\""+date+"\",\"end_date\":\""+date+"\"}";
+        String res = HttpRequest.sendPost("https://api.weixin.qq.com/datacube/getweanalysisappiddailyvisittrend?access_token="+access_token,param);
+
+        try {
+
+            WxappResult wxappResult = new ObjectMapper().readValue(res,WxappResult.class);
+
+            return wxappResult;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    /**
      * 获取微信小程序  日访问留存
-     * @param appid
-     * @param secret
+     * @param appid 小程序appid
+     * @param secret  小程序secret
      * @param date  日期  yyyyMMdd
      * @return
      */

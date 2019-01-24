@@ -70,12 +70,12 @@ public class WxappController {
 
             res.add(wxappStatisticList);
 
-            //获取前天的用户留存
+            //获取昨天的用户
             Calendar calendar = Calendar.getInstance();
-            calendar.add(Calendar.DATE,-2);
+            calendar.add(Calendar.DATE,-1);
             String date =  new SimpleDateFormat( "yyyyMMdd" ).format(calendar.getTime());
-            WxappResult wxappStatisticDaily2 = WxappApiUtil.getWeanlysisAppidDailyRetainInfo(wxapp.getAppid(),wxapp.getSecret(),date);
-            res.add(wxappStatisticDaily2);
+            WxappResult wxappStatisticDaily = WxappApiUtil.getWeanlysisAppidDailyVisitTrend(wxapp.getAppid(),wxapp.getSecret(),date);
+            res.add(wxappStatisticDaily);
 
             map.put("statistics",res);//本次操作一直缓存...不重新发送请求
 
