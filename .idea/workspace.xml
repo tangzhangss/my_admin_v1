@@ -7,12 +7,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5107a34f-8857-479e-a051-5ace2f6cf80f" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/log/spring.log" beforeDir="false" afterPath="$PROJECT_DIR$/log/spring.log" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/WxappApiUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/WxappApiUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/wxapp/statistics.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/wxapp/statistics.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/static/css/head.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/static/css/head.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/public/head.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/public/head.html" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <ignored path="$PROJECT_DIR$/target/" />
@@ -47,7 +44,7 @@
     <favorites_list name="ob-admin" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -97,7 +94,6 @@
         <option value="$PROJECT_DIR$/target/classes/templates/public/head.html" />
         <option value="$PROJECT_DIR$/target/classes/static/css/head.css" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/AdminController.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/static/css/head.css" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/error/505.html" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/error/500.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/LoginController.java" />
@@ -114,7 +110,6 @@
         <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/service/ObService.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/HttpRequest.java" />
-        <option value="$PROJECT_DIR$/src/main/resources/templates/public/head.html" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/bean/WxappResult.java" />
         <option value="$PROJECT_DIR$/src/main/resources/static/js/init.js" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/public/tool.html" />
@@ -139,6 +134,8 @@
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/utils/WxappApiUtil.java" />
         <option value="$PROJECT_DIR$/src/main/java/zyrs/xyz/obadmin/controller/WxappController.java" />
         <option value="$PROJECT_DIR$/src/main/resources/templates/wxapp/statistics.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/templates/public/head.html" />
+        <option value="$PROJECT_DIR$/src/main/resources/static/css/head.css" />
       </list>
     </option>
   </component>
@@ -168,10 +165,10 @@
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="18" />
-    <option name="y" value="12" />
-    <option name="width" value="1297" />
-    <option name="height" value="688" />
+    <option name="x" value="117" />
+    <option name="y" value="22" />
+    <option name="width" value="1210" />
+    <option name="height" value="696" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -180,7 +177,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -214,10 +210,43 @@
               <item name="java" type="462c0819:PsiDirectoryNode" />
               <item name="obadmin" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ob-admin" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ob-admin" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="main" type="462c0819:PsiDirectoryNode" />
+              <item name="resources" type="462c0819:PsiDirectoryNode" />
+              <item name="templates" type="462c0819:PsiDirectoryNode" />
+              <item name="public" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
       <pane id="PackagesPane" />
     </panes>
   </component>
@@ -670,11 +699,12 @@
       <workItem from="1548233522554" duration="2369000" />
       <workItem from="1548292545452" duration="602000" />
       <workItem from="1548312779506" duration="3087000" />
+      <workItem from="1548398219258" duration="335000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="321591000" />
+    <option name="totallyTimeSpent" value="321926000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -686,9 +716,9 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="18" y="12" width="1297" height="688" extended-state="0" />
+    <frame x="117" y="22" width="1210" height="696" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87628865" visible="true" weight="0.17865804" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.87628865" visible="true" weight="0.25391304" />
       <window_info id="Structure" order="1" sideWeight="0.49908257" weight="0.19136325" />
       <window_info id="UI Designer" order="2" />
       <window_info id="Web" order="3" sideWeight="0.12371134" side_tool="true" weight="0.20890938" />
@@ -700,13 +730,13 @@
       <window_info anchor="bottom" id="Docker" order="1" show_stripe_button="false" />
       <window_info anchor="bottom" id="Message" order="2" />
       <window_info anchor="bottom" id="Find" order="3" />
-      <window_info anchor="bottom" id="Run" order="4" weight="0.15162455" />
+      <window_info anchor="bottom" id="Run" order="4" weight="0.29537368" />
       <window_info anchor="bottom" id="Debug" order="5" weight="0.34046346" />
       <window_info anchor="bottom" id="Cvs" order="6" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="7" weight="0.4" />
-      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32844037" />
-      <window_info anchor="bottom" id="TODO" order="9" weight="0.32844037" />
-      <window_info anchor="bottom" id="Application Servers" order="10" weight="0.32844037" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32740214" />
+      <window_info anchor="bottom" id="TODO" order="9" weight="0.32740214" />
+      <window_info anchor="bottom" id="Application Servers" order="10" weight="0.32740214" />
       <window_info anchor="bottom" id="Spring" order="11" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
@@ -782,13 +812,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/aside.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="39" lean-forward="true" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://C:/Program Files/Java/jdk1.8.0_192/src.zip!/java/text/DateFormat.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -851,13 +874,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="118">
           <caret line="2797" column="25" selection-start-line="2797" selection-start-column="25" selection-end-line="2797" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/head.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="228">
-          <caret line="66" column="35" lean-forward="true" selection-start-line="66" selection-start-column="35" selection-end-line="66" selection-end-column="35" />
         </state>
       </provider>
     </entry>
@@ -1211,6 +1227,20 @@
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/static/css/head.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="114">
+          <caret line="27" column="17" lean-forward="true" selection-start-line="27" selection-start-column="17" selection-end-line="27" selection-end-column="17" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/resources/templates/public/head.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-228">
+          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
         </state>
       </provider>
     </entry>
