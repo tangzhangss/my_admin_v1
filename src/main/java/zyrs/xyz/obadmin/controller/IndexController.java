@@ -121,10 +121,11 @@ public class IndexController {
     @RequestMapping("/route")
     public String route(@RequestParam("control")String control,@RequestParam("url")String url,
                         @RequestParam(value = "menuId",defaultValue = "0")Integer menuId,Map<String,Object> map){
-
         //设置当前被选中菜单
         if(menuId!=0){
-            map.put("selectedMenuId",menuId);
+            User user = (User) map.get("current_user");
+            user.setSelectedMenuId(menuId);
+            map.put("current_user",user);
         }
 
         return "forward:/"+control+"/"+url;

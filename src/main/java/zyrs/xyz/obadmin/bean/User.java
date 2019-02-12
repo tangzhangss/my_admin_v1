@@ -3,7 +3,7 @@ package zyrs.xyz.obadmin.bean;
 import java.io.Serializable;
 
 /**
- * 用户表
+ * 管理系统用户表
  *
  * 一个用户可有多个项目
  */

@@ -8,7 +8,7 @@
              <span th:text="${menu.name}"></span>
 
              <div class="item-one" th:each="option : ${menu.menuSecondList}">
-                 <a  th:class="${selectedMenuId}==${option.id}?'item-selected':''"  th:text="${option.name}"  th:onclick="menu_selected([[${option.url}]],[[${option.id}]])">
+                 <a  th:class="${current_user.selectedMenuId}==${option.id}?'item-selected':''"  th:text="${option.name}"  th:onclick="menu_selected([[${option.url}]],[[${option.id}]])">
                      交互错误!
                  </a>
              </div>
@@ -25,10 +25,7 @@
         </script>
 
         <script>
-
-
             function menu_selected(url,id){
-              console.log(url,">",id);
               window.location.href=url+"&menuId="+id;
             }
         </script>

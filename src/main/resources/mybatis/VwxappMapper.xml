@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="zyrs.xyz.obadmin.mapper.VwxappMapper">
+
+    <!--获取所有的成员信息  id 头像 省 市 性别 微信名 身份 公众号openid 注册时间-->
+    <sql id="base_column">
+        id,avatars,province,city,sex,identity,nickname,wxopenid,create_time
+    </sql>
+
+    <!--查询所有成员基本信息-->
+    <select id="getAllUserBaseInfo" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select <include refid="base_column"></include> from tbl_z_v_member where nickname like #{param2} or openid = #{param1}
+    </select>
+
+</mapper>

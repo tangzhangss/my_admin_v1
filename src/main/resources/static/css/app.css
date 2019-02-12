@@ -50,3 +50,9 @@ a:hover{
 .ob_prompt{
 
 }
+/**分页**/
+.pagination-box{
+    color: #337ab7;
+    box-shadow: none;
+    padding: 0;
+}

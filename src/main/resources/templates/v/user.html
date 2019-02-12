@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--单独引入外部文件   layui.js 会导致下面的一个img请求回调 原因不知-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="管理后台" content="微信,小程序,后台管理系统">
+    <title>
+        逐运 | 后台管理系统
+    </title>
+    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet"  type="text/css"  href="/static/layui/css/layui.css" charset="utf-8"/>
+
+    <link rel="stylesheet" type="text/css" href="/static/css/head.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/app.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/css/aside.css" charset="utf-8"/>
+    <script  src="/static/js/init.js" defer > </script>
+    <!--引入vue.js-->
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+</head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table *{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table .doctor{
+        background-color: #00CCFF;
+
+    }
+    .table .patient{
+        background-color: #EF5AA1;
+
+    }
+    .table .identity span{
+        color: white;
+        padding:5px 10px;
+        box-shadow: 1px 1px 5px 1px #bbbbbb;
+    }
+    .members .avatars img{
+        width:40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .operator{
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .operator input{
+        width: 260px;
+        margin-right:5px;
+        float: right;
+    }
+    .operator button{
+        float: right;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+
+            <div class="border-section banner-box">
+
+                <form class="operator" action="/wxapp_v/alluser">
+                    <button type="submit" class="btn btn-success" style="background-color: #1aad19;" data-toggle="modal" data-target="#banner-modal">查找</button>
+                    <input name="like"  type="text" placeholder="微信名、公众号openid" class="form-control"/>
+                </form>
+
+                <table class="table table-hover members">
+                    <tr>
+                       <th>ID</th>
+                       <th>微信头像</th>
+                       <th>地区</th>
+                       <th>性别</th>
+                       <th>微信名</th>
+                       <th>身份</th>
+                       <th>公众号openid</th>
+                       <th>注册时间</th>
+                    </tr>
+                    <tr th:each="member:${members}">
+                             <td th:text="${member.id}"></td>
+                             <td class="avatars">
+                                 <!--会触发layui的上下滑动事件  原因不知-->
+                                 <img th:src="${member.avatars}"/>
+                             </td>
+                             <td th:text="${member.province}+ '-'+ ${member.city}"></td>
+                             <td th:text="${member.sex == 1?'男':'女'}"></td>
+                             <td th:text="${member.nickname}"></td>
+                             <td class="identity">
+                                 <span class="doctor" th:if="${member.identity == 3}"> 医生</span>
+                                 <span class="patient" th:if="${member.identity == 2}"> 患者</span>
+                             </td>
+                             <td th:text="${member.wxopenid}"></td>
+                             <td th:text="${member.createTime}"></td>
+                    </tr>
+                </table>
+
+                <nav aria-label="..." class="pagination-box">
+                    <div class="selectpageNo">共<span th:text="${pageinfo.pages}"></span>页<span th:text="${pageinfo.total}"></span>条记录</div>
+                    <ul class="pagination">
+                        <li><a href="/wxapp_v/alluser?pageNo=1">首页</a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum -3}"  th:text="${pageinfo.list.pageNum -3}" th:if="${pageinfo.list.pageNum -3} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum -2}"  th:text="${pageinfo.list.pageNum -2}" th:if="${pageinfo.list.pageNum -2} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum -1}" th:text="${pageinfo.list.pageNum -1}" th:if="${pageinfo.list.pageNum -1} > 0"></a></li>
+                        <li class="active"><a href="#" th:text="${pageinfo.list.pageNum}"><span class="sr-only">(current)</span></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum +1}" th:text="${pageinfo.list.pageNum +1}" th:if="${pageinfo.list.pageNum +1} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum +2}" th:text="${pageinfo.list.pageNum +2}" th:if="${pageinfo.list.pageNum +2} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.list.pageNum +3}" th:text="${pageinfo.list.pageNum +3}" th:if="${pageinfo.list.pageNum +3} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/alluser?pageNo='+${pageinfo.pages}">尾页</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+
+<script>
+
+</script>
+</body>
+</html>

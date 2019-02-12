@@ -71,17 +71,14 @@
                     data:{"id":id},
                     success:function(res){
                         console.log("项目信息:",res);
-                        
                         if(res.length == 1){
                             window.location.href="/index?oid="+res[0].id
                         }
-
                         my_project.obList = res;
-
-                        
                     }
                 })
             }
         </script>
    </div>
+
 </html>
