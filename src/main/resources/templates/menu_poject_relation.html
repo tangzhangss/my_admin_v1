@@ -46,7 +46,7 @@
                      <h2 class="layui-colla-title">
                          <span class="title" th:text="${mp.mname}">二级菜单标题</span>
                      </h2>
-                     <div class="layui-colla-content layui-show">
+                     <div class="layui-colla-content" style="background-color: white">
                          <div class="item-one" th:each="pro:${mp.obList}">
                              <img th:src="${pro.logo}"/>
                              <span th:text="${pro.name}"></span>

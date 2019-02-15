@@ -22,12 +22,19 @@
             if(menuList==null || menuList == ''){
                 window.location.href="/index";
             }
-        </script>
 
-        <script>
+            //菜单被选择
             function menu_selected(url,id){
-              window.location.href=url+"&menuId="+id;
+                let cid = [[${current_user.selectedMenuId}]];
+
+                //如果点击的是当前菜单，不跳转
+                if(cid==id){
+                    return false;
+                }
+
+                window.location.href=url+"&menuId="+id;
             }
         </script>
+
     </aside>
 </html>

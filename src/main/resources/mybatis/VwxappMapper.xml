@@ -9,7 +9,66 @@
 
     <!--查询所有成员基本信息-->
     <select id="getAllUserBaseInfo" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select <include refid="base_column"></include> from tbl_z_v_member where nickname like #{param2} or openid = #{param1}
+        select <include refid="base_column"></include> from tbl_wxapp_member where nickname like #{param2} or openid = #{param1} order by id desc
+    </select>
+
+    <!--医生列表信息-->
+    <select id="getDoctorList" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select d.id,m.realavatars,m.realname,m.birthday,m.sex,m.contact,d.hospital,d.good_field,d.level,d.isaudit from tbl_z_v_member_doctor d right join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where m.identity = 3 and ( realname like #{like} or hospital like #{like} or contact like #{like}) order by id desc
+    </select>
+    <!--医生详情信息   患者人数-->
+    <select id="getDoctorDetail" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select d.id,m.openid,d.wxopenid,m.contact,d.education,d.good_field,d.hospital,m.realavatars,d.level,d.card_face,d.card_back,d.certificate_doctor,d.certificate_practice,d.isaudit,d.message,d.patient_num from tbl_z_v_member_doctor d left join tbl_wxapp_member m on d.wxopenid = m.wxopenid where d.id = #{id}
+    </select>
+
+    <!--医生通过(不)|审核请求-->
+   <update id="doctorAccessApply">
+       update tbl_z_v_member_doctor set isaudit = 2 , message = "" where id = #{id}
+   </update>
+    <update id="doctorRefuseApply">
+        update tbl_z_v_member_doctor set isaudit = 3 , message = #{param2} where id = #{param1}
+    </update>
+
+
+    <!--获取患者 列表信息      id,真是头像 姓名 性别 年龄 手机   最多咨询医生（“姓名-联系-性别”）-->
+    <resultMap type="zyrs.xyz.obadmin.bean.VmemberPatient" id="patientInfoResultMap">
+        <association property="patient" javaType="zyrs.xyz.obadmin.bean.WxappMember">
+            <id column="m_id" property="id"></id>
+            <result column="m_realavatars" property="realavatars"/>
+            <result column="m_sex" property="sex"/>
+            <result column="m_contact" property="contact"/>
+            <result column="m_birthday" property="birthday"/>
+            <result column="m_realname" property="realname"/>
+        </association>
+
+        <association property="doctor" javaType="zyrs.xyz.obadmin.bean.WxappMember">
+            <result column="d_sex" property="sex"/>
+            <result column="d_contact" property="contact"/>
+            <result column="d_realname" property="realname"/>
+        </association>
+
+    </resultMap>
+
+    <select id="getPatientList" resultMap="patientInfoResultMap">
+          select
+            m.id m_id,m.realavatars m_realavatars,m.sex m_sex,m.contact m_contact,m.birthday m_birthday,m.realname m_realname,d.sex d_sex,d.contact d_contact,d.realname d_realname
+         from tbl_wxapp_member m,tbl_wxapp_member d  where m.identity = 2 and  d.wxopenid = (SELECT c.doctor_wxopenid FROM tbl_z_v_member_consult c WHERE c.patient_wxopenid = m.wxopenid GROUP BY c.doctor_wxopenid ORDER BY COUNT(c.id) DESC LIMIT 0,1)
+         and (m.realname like #{like} or m.contact like #{like} or d.realname like #{like}) order by m.id desc
+    </select>
+
+
+    <!--获取患者信息-->
+    <select id="getPatientInfo" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+         select id,openid,wxopenid,contact,province,city,realavatars from tbl_wxapp_member where id = #{id}
+    </select>
+    <!--获取患者咨询记录-->
+    <select id="getPatientConsultLog" resultType="zyrs.xyz.obadmin.bean.VmemberConsult">
+         select c.create_time,c.server_time,c.complete_time,c.label,c.assess,d.realname doctor_realname from tbl_z_v_member_consult c left join tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid where c.patient_wxopenid = #{wxopenid} ORDER by c.id desc
+    </select>
+
+    <!--患者话费总金额-->
+    <select id="getPatientConsultSumMoney" resultType="java.lang.Double">
+         select SUM(money) from tbl_order where wxopenid = #{wxopenid} and state = 1
     </select>
 
 </mapper>

@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!--单独引入外部文件 下滑  layui.js 会导致  请求回调 原因不知-->
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table *{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table .isaudit span{
+        color: white;
+        padding:5px 10px;
+        box-shadow: 1px 1px 5px 1px #bbbbbb;
+    }
+    .table .operate img{
+        width: 50px;
+        height:30px;
+        cursor: pointer;
+    }
+    .members .avatars img{
+        width:40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .operator{
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .operator input{
+        width: 260px;
+        margin-right:5px;
+        float: right;
+    }
+    .operator button{
+        float: right;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+
+            <div class="border-section banner-box">
+
+                <form class="operator" action="/wxapp_v/patient_list">
+                    <button type="submit" class="btn btn-success" style="background-color: #1aad19;" data-toggle="modal" data-target="#banner-modal">查找</button>
+                    <input name="like"  type="text" placeholder="姓名、联系方式、医生姓名" class="form-control"/>
+                </form>
+
+                <table class="table table-hover members">
+                    <tr>
+                        <th>ID</th>
+                        <th>患者头像</th>
+                        <th>姓名</th>
+                        <th>性别</th>
+                        <th>年龄</th>
+                        <th>手机</th>
+                        <th>最多咨询医生</th>
+                        <th>查看详情</th>
+                    </tr>
+                    <tr th:each="vmemberPatient:${vmemberPatients}">
+                        <td th:text="${vmemberPatient.patient.id}"></td>
+                        <td class="avatars">
+                            <!--会触发layui的上下滑动事件  原因不知-->
+                            <img th:src="${vmemberPatient.patient.realavatars}"/>
+                        </td>
+                        <td th:text="${vmemberPatient.patient.realname}"></td>
+                        <td th:text="${vmemberPatient.patient.sex}"></td>
+                        <td th:text="${vmemberPatient.patient.age}"></td>
+                        <td th:text="${vmemberPatient.patient.contact}"></td>
+                        <td th:text="${vmemberPatient.doctor.realname}+ '-'+ ${vmemberPatient.doctor.contact}  + '-' + ${vmemberPatient.doctor.sex}"></td>
+
+                        <td class="operate">
+                            <a th:href="'/wxapp_v/patient_detail?id='+${vmemberPatient.patient.id}">
+                                <img src="/static/img/tools/detail.png" />
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+
+                <nav aria-label="..." class="pagination-box">
+                    <div class="selectpageNo">共<span th:text="${pageinfo.pages}"></span>页,  <span th:text="${pageinfo.total}"></span>条记录</div>
+                    <ul class="pagination">
+                        <li><a href="/wxapp_v/patient_list?pageNo=1">首页</a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum -3}"  th:text="${pageinfo.list.pageNum -3}" th:if="${pageinfo.list.pageNum -3} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum -2}"  th:text="${pageinfo.list.pageNum -2}" th:if="${pageinfo.list.pageNum -2} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum -1}" th:text="${pageinfo.list.pageNum -1}" th:if="${pageinfo.list.pageNum -1} > 0"></a></li>
+                        <li class="active"><a href="#" th:text="${pageinfo.list.pageNum}"><span class="sr-only">(current)</span></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum +1}" th:text="${pageinfo.list.pageNum +1}" th:if="${pageinfo.list.pageNum +1} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum +2}" th:text="${pageinfo.list.pageNum +2}" th:if="${pageinfo.list.pageNum +2} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.list.pageNum +3}" th:text="${pageinfo.list.pageNum +3}" th:if="${pageinfo.list.pageNum +3} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/patient_list?pageNo='+${pageinfo.pages}">尾页</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+
+<script>
+
+</script>
+</body>
+</html>

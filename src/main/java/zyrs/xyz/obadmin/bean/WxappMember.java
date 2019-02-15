@@ -2,6 +2,7 @@ package zyrs.xyz.obadmin.bean;
 
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.format.annotation.DateTimeFormat;
+import zyrs.xyz.obadmin.utils.CalculateUtil;
 
 import javax.xml.crypto.Data;
 
@@ -35,7 +36,8 @@ public class WxappMember {
     private String cardFace;//省份证正面
     private String cardBack;//身份证反面
     private String certificateDoctor;//医师资格证
-    private String certificate;//置业资格证
+    private String certificatePractice;//执业资格证
+    private Integer patientNum;//病人数量
 
     private int isaudit;//医生状态 1待审核 2通过 3 不通过
     private String message;//信息 可能是审核失败原因
@@ -65,8 +67,8 @@ public class WxappMember {
         this.wxopenid = wxopenid;
     }
 
-    public Integer getSex() {
-        return sex;
+    public String getSex() {
+        return sex==1?"男":"女";
     }
 
     public void setSex(Integer sex) {
@@ -162,6 +164,11 @@ public class WxappMember {
         this.birthday = birthday;
     }
 
+    //年龄 ——————根据出生日期计算
+    public Integer getAge() {
+        return CalculateUtil.getAge(birthday);
+    }
+
     public String getEducation() {
         return education;
     }
@@ -218,15 +225,15 @@ public class WxappMember {
         this.certificateDoctor = certificateDoctor;
     }
 
-    public String getCertificate() {
-        return certificate;
+    public String getCertificatePractice() {
+        return certificatePractice;
     }
 
-    public void setCertificate(String certificate) {
-        this.certificate = certificate;
+    public void setCertificatePractice(String certificate) {
+        this.certificatePractice = certificate;
     }
 
-    public int getIsaudit() {
+    public Integer getIsaudit() {
         return isaudit;
     }
 
@@ -242,6 +249,14 @@ public class WxappMember {
         this.message = message;
     }
 
+    public Integer getPatientNum() {
+        return patientNum;
+    }
+
+    public void setPatientNum(Integer patientNum) {
+        this.patientNum = patientNum;
+    }
+
     @Override
     public String toString() {
         return "WxappMember{" +
@@ -249,12 +264,12 @@ public class WxappMember {
                 ", openid='" + openid + '\'' +
                 ", wxopenid='" + wxopenid + '\'' +
                 ", sex=" + sex +
-                ", avarars='" + avatars + '\'' +
+                ", avatars='" + avatars + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
                 ", identity=" + identity +
-                ", createTime=" + createTime +
+                ", createTime='" + createTime + '\'' +
                 ", realname='" + realname + '\'' +
                 ", realavatars='" + realavatars + '\'' +
                 ", contact='" + contact + '\'' +
@@ -263,10 +278,11 @@ public class WxappMember {
                 ", goodField='" + goodField + '\'' +
                 ", hospital='" + hospital + '\'' +
                 ", level='" + level + '\'' +
-                ", card_face='" + cardFace + '\'' +
-                ", card_back='" + cardBack + '\'' +
-                ", certificate_doctor='" + certificateDoctor + '\'' +
-                ", certificate='" + certificate + '\'' +
+                ", cardFace='" + cardFace + '\'' +
+                ", cardBack='" + cardBack + '\'' +
+                ", certificateDoctor='" + certificateDoctor + '\'' +
+                ", CertificatePractice='" + certificatePractice + '\'' +
+                ", patientNum=" + patientNum +
                 ", isaudit=" + isaudit +
                 ", message='" + message + '\'' +
                 '}';

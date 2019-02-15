@@ -44,9 +44,110 @@ public class VwxappController {
         PageInfo<?> appsPageInfo = new PageInfo<>(wxappMembers);
 
         map.put("members",wxappMembers);
-        System.out.println(appsPageInfo);
+
         map.put("pageinfo",appsPageInfo);
 
         return "/v/user";
+    }
+
+
+    /**
+     * 渲染  所有医生信息
+     * like 模糊查询
+     * pageNo
+     * @return  渲染页面路径
+     */
+    @RequestMapping("doctor_list")
+    public  String renderDoctorList(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+        PageHelper.startPage(pageNo, 10);
+        //获取所有的用户信息
+        List<WxappMember> wxappMembers = vWxappService.getDoctorList(like);
+
+        PageInfo<?> appsPageInfo = new PageInfo<>(wxappMembers);
+
+        map.put("members",wxappMembers);
+
+        map.put("pageinfo",appsPageInfo);
+
+        return "/v/doctor_list";
+    }
+    /**
+     * 渲染  医生详情页
+     * @return  渲染页面路径
+     */
+    @RequestMapping("doctor_detail")
+    public  String renderDoctorDetail(Map<String,Object> map,@RequestParam(value="id")Integer id){
+        //获取所有的用户信息
+        WxappMember doctor = vWxappService.getDoctorDetail(id);
+
+        map.put("doctor",doctor);
+
+        return "/v/doctor_detail";
+    }
+
+    /**
+     * 渲染  医生详情页
+     * @return  渲染页面路径
+     */
+    @RequestMapping("doctor_access_apply")
+    public  String renderDoctorAccessApply(Map<String,Object> map,@RequestParam(value="id")Integer id){
+
+        //医生通过审核请求
+        vWxappService.doctorAccessApply(id);
+
+        return "redirect:doctor_detail?id="+id;
+    }
+    /**
+     * 渲染  医生详情页
+     * @return  渲染页面路径
+     */
+    @RequestMapping("doctor_refuse_apply")
+    public  String renderDoctorRefuseApply(Map<String,Object> map,@RequestParam(value="id")Integer id,@RequestParam(value="message")String message){
+
+        //医生通过审核请求
+        vWxappService.doctorRefuseApply(id,message);
+
+        return "redirect:doctor_detail?id="+id;
+    }
+
+
+    /**
+     * 渲染  所有患者信息
+     * like 模糊查询
+     * pageNo
+     * @return  渲染页面路径
+     */
+    @RequestMapping("patient_list")
+    public  String renderPatientList(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+        PageHelper.startPage(pageNo, 10);
+        //获取所有的用户信息
+        List<VmemberPatient> vmemberPatients = vWxappService.getPatientList(like);
+
+        PageInfo<?> appsPageInfo = new PageInfo<>(vmemberPatients);
+
+        map.put("vmemberPatients",vmemberPatients);
+
+        map.put("pageinfo",appsPageInfo);
+
+        return "/v/patient_list";
+    }
+    /**
+     * 渲染  患者详情页
+     * @return  渲染页面路径
+     */
+    @RequestMapping("patient_detail")
+    public  String renderPatientDetail(Map<String,Object> map,@RequestParam(value="id")Integer id){
+        //获取用户信息
+        WxappMember patient = vWxappService.getPatientInfo(id);
+        //获取咨询记录  什么时候咨询了什么人  完后时间  评价 咨询标签
+        List<VmemberConsult> patientConsultLog = vWxappService.getPatientConsultLog(patient.getWxopenid());
+        //获取订单话费总金额.
+        Double cost =vWxappService.getPatientConsultSumMoney(patient.getWxopenid());
+
+        map.put("patient",patient);
+        map.put("patientConsultLog",patientConsultLog);
+        map.put("cost",cost==null?0:cost);
+
+        return "/v/patient_detail";
     }
 }

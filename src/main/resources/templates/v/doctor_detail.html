@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .layui-input,.layui-textarea{
+        width:200px;
+    }
+    .layui-form-label{
+        width: 200px;
+    }
+    .long{
+        width: 400px;
+    }
+    .section{
+        font-size: 15px;
+    }
+    .section .col{
+        margin:5px 0;
+    }
+    .section .col span{
+        margin: 0 10px;
+        font-weight:700;
+    }
+    .section .baseinfo{
+        display: flex;
+        justify-content: space-between;
+    }
+    .section .baseinfo .right img{
+        width:100px;
+        height:100px;
+        border-radius:100px;
+    }
+    .pic{
+        display: flex;
+    }
+    .pic .one{
+        width: 50%;
+    }
+    .pic .one div{
+        width: 100%;
+        margin-bottom:10px;
+        display: flex;
+    }
+    .pic .one .card{
+        display: flex;
+        flex-direction: column;
+    }
+    .pic .one div .card{
+        width:300px;
+        height: 145px;
+        margin-bottom:5px;
+    }
+    .pic .one div .cert{
+        width:200px;
+        height: 300px;
+    }
+    .sign{
+        font-size: 15px;
+        font-width:700;
+    }
+    .sign img{
+        width: 50px;
+        height: 50px;
+    }
+    .message{
+        font-size: 20px;
+        color: red;
+        margin:50px 50px;
+    }
+    .audit{
+        text-align: right;
+        padding:20px 0;
+        border-top: 1px solid #ccc;
+
+    }
+    .audit a{
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+    }
+    .audit a:hover{
+        filter: brightness(0.8);
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section border-section">
+            <div class="baseinfo">
+                <div class="left">
+                    <div class="col">
+                        平台等级:<span style="color: orangered;font-size: 20px" th:text="${doctor.level}"></span>
+                        患者人数:<span style="color: green;font-size: 20px" th:text="${doctor.patientNum}"></span>(人)
+                    </div>
+                    <div class="col">
+                        openid:<span  th:text="${doctor.openid}"></span>
+                    </div>
+                    <div class="col">
+                        wxopenid:<span  th:text="${doctor.wxopenid}"></span>
+                    </div>
+                    <div class="col">
+                        联系方式:<span  th:text="${doctor.contact}"></span>
+                    </div>
+                </div>
+                <div class="right">
+                        <img th:src="${doctor.realavatars}"/>
+                </div>
+            </div>
+            <div class="col">
+                教育资质:<span  th:text="${doctor.education}"></span>
+            </div>
+            <div class="col">
+                擅长领域:<span  th:text="${doctor.goodField}"></span>
+            </div>
+            <div class="col">
+                坐诊医院:<span  th:text="${doctor.hospital}"></span>
+            </div>
+        </div>
+
+        <div class="section border-section">
+             <div class="pic">
+                 <div class="one">
+                     <div>身份证</div>
+                     <div class="card">
+                         <a th:href="${doctor.cardFace}" target="_blank">
+                             <img class="card"  th:src="${doctor.cardFace}"/>
+                         </a>
+                         <a th:href="${doctor.cardBack}" target="_blank">
+                             <img class="card"  th:src="${doctor.cardBack}"/>
+                         </a>
+                     </div>
+                 </div>
+                 <div class="one">
+                     <div>医生资格证与执业医师证</div>
+                     <div>
+                         <a th:href="${doctor.certificateDoctor}" target="_blank">
+                             <img class="cert"  th:src="${doctor.certificateDoctor}"/>
+                         </a>
+                         <a th:href="${doctor.certificatePractice}" target="_blank">
+                             <img  class="cert" th:src="${doctor.certificatePractice}"/>
+                         </a>
+                     </div>
+                 </div>
+             </div>
+
+             <div th:if="${doctor.isaudit != 2}" class="audit">
+                <a th:if="${doctor.isaudit != 2}" th:href="'/wxapp_v/doctor_access_apply?id='+${doctor.id}" style="background-color: #1aad19">通过审核</a>
+                 <!--2-23 设置拒绝理由-->
+                 <a th:if="${doctor.isaudit ==1}" th:onclick="refuse([[${doctor.id}]])" href="javascript:void(0)" style="background-color: red">拒绝通过</a>
+             </div>
+
+            <div class="sign">
+                <span th:if="${doctor.isaudit == 2}" style="color: #1aad19">
+                    <img src="/static/img/tools/access.png"/>(已通过)
+                </span>
+                <span th:if="${doctor.isaudit == 1}" style="color:orange">
+                    <img src="/static/img/tools/wait.png"/>(待审核)</span>
+                <span th:if="${doctor.isaudit == 3}" style="color: red">
+                    <img src="/static/img/tools/refuse.png"/>(已拒绝)</span>
+            </div>
+
+            <div class="message" th:text="${doctor.message}"></div>
+        </div>
+    </section>
+</div>
+
+<div th:replace  ="/public/tool :: project_select_modal"></div>
+
+
+</body>
+<div class="refuse_modal" style="display: none">
+
+    <input type="hidden" class="refuse_id"/>
+    <input class="form-control refuse_message" style="width: 80%;margin: 10px auto;" placeholder="必须填写"/>
+    <button type="button" class="btn btn-success" style="float: right;margin-right: 10%" onclick="save_refuse_message()">提交</button>
+</div>
+<script>
+    function refuse(id){
+        mylayer.openModal($(".refuse_modal"),"请输入拒绝理由",['400px', '160px']);
+        $(".refuse_modal .refuse_id").val(id);
+        return false;
+    }
+    function save_refuse_message(){
+        let id = $(".refuse_id").val();
+        let message = $(".refuse_message").val();
+
+        console.log(id,message);
+
+        if(message == '' || message ==undefined){
+            mylayer.msg("拒绝理由不可为空！");
+            return false;
+        }
+
+        window.location.href="/wxapp_v/doctor_refuse_apply?id="+id+"&message="+message;
+    }
+</script>
+</html>

@@ -3,6 +3,8 @@ package zyrs.xyz.obadmin.service;
 import org.apache.commons.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import zyrs.xyz.obadmin.bean.VmemberConsult;
+import zyrs.xyz.obadmin.bean.VmemberPatient;
 import zyrs.xyz.obadmin.bean.WxappMember;
 import zyrs.xyz.obadmin.mapper.VwxappMapper;
 
@@ -23,5 +25,41 @@ public class VwxappService {
         String nickname =like.equals("")?"%%":"%"+new String(Base64.encodeBase64(like.getBytes()))+"%";
 
         return vwxappMapper.getAllUserBaseInfo(like,nickname);
+    }
+
+    public List<WxappMember> getDoctorList(String like) {
+
+        like = "%"+like+"%";
+
+        return vwxappMapper.getDoctorList(like);
+    }
+
+    public WxappMember getDoctorDetail(Integer id) {
+        return vwxappMapper.getDoctorDetail(id);
+    }
+
+    public void doctorAccessApply(Integer id) {
+        vwxappMapper.doctorAccessApply(id);
+    }
+
+    public void doctorRefuseApply(Integer id, String message) {
+        vwxappMapper.doctorRefuseApply(id,message);
+    }
+
+    public List<VmemberPatient> getPatientList(String like){
+        like = "%"+like+"%";
+        return vwxappMapper.getPatientList(like);
+    }
+
+    public WxappMember getPatientInfo(Integer id) {
+        return vwxappMapper.getPatientInfo(id);
+    }
+
+    public List<VmemberConsult> getPatientConsultLog(String wxopenid) {
+        return vwxappMapper.getPatientConsultLog(wxopenid);
+    }
+
+    public Double getPatientConsultSumMoney(String wxopenid) {
+        return vwxappMapper.getPatientConsultSumMoney(wxopenid);
     }
 }
