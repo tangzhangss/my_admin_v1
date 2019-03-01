@@ -8,6 +8,8 @@ public class Wxapp {
     private Integer id;
     private String appid;
     private String secret;
+    private String gzappid;
+    private String gzsecret;
     private Integer status;//使用中 1 审核中 2
 
     private Integer obId; //项目id
@@ -52,12 +54,30 @@ public class Wxapp {
         this.status = status;
     }
 
+    public String getGzappid() {
+        return gzappid;
+    }
+
+    public void setGzappid(String gzappid) {
+        this.gzappid = gzappid;
+    }
+
+    public String getGzsecret() {
+        return gzsecret;
+    }
+
+    public void setGzsecret(String gzsecret) {
+        this.gzsecret = gzsecret;
+    }
+
     @Override
     public String toString() {
         return "Wxapp{" +
                 "id=" + id +
                 ", appid='" + appid + '\'' +
                 ", secret='" + secret + '\'' +
+                ", gzappid='" + gzappid + '\'' +
+                ", gzsecret='" + gzsecret + '\'' +
                 ", status=" + status +
                 ", obId=" + obId +
                 '}';

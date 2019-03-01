@@ -37,9 +37,11 @@ public class VwxappController {
      */
     @RequestMapping("alluser")
     public  String renderAllUser(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+        User user = (User) map.get("current_user");
+
         PageHelper.startPage(pageNo, 10);
         //获取所有的用户信息
-        List<WxappMember> wxappMembers = vWxappService.getAllUserBaseInfo(like);
+        List<WxappMember> wxappMembers = vWxappService.getAllUserBaseInfo(like,user.getObId());
 
         PageInfo<?> appsPageInfo = new PageInfo<>(wxappMembers);
 
@@ -59,9 +61,11 @@ public class VwxappController {
      */
     @RequestMapping("doctor_list")
     public  String renderDoctorList(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+        User user = (User) map.get("current_user");
+
         PageHelper.startPage(pageNo, 10);
         //获取所有的用户信息
-        List<WxappMember> wxappMembers = vWxappService.getDoctorList(like);
+        List<WxappMember> wxappMembers = vWxappService.getDoctorList(like,user.getObId());
 
         PageInfo<?> appsPageInfo = new PageInfo<>(wxappMembers);
 
@@ -119,9 +123,10 @@ public class VwxappController {
      */
     @RequestMapping("patient_list")
     public  String renderPatientList(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+        User user = (User) map.get("current_user");
         PageHelper.startPage(pageNo, 10);
         //获取所有的用户信息
-        List<VmemberPatient> vmemberPatients = vWxappService.getPatientList(like);
+        List<VmemberPatient> vmemberPatients = vWxappService.getPatientList(like,user.getObId());
 
         PageInfo<?> appsPageInfo = new PageInfo<>(vmemberPatients);
 

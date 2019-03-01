@@ -14,11 +14,16 @@ public class WxappMember {
     private Integer id;//用户ID
     private String openid;//小程序openid
     private String wxopenid;//公众号openid
-    private Integer sex;//性别 1 男 2女
+    private Integer gender;//性别 1 男 2女
+    private String sex;//性别 1 男 2女
     private String avatars;//微信头像
-    private String nickname;//base64编码之后的
+    private String nickname;//
+    private String nicknameDecodeBase64;//base64编码之后的
     private String province;//所在省
     private String city;//所在市
+
+    private Integer oid;//项目id
+    private String unionid;//开放平台唯一
 
     private Integer identity;//身份  【1普通默认 2患者 3 医生  全v健康】
 
@@ -42,6 +47,22 @@ public class WxappMember {
     private int isaudit;//医生状态 1待审核 2通过 3 不通过
     private String message;//信息 可能是审核失败原因
 
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
 
     public Integer getId() {
         return id;
@@ -68,11 +89,18 @@ public class WxappMember {
     }
 
     public String getSex() {
-        return sex==1?"男":"女";
+        if(gender!=null){
+            return gender==1?"男":"女";
+        }
+        return null;
     }
 
-    public void setSex(Integer sex) {
-        this.sex = sex;
+    public Integer getGender() {
+        return gender;
+    }
+
+    public void setGender(Integer gender) {
+        this.gender = gender;
     }
 
     public String getAvatars() {
@@ -84,6 +112,10 @@ public class WxappMember {
     }
 
     public String getNickname() {
+        return nickname;
+    }
+
+    public String getNicknameDecodeBase64() {
         //base64转码
         if(nickname!=null){
             return new String(Base64.decodeBase64(nickname));
@@ -92,6 +124,13 @@ public class WxappMember {
         }
 
     }
+    public void setNicknameEncodeBase64() {
+        //base64转码
+        if(nickname!=null){
+            this.nickname=Base64.encodeBase64String(nickname.getBytes());
+        }
+    }
+
 
     public void setNickname(String nickname) {
         //base64编码过的
@@ -166,7 +205,10 @@ public class WxappMember {
 
     //年龄 ——————根据出生日期计算
     public Integer getAge() {
-        return CalculateUtil.getAge(birthday);
+        if(birthday!=null){
+            return CalculateUtil.getAge(birthday);
+        }
+        return null;
     }
 
     public String getEducation() {
@@ -263,11 +305,14 @@ public class WxappMember {
                 "id=" + id +
                 ", openid='" + openid + '\'' +
                 ", wxopenid='" + wxopenid + '\'' +
-                ", sex=" + sex +
+                ", gender=" + gender +
+                ", sex='" + sex + '\'' +
                 ", avatars='" + avatars + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", province='" + province + '\'' +
                 ", city='" + city + '\'' +
+                ", oid=" + oid +
+                ", unionid='" + unionid + '\'' +
                 ", identity=" + identity +
                 ", createTime='" + createTime + '\'' +
                 ", realname='" + realname + '\'' +
@@ -281,7 +326,7 @@ public class WxappMember {
                 ", cardFace='" + cardFace + '\'' +
                 ", cardBack='" + cardBack + '\'' +
                 ", certificateDoctor='" + certificateDoctor + '\'' +
-                ", CertificatePractice='" + certificatePractice + '\'' +
+                ", certificatePractice='" + certificatePractice + '\'' +
                 ", patientNum=" + patientNum +
                 ", isaudit=" + isaudit +
                 ", message='" + message + '\'' +

@@ -12,9 +12,9 @@ import java.util.List;
  */
 @Mapper
 public interface VwxappMapper {
-    List<WxappMember> getAllUserBaseInfo(String wxopenid,String nickname);
+    List<WxappMember> getAllUserBaseInfo(String wxopenid,String nickname,Integer oid);
 
-    List<WxappMember> getDoctorList(String like);
+    List<WxappMember> getDoctorList(String like,Integer oid);
 
     WxappMember getDoctorDetail(Integer id);
 
@@ -22,7 +22,7 @@ public interface VwxappMapper {
 
     void doctorRefuseApply(Integer id, String message);
 
-    List<VmemberPatient> getPatientList(String like);
+    List<VmemberPatient> getPatientList(String like,Integer oid);
 
     WxappMember getPatientInfo(Integer id);
 

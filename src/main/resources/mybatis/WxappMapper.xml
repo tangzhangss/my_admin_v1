@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="zyrs.xyz.obadmin.mapper.WxappMapper">
    <sql id="column">
-      id,appid,secret,ob_id,status
+      id,appid,secret,gzappid,gzsecret,ob_id,status
    </sql>
 
     <select id="getWxappInfoByObId" resultType="zyrs.xyz.obadmin.bean.Wxapp">
@@ -10,7 +10,7 @@
     </select>
     <!--更新项目的appid secret-->
     <insert id="addOrUpdateWxapp" parameterType="zyrs.xyz.obadmin.bean.Wxapp">
-        replace into tbl_wxapp value(#{id},#{appid},#{secret},#{obId},#{status})
+        replace into tbl_wxapp(id,appid,secret,ob_id,status,gzappid,gzsecret) value(#{id},#{appid},#{secret},#{obId},#{status},#{gzappid},#{gzsecret})
     </insert>
 
     <!--轮播图模块-->
@@ -78,4 +78,22 @@
         select * from tbl_wxapp_merchant where oid = #{obId}
     </select>
 
+    <select id="getWxappMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select * from tbl_wxapp_member where openid=#{param1} and oid=#{param2}
+    </select>
+
+    <!--插入用户 or 更新用户-->
+    <insert id="insertOrUpdateMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember">
+         replace into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})
+    </insert>
+
+    <!--更新用户公众号openid-->
+    <update id="updateWeiXinOpenid">
+        UPDATE  tbl_wxapp_member set wxopenid=#{param1} where id = #{param2}
+    </update>
+
+    <!--ID  获取 用户 gzopenid-->
+    <select id="getUserWxopenidById" resultType="java.lang.String">
+        select wxopenid from tbl_wxapp_member where id =#{id}
+    </select>
 </mapper>

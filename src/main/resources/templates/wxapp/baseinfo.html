@@ -92,12 +92,20 @@
 
                     </div>
                     <div class="col">
-                        <label >AppID(小程序ID)</label>
+                        <label >AppID(小程序AppID)</label>
                         <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
                     </div>
                     <div class="col">
                         <label>AppSecret(小程序密钥)</label>
                         <input type="text" class="secret form-control"  placeholder="secret" v-bind:value="wxapp.secret"/>
+                    </div>
+                    <div class="col">
+                        <label >GZAppID(小程序绑定公众号AppID)</label>
+                        <input type="text" class="gzappid form-control" placeholder="gzappid"  v-bind:value="wxapp.gzappid"/>
+                    </div>
+                    <div class="col">
+                        <label>GZAppSecret(小程序绑定公众号密钥)</label>
+                        <input type="text" class="gzsecret form-control"  placeholder="gzsecret" v-bind:value="wxapp.gzsecret"/>
                     </div>
 
                     <button  class="btn btn-success" id="save_wxapp">提交</button>
@@ -111,6 +119,8 @@
                        wxapp:{
                            "appid":"",
                            "secret":'',
+                           "gzappid":"",
+                           "gzsecret":'',
                            "id":null,
                            "status":1
                        }
@@ -128,10 +138,12 @@
                 $("#save_wxapp").click(function(){
                     let appid = $(".appid").val();
                     let secret  = $(".secret").val();
+                    let gzappid = $(".gzappid").val();
+                    let gzsecret  = $(".gzsecret").val();
                     let obId=[[${ob.id}]];
                     $.ajax({
                         url:"/ob/add_or_update_wxapp",
-                        data:{"appid":appid,"secret":secret,"id": my_wxapp.wxapp.id,"obId":obId,"status":my_wxapp.wxapp.status},
+                        data:{"appid":appid,"secret":secret,"gzappid":gzappid,"gzsecret":gzsecret,"id": my_wxapp.wxapp.id,"obId":obId,"status":my_wxapp.wxapp.status},
                         success:function(){
                             mylayer.msg("操作成功!");
                         }

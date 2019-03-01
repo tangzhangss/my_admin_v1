@@ -78,7 +78,7 @@
                              </td>
                              <td th:text="${member.province}+ '-'+ ${member.city}"></td>
                              <td th:text="${member.sex}"></td>
-                             <td th:text="${member.nickname}"></td>
+                             <td th:text="${member.nicknameDecodeBase64}"></td>
                              <td class="identity">
                                  <span class="doctor" th:if="${member.identity == 3}"> 医生</span>
                                  <span class="patient" th:if="${member.identity == 2}"> 患者</span>

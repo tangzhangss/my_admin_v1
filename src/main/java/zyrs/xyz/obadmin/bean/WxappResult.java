@@ -20,6 +20,35 @@ public class WxappResult {
     private List<Map<String,String>> list;
 
 
+    //login  jscode2session返回参数
+    private  String unionid;//用户在开放平台的唯一标识符
+    private String  session_key;//会话密钥
+    private String openid;//小程序唯一标识
+
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid;
+    }
+
+    public String getSession_key() {
+        return session_key;
+    }
+
+    public void setSession_key(String session_key) {
+        this.session_key = session_key;
+    }
+
+    public String getUnionid() {
+        return unionid;
+    }
+
+    public void setUnionid(String unionid) {
+        this.unionid = unionid;
+    }
+
     public String getRef_date() {
         return ref_date;
     }
@@ -99,6 +128,9 @@ public class WxappResult {
                 ", visit_uv_new=" + visit_uv_new +
                 ", visit_uv=" + visit_uv +
                 ", list=" + list +
+                ", unionid='" + unionid + '\'' +
+                ", session_key='" + session_key + '\'' +
+                ", openid='" + openid + '\'' +
                 '}';
     }
 }

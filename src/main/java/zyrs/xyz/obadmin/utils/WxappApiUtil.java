@@ -2,6 +2,7 @@ package zyrs.xyz.obadmin.utils;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.org.apache.xpath.internal.operations.Bool;
+import zyrs.xyz.obadmin.bean.WxappMember;
 import zyrs.xyz.obadmin.bean.WxappResult;
 
 import java.io.IOException;
@@ -22,7 +23,7 @@ public class WxappApiUtil {
 
         ObjectMapper mapper = new ObjectMapper();
 
-        String res = HttpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/token","grant_type=client_credential&appid=wx8c45fc78f9bcdb6c&secret=c5bbfc58460d111c8f60d13ebcfe1b72");
+        String res = HttpRequest.sendGet("https://api.weixin.qq.com/cgi-bin/token","grant_type=client_credential&appid="+appid+"&secret="+secret);
 
         try {
             WxappResult wxappResult = mapper.readValue(res,WxappResult.class);
@@ -126,5 +127,25 @@ public class WxappApiUtil {
 
 
         return wxappResultList;
+    }
+
+    public static WxappResult authLogin(String appid, String secret, String code){
+
+        String access_token = getAccessToken(appid, secret).getAccess_token();
+
+        ObjectMapper mapper = new ObjectMapper();
+
+        String res = HttpRequest.sendGet("https://api.weixin.qq.com/sns/jscode2session","appid="+appid+"&secret="+secret+"&js_code="+code+"&grant_type=authorization_code");
+
+        try {
+            WxappResult wxappResult = mapper.readValue(res,WxappResult.class);
+
+            return wxappResult;
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

@@ -19,19 +19,19 @@ public class VwxappService {
     @Autowired
     private VwxappMapper vwxappMapper;
 
-    public List<WxappMember> getAllUserBaseInfo(String like) {
+    public List<WxappMember> getAllUserBaseInfo(String like,Integer oid) {
 
         //数据库是base64编码之后的 所以需要编码之后查询
         String nickname =like.equals("")?"%%":"%"+new String(Base64.encodeBase64(like.getBytes()))+"%";
 
-        return vwxappMapper.getAllUserBaseInfo(like,nickname);
+        return vwxappMapper.getAllUserBaseInfo(like,nickname,oid);
     }
 
-    public List<WxappMember> getDoctorList(String like) {
+    public List<WxappMember> getDoctorList(String like,Integer oid) {
 
         like = "%"+like+"%";
 
-        return vwxappMapper.getDoctorList(like);
+        return vwxappMapper.getDoctorList(like,oid);
     }
 
     public WxappMember getDoctorDetail(Integer id) {
@@ -46,9 +46,9 @@ public class VwxappService {
         vwxappMapper.doctorRefuseApply(id,message);
     }
 
-    public List<VmemberPatient> getPatientList(String like){
+    public List<VmemberPatient> getPatientList(String like,Integer oid){
         like = "%"+like+"%";
-        return vwxappMapper.getPatientList(like);
+        return vwxappMapper.getPatientList(like,oid);
     }
 
     public WxappMember getPatientInfo(Integer id) {

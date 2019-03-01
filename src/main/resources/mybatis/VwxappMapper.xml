@@ -4,17 +4,17 @@
 
     <!--获取所有的成员信息  id 头像 省 市 性别 微信名 身份 公众号openid 注册时间-->
     <sql id="base_column">
-        id,avatars,province,city,sex,identity,nickname,wxopenid,create_time
+        id,avatars,province,city,gender,identity,nickname,wxopenid,create_time
     </sql>
 
     <!--查询所有成员基本信息-->
     <select id="getAllUserBaseInfo" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select <include refid="base_column"></include> from tbl_wxapp_member where nickname like #{param2} or openid = #{param1} order by id desc
+        select <include refid="base_column"></include> from tbl_wxapp_member where (nickname like #{param2} or openid = #{param1}) and oid = #{param3}  order by id desc
     </select>
 
     <!--医生列表信息-->
     <select id="getDoctorList" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select d.id,m.realavatars,m.realname,m.birthday,m.sex,m.contact,d.hospital,d.good_field,d.level,d.isaudit from tbl_z_v_member_doctor d right join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where m.identity = 3 and ( realname like #{like} or hospital like #{like} or contact like #{like}) order by id desc
+        select d.id,m.realavatars,m.realname,m.birthday,m.gender,m.contact,d.hospital,d.good_field,d.level,d.isaudit from tbl_z_v_member_doctor d right join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where m.identity = 3 and ( realname like #{param1} or hospital like #{param1} or contact like #{param1}) and m.oid=#{param2} order by id desc
     </select>
     <!--医生详情信息   患者人数-->
     <select id="getDoctorDetail" resultType="zyrs.xyz.obadmin.bean.WxappMember">
@@ -35,14 +35,14 @@
         <association property="patient" javaType="zyrs.xyz.obadmin.bean.WxappMember">
             <id column="m_id" property="id"></id>
             <result column="m_realavatars" property="realavatars"/>
-            <result column="m_sex" property="sex"/>
+            <result column="m_gender" property="gender"/>
             <result column="m_contact" property="contact"/>
             <result column="m_birthday" property="birthday"/>
             <result column="m_realname" property="realname"/>
         </association>
 
         <association property="doctor" javaType="zyrs.xyz.obadmin.bean.WxappMember">
-            <result column="d_sex" property="sex"/>
+            <result column="d_gender" property="gender"/>
             <result column="d_contact" property="contact"/>
             <result column="d_realname" property="realname"/>
         </association>
@@ -51,9 +51,9 @@
 
     <select id="getPatientList" resultMap="patientInfoResultMap">
           select
-            m.id m_id,m.realavatars m_realavatars,m.sex m_sex,m.contact m_contact,m.birthday m_birthday,m.realname m_realname,d.sex d_sex,d.contact d_contact,d.realname d_realname
-         from tbl_wxapp_member m,tbl_wxapp_member d  where m.identity = 2 and  d.wxopenid = (SELECT c.doctor_wxopenid FROM tbl_z_v_member_consult c WHERE c.patient_wxopenid = m.wxopenid GROUP BY c.doctor_wxopenid ORDER BY COUNT(c.id) DESC LIMIT 0,1)
-         and (m.realname like #{like} or m.contact like #{like} or d.realname like #{like}) order by m.id desc
+            m.id m_id,m.realavatars m_realavatars,m.gender m_gender,m.contact m_contact,m.birthday m_birthday,m.realname m_realname,d.gender d_gender,d.contact d_contact,d.realname d_realname
+         from tbl_wxapp_member m,tbl_wxapp_member d  where  m.oid=#{param2} and m.identity = 2 and  d.wxopenid = (SELECT c.doctor_wxopenid FROM tbl_z_v_member_consult c WHERE c.patient_wxopenid = m.wxopenid GROUP BY c.doctor_wxopenid ORDER BY COUNT(c.id) DESC LIMIT 0,1)
+         and (m.realname like #{param1} or m.contact like #{param1} or d.realname like #{param1}) order by m.id desc
     </select>
 
 

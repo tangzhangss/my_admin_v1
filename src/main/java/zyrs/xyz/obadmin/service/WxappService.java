@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import zyrs.xyz.obadmin.bean.*;
 import zyrs.xyz.obadmin.mapper.UserMapper;
 import zyrs.xyz.obadmin.mapper.WxappMapper;
@@ -68,5 +69,36 @@ public class WxappService {
 
     public WxappMerchant getWxappMerchantInfo(Integer obId) {
         return wxappMapper.getWxappMerchantInfo(obId);
+    }
+
+
+    @Transactional
+    public WxappMember insertOrUpdateMemberAndReturnData(WxappMember wxappMember) {
+
+        //base64
+        wxappMember.setNicknameEncodeBase64();
+        //先查询
+        WxappMember wxappMember1 = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
+
+        if(wxappMember1!=null){
+            wxappMember.setId(wxappMember1.getId());
+
+            //必须要有 微信网页授权
+            wxappMember.setWxopenid(wxappMember1.getWxopenid());
+        }
+
+
+        wxappMapper.insertOrUpdateMember(wxappMember);
+
+        //更新or插入
+        return wxappMember;
+    }
+
+    public void updateWeiXinOpenid(String openid, Integer id) {
+        wxappMapper.updateWeiXinOpenid(openid,id);
+    }
+
+    public String getUserWxopenidById(Integer id) {
+      return   wxappMapper.getUserWxopenidById(id);
     }
 }

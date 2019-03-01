@@ -1,10 +1,7 @@
 package zyrs.xyz.obadmin.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
-import zyrs.xyz.obadmin.bean.Banner;
-import zyrs.xyz.obadmin.bean.BannerChild;
-import zyrs.xyz.obadmin.bean.Wxapp;
-import zyrs.xyz.obadmin.bean.WxappMerchant;
+import zyrs.xyz.obadmin.bean.*;
 
 import java.util.List;
 
@@ -35,4 +32,12 @@ public interface WxappMapper {
     void updateMerchant(WxappMerchant wxappMerchant);
 
     WxappMerchant getWxappMerchantInfo(Integer obId);
+
+    void insertOrUpdateMember(WxappMember wxappMember);
+
+    WxappMember getWxappMember(String openid, Integer oid);
+
+    void updateWeiXinOpenid(String openid, Integer id);
+
+    String getUserWxopenidById(Integer id);
 }

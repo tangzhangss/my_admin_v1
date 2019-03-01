@@ -35,7 +35,7 @@ public class WxappController {
         Ob ob =  obService.getObInfoById(user.getObId());
         //获取项目的appid,secret,
         Wxapp wxapp = wxappService.getWxappInfoByObId(user.getObId());
-        System.out.println(ob+" "+wxapp);
+
         map.put("ob",ob);
         map.put("wxapp",wxapp);
 
@@ -215,6 +215,4 @@ public class WxappController {
         }
 
     }
-
-
 }
