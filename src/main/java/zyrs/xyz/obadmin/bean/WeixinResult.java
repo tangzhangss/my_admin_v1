@@ -15,6 +15,15 @@ public class WeixinResult {
     private String openid;//用户openid
     private String scope;//用户授权的作用域，使用逗号（,）分隔
     private String errmsg;//错误信息
+    private String msgid;//模板消息返回
+
+    public String getMsgid() {
+        return msgid;
+    }
+
+    public void setMsgid(String msgid) {
+        this.msgid = msgid;
+    }
 
     @Override
     public String toString() {
@@ -26,6 +35,7 @@ public class WeixinResult {
                 ", openid='" + openid + '\'' +
                 ", scope='" + scope + '\'' +
                 ", errmsg='" + errmsg + '\'' +
+                ", megid='" + msgid + '\'' +
                 '}';
     }
 

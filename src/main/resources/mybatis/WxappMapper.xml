@@ -71,20 +71,20 @@
 
     <!--商户平台-->
     <insert id="updateMerchant">
-        replace into tbl_wxapp_merchant value(#{mchid},#{mchkey},#{tradeType},#{body},#{sslcertPath},#{sslkeyPath},#{rootPath},#{oid})
+        replace into tbl_weixin_merchant value(#{mchid},#{mchkey},#{tradeType},#{body},#{sslcertPath},#{sslkeyPath},#{rootPath},#{oid})
     </insert>
 
     <select id="getWxappMerchantInfo" resultType="zyrs.xyz.obadmin.bean.WxappMerchant">
-        select * from tbl_wxapp_merchant where oid = #{obId}
+        select * from tbl_weixin_merchant where oid = #{obId}
     </select>
 
     <select id="getWxappMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select * from tbl_wxapp_member where openid=#{param1} and oid=#{param2}
+        select id,avatars,openid,wxopenid,nickname,gender,`identity`  from tbl_wxapp_member where openid=#{param1} and oid=#{param2}
     </select>
 
     <!--插入用户 or 更新用户-->
     <insert id="insertOrUpdateMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember">
-         replace into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})
+          INSERT  into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})   on duplicate key update id = #{id},openid = #{openid},unionid = #{unionid},gender=#{gender},avatars=#{avatars},nickname=#{nickname},oid=#{oid},province=#{province},city=#{city}
     </insert>
 
     <!--更新用户公众号openid-->
@@ -95,5 +95,27 @@
     <!--ID  获取 用户 gzopenid-->
     <select id="getUserWxopenidById" resultType="java.lang.String">
         select wxopenid from tbl_wxapp_member where id =#{id}
+    </select>
+
+    <!--绑定银行卡-->
+    <select id="getUserBank" resultType="zyrs.xyz.obadmin.bean.WxappBank">
+        select * from tbl_wxapp_bank where openid = #{param1} and oid = #{param2}
+    </select>
+    
+    <insert id="modifyUserBank"  parameterType="zyrs.xyz.obadmin.bean.WxappBank">
+        replace into tbl_wxapp_bank value(#{id},#{oid},#{openid},#{card},#{account})
+    </insert>
+
+    <!--查询__更改用户余额-->
+    <select id="getMemberBlanceByOpenid" resultType="java.lang.Double">
+        select balance from tbl_wxapp_balance where openid = #{param1} and oid=#{param2}
+    </select>
+    <update id="updateMemberBlanceByOpenid">
+        update tbl_wxapp_balance set balance = #{param3} where openid = #{param1} and oid=#{param2}
+    </update>
+
+    <!--获取用户的基本信息 通过oid wxopenid-->
+    <select id="getMemberBaseInfoByWxopenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
+       select realname,contact from tbl_wxapp_member where oid = #{param2} and wxopenid = #{param1}
     </select>
 </mapper>

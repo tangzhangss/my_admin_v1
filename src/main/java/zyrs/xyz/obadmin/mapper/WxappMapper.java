@@ -40,4 +40,14 @@ public interface WxappMapper {
     void updateWeiXinOpenid(String openid, Integer id);
 
     String getUserWxopenidById(Integer id);
+
+    void modifyUserBank(WxappBank wxappBank);
+
+    WxappBank getUserBank(String openid,Integer oid);
+
+    Double getMemberBlanceByOpenid(String openid,Integer oid);
+
+    void updateMemberBlanceByOpenid(String openid,Integer oid, Double money);
+
+    WxappMember getMemberBaseInfoByWxopenidAndOid(String wxopenid, Integer oid);
 }

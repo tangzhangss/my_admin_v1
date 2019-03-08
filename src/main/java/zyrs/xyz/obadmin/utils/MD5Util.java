@@ -1,6 +1,7 @@
 package zyrs.xyz.obadmin.utils;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.springframework.util.DigestUtils;
 
 public class MD5Util {
     public static String encryptPassword(String password){
@@ -11,4 +12,9 @@ public class MD5Util {
 
         return s.toString();
     }
+
+    public static String MD5(String str){
+        return DigestUtils.md5DigestAsHex(str.getBytes());
+    }
+
 }

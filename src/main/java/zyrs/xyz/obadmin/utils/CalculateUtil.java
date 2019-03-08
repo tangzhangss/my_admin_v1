@@ -45,4 +45,18 @@ public class CalculateUtil{
         }
         return age;
     }
+
+    /**
+     * 获取当前日期
+     * @return
+     */
+    public static String getCurrentDate(String format){
+        String date_str="";
+        Date dt = new Date();
+        //最后的aa表示“上午”或“下午”    HH表示24小时制    如果换成hh表示12小时制
+        SimpleDateFormat sdf = new SimpleDateFormat(format);
+        date_str=sdf.format(dt);
+
+        return date_str;
+    }
 }

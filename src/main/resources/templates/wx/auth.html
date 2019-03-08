@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;" name="viewport" />
+    <title>微信网页授权</title>
+</head>
+<style>
+    .auth{
+        margin:50px auto;
+        display: flex;
+        flex-direction: column;;
+        align-items: center;
+        height:200px;
+        justify-content: space-around;
+    }
+    .auth img{
+        width:100px;
+        height: 100px;
+    }
+    .auth .title{
+        font-size:20px;
+        font-weight: bold;
+        text-align: center;
+    }
+    .auth .msg{
+        color: #aaa;
+        text-align: center;
+    }
+</style>
+<body>
+    <!--授权成功-->
+    <div class="auth" th:if="${status=='0'}">
+         <img src="/static/img/wx/auth_success.png"/>
+          <div class="title">授权成功</div>
+          <div class="msg">返回即可体验服务</div>
+    </div>
+    <!--授权失败-->
+    <div class="auth" th:if="${status!='0'}">
+        <img src="/static/img/wx/auth_fail.png"/>
+        <div class="title">授权失败</div>
+        <div class="msg">请返回重试或联系客服电话:028-84866880,微信:quanvjiankang解决</div>
+    </div>
+
+
+</body>
+</html>

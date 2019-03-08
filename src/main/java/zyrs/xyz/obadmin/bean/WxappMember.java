@@ -11,6 +11,7 @@ import javax.xml.crypto.Data;
  * 小程序用户表
  */
 public class WxappMember {
+
     private Integer id;//用户ID
     private String openid;//小程序openid
     private String wxopenid;//公众号openid
@@ -21,6 +22,8 @@ public class WxappMember {
     private String nicknameDecodeBase64;//base64编码之后的
     private String province;//所在省
     private String city;//所在市
+
+    private Double balance;//余额
 
     private Integer oid;//项目id
     private String unionid;//开放平台唯一
@@ -138,6 +141,15 @@ public class WxappMember {
 
     }
 
+    public Double getBalance() {
+        balance = balance==null?0.00:balance;
+        return balance;
+    }
+
+    public void setBalance(Double balance) {
+        this.balance = balance;
+    }
+
     public String getProvince() {
         return province;
     }
@@ -167,6 +179,7 @@ public class WxappMember {
     }
 
     public void setCreateTime(String createTime) {
+        System.out.println(createTime);
         //去掉timestamp后面的0
         this.createTime = createTime.substring(0,createTime.lastIndexOf(":"));
     }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import zyrs.xyz.obadmin.bean.*;
 import zyrs.xyz.obadmin.mapper.UserMapper;
+import zyrs.xyz.obadmin.mapper.VwxappMapper;
 import zyrs.xyz.obadmin.mapper.WxappMapper;
 import zyrs.xyz.obadmin.utils.HttpRequest;
 import zyrs.xyz.obadmin.utils.MD5Util;
@@ -79,14 +80,17 @@ public class WxappService {
         wxappMember.setNicknameEncodeBase64();
         //先查询
         WxappMember wxappMember1 = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
+        System.out.println("member"+wxappMember1);
 
         if(wxappMember1!=null){
-            wxappMember.setId(wxappMember1.getId());
 
-            //必须要有 微信网页授权
+            //返回ID和身份
+            wxappMember.setId(wxappMember1.getId());
+            wxappMember.setIdentity(wxappMember1.getIdentity());
+
+            //必须要有 微信网页授权_返回时需要 更新插入不需要
             wxappMember.setWxopenid(wxappMember1.getWxopenid());
         }
-
 
         wxappMapper.insertOrUpdateMember(wxappMember);
 
@@ -100,5 +104,25 @@ public class WxappService {
 
     public String getUserWxopenidById(Integer id) {
       return   wxappMapper.getUserWxopenidById(id);
+    }
+
+
+    public void modifyUserBank(WxappBank wxappBank) {
+        WxappBank wxappBankTemp;
+
+       //查询openid是否存在
+       if((wxappBankTemp = getUserBank(wxappBank.getOpenid(),wxappBank.getOid())) != null){
+           wxappBank.setId(wxappBankTemp.getId());
+       }
+
+
+        wxappMapper.modifyUserBank(wxappBank);
+    }
+    public WxappBank getUserBank(String openid,Integer oid) {
+        return wxappMapper.getUserBank(openid,oid);
+    }
+
+    public WxappMember getMemberBaseInfoByWxopenidAndOid(String wxopenid,Integer oid) {
+        return wxappMapper.getMemberBaseInfoByWxopenidAndOid(wxopenid,oid);
     }
 }

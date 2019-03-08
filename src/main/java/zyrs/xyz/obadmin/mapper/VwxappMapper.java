@@ -29,4 +29,18 @@ public interface VwxappMapper {
     List<VmemberConsult> getPatientConsultLog(String wxopenid);
 
     Double getPatientConsultSumMoney(String wxopenid);
+
+
+    void modifyUserInfoDoctorByWxopenid(WxappMember wxappMembe);
+
+    void modifyUserInfoBase(WxappMember wxappMember);
+
+    WxappMember getUserInfoById(Integer id);
+
+
+    void createConsultOrder(VmemberConsult vmemberConsult);
+
+    void updateMemberIdentityByWxopenid(String patientWxopenid, int i);
+
+    List<VmemberConsult> getPatientConsultList(String wxopenid,int oid);
 }

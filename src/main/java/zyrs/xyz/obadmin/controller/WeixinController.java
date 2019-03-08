@@ -30,19 +30,25 @@ public class WeixinController {
      * @param param   项目id 获取微信appid srcret _ 用户ID
      * @return
      */
-    @ResponseBody
     @RequestMapping("auth")
-    public void auth(Map<String,Object> map,@RequestParam("code") String code,@RequestParam("param")String param){
+    public String auth(Map<String,Object> map,@RequestParam("code") String code,@RequestParam("param")String param){
 
         String [] ids = param.split("_");
 
-        Wxapp wxapp = wxappService.getWxappInfoByObId(Integer.valueOf(ids[0]));
-        //获取access_token
-        WeixinResult weixinResult =  WeixinApiUtil.getAccessToken(wxapp.getGzappid(),wxapp.getGzsecret(),code);
-        System.out.println(weixinResult);
-        wxappService.updateWeiXinOpenid(weixinResult.getOpenid(),Integer.valueOf(ids[1]));
+        try{
+           Wxapp wxapp = wxappService.getWxappInfoByObId(Integer.valueOf(ids[0]));
+           //获取access_token
+           WeixinResult weixinResult =  WeixinApiUtil.getAccessToken(wxapp.getGzappid(),wxapp.getGzsecret(),code);
+           System.out.println(weixinResult);
+           wxappService.updateWeiXinOpenid(weixinResult.getOpenid(),Integer.valueOf(ids[1]));
+        }catch (Exception e){
+            System.out.println(e);
+            map.put("status","2");//授权失败
+        }
 
+        map.put("status","0");//授权成功
         //****************************************
         //授权成功的页面
+       return "wx/auth";
     }
 }
