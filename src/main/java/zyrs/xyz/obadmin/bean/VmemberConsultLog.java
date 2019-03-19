@@ -1,5 +1,7 @@
 package zyrs.xyz.obadmin.bean;
 
+import org.apache.commons.codec.binary.Base64;
+
 /**
  * Created by Administrator on 2019/3/8.
  * 聊天记录....
@@ -10,9 +12,11 @@ public class VmemberConsultLog {
     private Integer consultId;
     private Integer ctype;
     private String message;
+    private String messageDecode;//解码的消息
+    private String messageEncode;//编码的
     private String image;
     private String video;//语音消息
-    private String identity;//发送消息的省份 1患者 2医生
+    private Integer identity;//发送消息的省份 1患者 2医生
     private String replytime;//回复时间 时间戳
     private Integer isread;//是否已读 0未读 1已读
 
@@ -43,6 +47,24 @@ public class VmemberConsultLog {
     public String getMessage() {
         return message;
     }
+    public String getMessageDecode() {
+        //base64编码 解码
+        if(message!=null){
+            return new String(Base64.decodeBase64(message));
+        }else{
+            return message;
+        }
+    }
+
+    public String getMessageEncode() {
+        //base64编码
+        if(message!=null){
+           return Base64.encodeBase64String(message.getBytes());
+        }
+
+        return null;
+
+    }
 
     public void setMessage(String message) {
         this.message = message;
@@ -64,20 +86,22 @@ public class VmemberConsultLog {
         this.video = video;
     }
 
-    public String getIdentity() {
+    public Integer getIdentity() {
         return identity;
     }
 
-    public void setIdentity(String identity) {
+    public void setIdentity(Integer identity) {
         this.identity = identity;
     }
 
     public String getReplytime() {
+
         return replytime;
     }
 
     public void setReplytime(String replytime) {
-        this.replytime = replytime;
+        //去掉timestamp后面的0_前端app显示就是去掉秒显示
+        this.replytime = replytime.substring(0,replytime.lastIndexOf("."));
     }
 
     public Integer getIsread() {

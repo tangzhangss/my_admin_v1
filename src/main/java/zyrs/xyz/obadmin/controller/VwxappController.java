@@ -146,8 +146,12 @@ public class VwxappController {
         WxappMember patient = vWxappService.getPatientInfo(id);
         //获取咨询记录  什么时候咨询了什么人  完后时间  评价 咨询标签
         List<VmemberConsult> patientConsultLog = vWxappService.getPatientConsultLog(patient.getWxopenid());
-        //获取订单话费总金额.
-        Double cost =vWxappService.getPatientConsultSumMoney(patient.getWxopenid());
+
+        //当前项目id
+        int oid = ((User)map.get("current_user")).getObId();
+
+        //获取总花费金额 包含余额.....
+        Double cost =vWxappService.getPatientConsultSumMoney(patient.getWxopenid(),oid);
 
         map.put("patient",patient);
         map.put("patientConsultLog",patientConsultLog);
@@ -155,4 +159,34 @@ public class VwxappController {
 
         return "/v/patient_detail";
     }
+    /**
+     * 获取咨询订单
+     * @param status 状态 1 带接单 2 进行中 3完成 4退款
+     * @param like 模糊查询 患者名字 患者手机 医生名字 医生手机
+     * @return
+     */
+    @RequestMapping("consult_order")
+    public  String consultWait(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like
+            ,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo
+           ,@RequestParam(value="status")Integer status){
+
+        User user = (User) map.get("current_user");
+        PageHelper.startPage(pageNo, 10);
+        //获取所有的用户信息
+        List<VmemberConsult> vmemberConsults = vWxappService.getConsultOrderList(like,user.getObId(),status);
+
+        PageInfo<?> appsPageInfo = new PageInfo<>(vmemberConsults);
+
+        //一对多的时候 总数为错误  会算上所有条数
+        appsPageInfo.setTotal(vmemberConsults.size());
+
+        map.put("vmemberConsults",vmemberConsults);
+
+        map.put("pageinfo",appsPageInfo);
+
+        map.put("status",status);
+
+        return "/v/consult_order";
+    }
+
 }

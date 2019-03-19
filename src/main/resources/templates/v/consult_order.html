@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+
+<!--单独引入外部文件 下滑  layui.js 会导致  请求回调 原因不知-->
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table *{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table .isaudit span{
+        color: white;
+        padding:5px 10px;
+        box-shadow: 1px 1px 5px 1px #bbbbbb;
+    }
+    .table .operate img{
+        width: 50px;
+        height:30px;
+        cursor: pointer;
+    }
+     .avatars{
+        width:40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .operator{
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .operator input{
+        width:360px;
+        margin-right:5px;
+        float: right;
+    }
+    .operator button{
+        float: right;
+    }
+    .person{
+        font-weight: bold;
+    }
+    .person span{
+        margin:0 5px;
+    }
+    .noread{
+        color: #ff9352;
+    }
+
+
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+
+            <div class="border-section banner-box">
+
+                <form class="operator" action="/wxapp_v/consult_order">
+                    <button type="submit" class="btn btn-success" style="background-color: #1aad19;" >查找</button>
+                    <input name="status"  type="hidden" th:value="${status}"/>
+                    <input name="like"  type="text" placeholder="患者姓名、联系方式,医生姓名，联系方式" class="form-control"/>
+                </form>
+
+                <table class="table table-hover">
+                    <tr>
+                        <th>患者</th>
+                        <th th:if="${status!=1}">医生</th>
+                        <th>提交时间</th>
+                        <th th:if="${status!=1}">接单时间</th>
+                        <th th:if="${status!=1}">完成时间</th>
+                        <th>咨询主题</th>
+                        <th>金额</th>
+                        <th>查看详情</th>
+                    </tr>
+                    <tr th:each="consult:${vmemberConsults}">
+                        <td class="person">
+                          <img class="avatars"  th:src="${consult.patientRealavatars}"/>
+                          <span th:text="${consult.patientRealname}"></span>
+                          <span th:text="'['+${consult.patientContact}+']'"></span>
+                          <span class="noread" th:if="${status==2}" th:text="'未读:'+${consult.patnoread}"></span>
+                        </td>
+                        <td class="person" th:if="${status!=1}">
+                            <img class="avatars" th:src="${consult.doctorRealavatars}"/>
+                            <span th:text="${consult.doctorRealname}"></span>
+                            <span th:text="'['+${consult.doctorContact}+']'"></span>
+                            <span class="noread" th:if="${status==2}" th:text="'未读:'+${consult.docnoread}"></span>
+                        </td>
+                        <td th:text="${consult.createTime}"></td>
+                        <td th:if="${status!=1}" th:text="${consult.serverTime}"></td>
+                        <td th:if="${status!=1}" th:text="${consult.completeTime}"></td>
+                        <td th:text="${consult.type eq 1?consult.label:'套餐'}"></td>
+                        <td th:text="'￥'+${consult.cost}"></td>
+                        <td class="operate">
+                            <img src="/static/img/tools/detail.png" />
+                        </td>
+                    </tr>
+                </table>
+
+                <nav aria-label="..." class="pagination-box">
+                    <div class="selectpageNo">共<span th:text="${pageinfo.pages}"></span>页,  <span th:text="${pageinfo.total}"></span>条记录</div>
+                    <ul class="pagination">
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo=1'+'&status='+${status}">首页</a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum -3}+'&status='+${status}"  th:text="${pageinfo.list.pageNum -3}" th:if="${pageinfo.list.pageNum -3} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum -2}+'&status='+${status}"  th:text="${pageinfo.list.pageNum -2}" th:if="${pageinfo.list.pageNum -2} > 0"></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum -1}+'&status='+${status}" th:text="${pageinfo.list.pageNum -1}" th:if="${pageinfo.list.pageNum -1} > 0"></a></li>
+                        <li class="active"><a href="#" th:text="${pageinfo.list.pageNum}"><span class="sr-only">(current)</span></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum +1}+'&status='+${status}" th:text="${pageinfo.list.pageNum +1}" th:if="${pageinfo.list.pageNum +1} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum +2}+'&status='+${status}" th:text="${pageinfo.list.pageNum +2}" th:if="${pageinfo.list.pageNum +2} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.list.pageNum +3}+'&status='+${status}" th:text="${pageinfo.list.pageNum +3}" th:if="${pageinfo.list.pageNum +3} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp_v/consult_order?pageNo='+${pageinfo.pages}+'&status='+${status}">尾页</a></li>
+                    </ul>
+                </nav>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<div class="modal fade" id="consult_chat_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title meal_modal_title" >咨询聊天记录</h4>
+                <input type="hidden"  class="meal_modal_wxopenid"/>
+            </div>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<script>
+
+</script>
+</body>
+</html>

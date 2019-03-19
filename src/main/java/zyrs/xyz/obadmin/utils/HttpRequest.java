@@ -92,8 +92,6 @@ public class HttpRequest {
             conn.setDoInput(true);
             // Post 请求不能使用缓存
             conn.setUseCaches(false);
-
-
             // 获取URLConnection对象对应的输出流
             out = new PrintWriter(conn.getOutputStream());
             out.write(param);

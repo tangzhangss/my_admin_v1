@@ -82,15 +82,23 @@
         <div class="layui-form-item">
             <label class="layui-form-label">账号|联系</label>
             <div class="layui-input-block">
-                <input type="text" name="username"  v-bind:value="user.username" lay-verify="required|number"  placeholder="手机号码" autocomplete="off" class="layui-input"/>
+                <input type="text" name="username"  v-bind:value="user.username"   placeholder="手机号码" autocomplete="off" class="layui-input"/>
             </div>
         </div>
+
+
+
 
         <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-block">
                 <input type="text" name="password"  v-bind:value="user.password" lay-verify="required" placeholder="账号密码" autocomplete="off" class="layui-input long"/>
             </div>
+        </div>
+        <div class="layui-form-item">
+            <span class="layui-input-block mark">
+               *修改信息，请一定修改密码，每次修改信息密码都会重新加密,生成新的密码
+            </span>
         </div>
 
         <!--项目状态  不显示  但是要原样传到 后台-->

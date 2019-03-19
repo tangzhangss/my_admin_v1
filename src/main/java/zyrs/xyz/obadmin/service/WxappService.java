@@ -78,21 +78,11 @@ public class WxappService {
 
         //base64
         wxappMember.setNicknameEncodeBase64();
-        //先查询
-        WxappMember wxappMember1 = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
-        System.out.println("member"+wxappMember1);
 
-        if(wxappMember1!=null){
+         wxappMapper.insertOrUpdateMember(wxappMember);
 
-            //返回ID和身份
-            wxappMember.setId(wxappMember1.getId());
-            wxappMember.setIdentity(wxappMember1.getIdentity());
-
-            //必须要有 微信网页授权_返回时需要 更新插入不需要
-            wxappMember.setWxopenid(wxappMember1.getWxopenid());
-        }
-
-        wxappMapper.insertOrUpdateMember(wxappMember);
+        //获取返回
+          wxappMember = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
 
         //更新or插入
         return wxappMember;
@@ -124,5 +114,9 @@ public class WxappService {
 
     public WxappMember getMemberBaseInfoByWxopenidAndOid(String wxopenid,Integer oid) {
         return wxappMapper.getMemberBaseInfoByWxopenidAndOid(wxopenid,oid);
+    }
+
+    public void setMemberIsOnline(Integer id, int online) {
+        wxappMapper.setMemberIsOnline(id,online);
     }
 }

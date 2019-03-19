@@ -16,7 +16,7 @@
     </select>
     <!--更新用户信息 插入-->
     <insert id="addOrUpdateUser">
-        replace into tbl_user value(#{id},#{username},#{password},#{level})
+        replace into tbl_user (id,username,password,level) value(#{id},#{username},#{password},#{level})
     </insert>
     <!--删除客户信息-->
     <delete id="deleteUserById">

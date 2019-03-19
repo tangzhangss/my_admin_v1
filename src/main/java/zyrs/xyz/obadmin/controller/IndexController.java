@@ -60,7 +60,6 @@ public class IndexController {
      */
     @RequestMapping("")
     public String index(Map<String,Object> map,@RequestParam(value = "oid",defaultValue = "0")Integer oid){
-
         User user = (User) map.get("current_user");
         //菜单获取
         List<Menu> menuList = null;

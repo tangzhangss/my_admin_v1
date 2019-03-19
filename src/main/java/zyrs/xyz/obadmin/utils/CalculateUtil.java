@@ -59,4 +59,25 @@ public class CalculateUtil{
 
         return date_str;
     }
+
+    /**
+     * 时间戳 转 日期时间格式时间
+     * @param timestamp
+     * @return
+     */
+    public  static String timestampTodatetime(Long timestamp){
+
+       return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(new Date(timestamp));
+    }
+
+    /**
+     * 获取几个月之后的时间戳
+     *
+     */
+    public static Long getTimestampWithAfterMonth(int month){
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar .MONTH,+month);
+
+        return cal.getTimeInMillis();
+    }
 }

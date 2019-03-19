@@ -3,7 +3,6 @@ package zyrs.xyz.obadmin.utils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.lang.RandomStringUtils;
-import sun.plugin.com.Utils;
 import zyrs.xyz.obadmin.bean.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,10 +68,11 @@ public class WeixinApiUtil {
      * @param wxappMerchant 商户信息
      * @param request  请求参数
      * @param notifyUrl 回调地址
+     * @param outTradeNo 商户订单号
      * @param isWxapp  是否是小程序 可微信公众号调用
      * @return
      */
-    public static String unifiedOrder(Wxapp wxapp, WxappMerchant wxappMerchant,HttpServletRequest request,String notifyUrl,Boolean isWxapp){
+    public static String unifiedOrder(Wxapp wxapp, WxappMerchant wxappMerchant,String outTradeNo,HttpServletRequest request,String notifyUrl,Boolean isWxapp){
 
         //接受参数(金额)
         String amount = request.getParameter("amount");
@@ -92,8 +92,6 @@ public class WeixinApiUtil {
         String body = wxappMerchant.getBody();
         //设置随机字符串
         String nonceStr = RandomStringUtils.randomAlphanumeric(32);
-        //设置商户订单号
-        String outTradeNo =CalculateUtil.getCurrentDate("yyyyMMdd")+"_"+System.currentTimeMillis();
 
         //设置请求参数(ID)
         //paraMap.put("appid", isWxapp?wxapp.getAppid():wxapp.getGzappid());
@@ -142,8 +140,6 @@ public class WeixinApiUtil {
 
 
         String res = HttpRequest.sendPost("https://api.mch.weixin.qq.com/pay/unifiedorder",paramBuffer.toString());
-
-        System.out.println("统一下单.."+paramBuffer+"....返回信息:"+res);
 
         return res;
     }

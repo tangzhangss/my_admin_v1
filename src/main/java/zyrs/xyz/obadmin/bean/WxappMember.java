@@ -50,7 +50,6 @@ public class WxappMember {
     private int isaudit;//医生状态 1待审核 2通过 3 不通过
     private String message;//信息 可能是审核失败原因
 
-
     public String getUnionid() {
         return unionid;
     }

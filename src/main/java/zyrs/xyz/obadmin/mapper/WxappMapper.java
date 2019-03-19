@@ -50,4 +50,6 @@ public interface WxappMapper {
     void updateMemberBlanceByOpenid(String openid,Integer oid, Double money);
 
     WxappMember getMemberBaseInfoByWxopenidAndOid(String wxopenid, Integer oid);
+
+    void setMemberIsOnline(Integer id, int online);
 }

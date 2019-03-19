@@ -99,10 +99,13 @@
                         患者人数:<span style="color: green;font-size: 20px" th:text="${doctor.patientNum}"></span>(人)
                     </div>
                     <div class="col">
-                        openid:<span  th:text="${doctor.openid}"></span>
+                        真实姓名:<span  th:text="${doctor.realname}"></span>
                     </div>
                     <div class="col">
-                        wxopenid:<span  th:text="${doctor.wxopenid}"></span>
+                        小程序openid:<span  th:text="${doctor.openid}"></span>
+                    </div>
+                    <div class="col">
+                        公众号openid:<span  th:text="${doctor.wxopenid}"></span>
                     </div>
                     <div class="col">
                         联系方式:<span  th:text="${doctor.contact}"></span>

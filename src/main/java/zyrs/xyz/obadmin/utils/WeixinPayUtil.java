@@ -106,7 +106,7 @@ public class WeixinPayUtil {
      * @return
      */
     @SuppressWarnings("rawtypes")
-    private Map<String,String> doXMLParse(String strxml) throws Exception {
+    public static Map<String,String> doXMLParse(String strxml) throws Exception {
         if(null == strxml || "".equals(strxml)) {
             return null;
         }
@@ -138,7 +138,7 @@ public class WeixinPayUtil {
         return m;
     }
 
-    private  InputStream String2Inputstream(String str) {
+    public static  InputStream String2Inputstream(String str) {
         return new ByteArrayInputStream(str.getBytes());
     }
 

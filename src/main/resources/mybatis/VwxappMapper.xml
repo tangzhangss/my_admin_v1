@@ -12,19 +12,31 @@
         select <include refid="base_column"></include> from tbl_wxapp_member where (nickname like #{param2} or openid = #{param1}) and oid = #{param3}  order by id desc
     </select>
 
-    <!--医生列表信息-->
+    <!--医生列表信息  查询医生不需要 oid 子项目 不能查询医生-->
     <select id="getDoctorList" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select d.id,m.realavatars,m.realname,m.birthday,m.gender,m.contact,d.hospital,d.good_field,d.level,d.isaudit from tbl_z_v_member_doctor d right join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where m.identity = 3 and ( realname like #{param1} or hospital like #{param1} or contact like #{param1}) and m.oid=#{param2} order by id desc
+        select d.id,m.realavatars,m.realname,m.birthday,m.gender,m.contact,d.hospital,d.good_field,d.level,d.isaudit,d.wxopenid from tbl_z_v_member_doctor d LEFT join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where  realname like #{param1} or hospital like #{param1} or contact like #{param1} order by id desc
+    </select>
+
+    <!--医生详情信息 通过id-->
+    <select id="getDoctorDetail" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select d.id,m.openid,d.wxopenid,m.contact,d.education,d.good_field,d.hospital,m.realavatars,m.realname,d.level,d.card_face,d.card_back,d.certificate_doctor,d.certificate_practice,d.isaudit,d.message from tbl_z_v_member_doctor d left join tbl_wxapp_member m on d.wxopenid = m.wxopenid  where d.id = #{id}
+    </select>
+    <select id="getDoctorDetailByWxopenid" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select d.education,d.good_field,d.hospital,m.realavatars,m.realname,d.level,d.hospital,m.realname,d.wxopenid from tbl_z_v_member_doctor d left join tbl_wxapp_member m on d.wxopenid = m.wxopenid  where d.wxopenid=#{wxopenid}
     </select>
     <!--医生详情信息   患者人数-->
-    <select id="getDoctorDetail" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select d.id,m.openid,d.wxopenid,m.contact,d.education,d.good_field,d.hospital,m.realavatars,d.level,d.card_face,d.card_back,d.certificate_doctor,d.certificate_practice,d.isaudit,d.message,d.patient_num from tbl_z_v_member_doctor d left join tbl_wxapp_member m on d.wxopenid = m.wxopenid where d.id = #{id}
-    </select>
+    <select id="getDoctorPatientNum" resultType="java.lang.Integer">
+        select count(distinct(patient_wxopenid)) patient_num from tbl_z_v_member_consult  where doctor_wxopenid = #{wxopenid}
+   </select>
+
 
     <!--医生通过(不)|审核请求-->
    <update id="doctorAccessApply">
        update tbl_z_v_member_doctor set isaudit = 2 , message = "" where id = #{id}
    </update>
+    <update id="setMemberIdentityWithDoctor">
+        update tbl_wxapp_member set identity = 3 where wxopenid = #{wxopenid}
+    </update>
     <update id="doctorRefuseApply">
         update tbl_z_v_member_doctor set isaudit = 3 , message = #{param2} where id = #{param1}
     </update>
@@ -66,9 +78,11 @@
          select c.create_time,c.server_time,c.complete_time,c.label,c.assess,d.realname doctor_realname from tbl_z_v_member_consult c left join tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid where c.patient_wxopenid = #{wxopenid} ORDER by c.id desc
     </select>
 
-    <!--患者话费总金额-->
+
+
+    <!--患者总充值金额-->
     <select id="getPatientConsultSumMoney" resultType="java.lang.Double">
-         select SUM(money) from tbl_order where wxopenid = #{wxopenid} and state = 1
+         select SUM(money)  from tbl_weixin_order where openid = #{param1} and oid = #{param2} and state = 1
     </select>
 
     <!--获取用户信息 通过用户id-->
@@ -90,10 +104,15 @@
     <insert id="createConsultOrder" parameterType="zyrs.xyz.obadmin.bean.VmemberConsult">
        insert tbl_z_v_member_consult (patient_wxopenid,label,title,picdesc,cost) value(#{patientWxopenid},#{label},#{title},#{picdesc},#{cost})
     </insert>
+    <insert id="createConsultOrderMeal" parameterType="zyrs.xyz.obadmin.bean.VmemberConsult">
+        insert tbl_z_v_member_consult (patient_wxopenid,doctor_wxopenid,type,cost,complete_time,deal_status,server_time) value(#{patientWxopenid},#{doctorWxopenid},#{type},#{cost},#{completeTimeWithTimestamp},2,#{serverTimeWithTimestamp})
+    </insert>
+
     <!--更改用户身份为2 患者-->
     <update id="updateMemberIdentityByWxopenid">
         update tbl_wxapp_member set identity = #{param2} where wxopenid = #{param1}
     </update>
+
 
 
     <resultMap id="patientConsultListResultMap" type="zyrs.xyz.obadmin.bean.VmemberConsult">
@@ -103,11 +122,39 @@
         <result property="serverTime" column="server_time"/>
         <result property="completeTime" column="complete_time"/>
         <result property="dealStatus" column="deal_status"/>
+        <result property="label" column="label"/>
         <result property="assess" column="assess"/>
+        <result property="patnoread" column="patnoread"/>
         <result property="doctorRealname" column="doc_realname"/>
         <result property="doctorRealavatars" column="doc_realavatars"/>
         <result property="doctorHospital" column="doc_hospital"/>
+
+        <collection property="consultLogs" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
+            <result property="consultId" column="consult_id"/>
+            <result property="ctype" column="ctype"/>
+            <result property="message" column="message"/>
+            <result property="image" column="image"/>
+            <result property="video" column="video"/>
+            <result property="replytime" column="replytime"/>
+        </collection>
+    </resultMap>
+    <resultMap id="doctorConsultListResultMap" type="zyrs.xyz.obadmin.bean.VmemberConsult">
+        <!--必须以菜单的id为主-->
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="serverTime" column="server_time"/>
+        <result property="completeTime" column="complete_time"/>
+        <result property="dealStatus" column="deal_status"/>
+        <result property="label" column="label"/>
+        <result property="title" column="title"/>
+        <result property="assess" column="assess"/>
+        <result property="cost" column="cost"/>
+        <result property="type" column="type"/>
+        <result property="docnoread" column="docnoread"/>
         <result property="patientRealname" column="patient_realname"/>
+        <result property="patientGender" column="gender"/>
+        <result property="patientBirthday" column="birthday"/>
+        <result property="patientContact" column="pat_contact"/>
         <result property="patientRealavatars" column="patient_realavatars"/>
 
         <collection property="consultLogs" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
@@ -116,19 +163,225 @@
             <result property="message" column="message"/>
             <result property="image" column="image"/>
             <result property="video" column="video"/>
-            <result property="identity" column="identity"/>
             <result property="replytime" column="replytime"/>
-            <result property="isread" column="isread"/>
         </collection>
     </resultMap>
-    <!--查询患者 咨询消息列表 没有完成的-->
-    <select id="getPatientConsultList" resultMap="patientConsultListResultMap">
-        select c.id,c.create_time,c.server_time,c.complete_time,c.deal_status,c.assess,
-          d.realname doc_realname,d.realavatars doc_realavatars,doc.hospital doc_hospital,
-          p.realname patient_realname,p.realavatars patient_realavatars,l.ctype,l.message,l.image,l.video,l.identity,l.replytime,l.isread from tbl_z_v_member_consult c
+    <resultMap id="allConsultListResultMap" type="zyrs.xyz.obadmin.bean.VmemberConsult">
+        <!--必须以菜单的id为主-->
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="serverTime" column="server_time"/>
+        <result property="completeTime" column="complete_time"/>
+        <result property="dealStatus" column="deal_status"/>
+        <result property="label" column="label"/>
+        <result property="assess" column="assess"/>
+        <result property="cost" column="cost"/>
+        <result property="type" column="type"/>
+        <result property="patnoread" column="patnoread"/>
+        <result property="docnoread" column="docnoread"/>
+        <result property="doctorRealname" column="doc_realname"/>
+        <result property="doctorContact" column="doc_contact"/>
+        <result property="patientRealname" column="pat_realname"/>
+        <result property="patientContact" column="pat_contact"/>
+        <result property="patientRealavatars" column="pat_realavatars"/>
+        <result property="doctorRealavatars" column="doc_realavatars"/>
 
-         left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid left JOIN tbl_wxapp_member d on c.doctor_wxopenid = p.wxopenid
+        <collection property="consultLogs" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
+            <result property="ctype" column="ctype"/>
+            <result property="message" column="message"/>
+            <result property="image" column="image"/>
+            <result property="video" column="video"/>
+            <result property="replytime" column="replytime"/>
+        </collection>
+    </resultMap>
+    <!--患者查询 咨询消息列表 没有完成的-->
+    <select id="getPatientConsultList" resultMap="patientConsultListResultMap">
+        select c.id,c.create_time,c.server_time,c.label,c.complete_time,c.deal_status,c.assess,c.patnoread,
+          d.realname doc_realname,d.realavatars doc_realavatars,doc.hospital doc_hospital,
+          l.ctype,l.message,l.image,l.video,l.replytime from tbl_z_v_member_consult c
+
+         left JOIN tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+         left JOIN tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid
          left join tbl_z_v_member_doctor doc on d.wxopenid = doc.wxopenid
-         left join tbl_z_v_member_consult_log l on c.id = l.consult_id where p.wxopenid = #{param1} and p.oid=#{param2} and c.deal_status in (1,2)
+         left join tbl_z_v_member_consult_log l on c.id = l.consult_id where c.patient_wxopenid  = #{param1} and p.oid=#{param2} and c.deal_status in (1,2)  order by c.patnoread desc,l.id desc
+    </select>
+    <!--患者查询 咨询消息列表 完成的-->
+    <select id="getPatientConsultCompletedList" resultMap="patientConsultListResultMap">
+        select c.id,c.label,c.complete_time,c.assess,c.deal_status,
+        d.realname doc_realname,d.realavatars doc_realavatars,doc.hospital doc_hospital
+        from tbl_z_v_member_consult c
+        left JOIN tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        left JOIN tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid
+        left join tbl_z_v_member_doctor doc on d.wxopenid = doc.wxopenid
+        where c.patient_wxopenid = #{param1} and p.oid=#{param2} and c.deal_status  > 2  order by c.complete_time desc
+    </select>
+
+    <!--医生查询 咨询消息列表 没有完成的  医生不需要 oid因为医生操作端 1 对 多-->
+    <select id="getDoctorConsultList" resultMap="doctorConsultListResultMap">
+        select c.id,c.create_time,c.server_time,c.title,c.label,c.complete_time,c.deal_status,c.assess,c.cost,c.docnoread,c.type,
+        p.realname patient_realname,p.realavatars patient_realavatars,l.ctype,l.message,l.image,l.video,l.replytime from tbl_z_v_member_consult c
+        left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        left join tbl_z_v_member_consult_log l on c.id = l.consult_id where c.doctor_wxopenid = #{openid} and c.deal_status = 2  order by c.docnoread desc,l.id desc
+    </select>
+    <!--医生查询 咨询消息列表 完成的-->
+    <select id="getDoctorConsultCompleteList" resultMap="doctorConsultListResultMap">
+        select c.id,c.create_time,c.server_time,c.title,c.label,c.complete_time,c.deal_status,c.assess,c.type,
+        p.realname patient_realname,p.realavatars patient_realavatars,p.gender,p.birthday from tbl_z_v_member_consult c
+        left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        where c.doctor_wxopenid = #{openid} and c.deal_status  > 2   order by c.complete_time desc
+
+    </select>
+    <!-- 医生查询  获取新的预约咨询记录-->
+    <select id="getConsultNewList" resultMap="doctorConsultListResultMap">
+        select c.id,c.create_time,c.server_time,c.title,c.label,c.complete_time,c.deal_status,c.assess,c.cost,p.gender,c.type,
+        p.realname patient_realname,p.realavatars patient_realavatars,p.contact pat_contact from tbl_z_v_member_consult c
+        left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        where c.deal_status = 1 order by c.create_time desc
+    </select>
+
+    <!---获取所有的咨询信息-->
+    <select id="getConsultOrderList" resultMap="allConsultListResultMap">
+       select c.id,c.label,c.complete_time,c.create_time,c.server_time,c.assess,c.deal_status,c.type,c.cost,c.docnoread,c.patnoread,
+        d.realname doc_realname,d.contact doc_contact,d.realavatars doc_realavatars,p.realname pat_realname,p.contact pat_contact,p.realavatars pat_realavatars,
+        l.ctype,l.message,l.image,l.video,l.replytime
+        from tbl_z_v_member_consult c
+        left JOIN tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        left JOIN tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid
+        left join tbl_z_v_member_doctor doc on d.wxopenid = doc.wxopenid
+        left join tbl_z_v_member_consult_log l on c.id = l.consult_id
+        where
+        (d.realname like #{param1} or d.contact like #{param1} or p.realname like #{param1} or p.contact like #{param1} )
+        and
+        c.deal_status = #{param3}
+        and p.oid = #{param2}
+        order by c.id desc,l.id asc
+    </select>
+
+   <!--获取某条咨询的信息-->
+    <resultMap id="consultDetailResultMap" type="zyrs.xyz.obadmin.bean.VmemberConsult">
+        <!--必须以菜单的id为主-->
+        <id property="id" column="id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="serverTime" column="server_time"/>
+        <result property="completeTime" column="complete_time"/>
+        <result property="label" column="label"/>
+        <result property="title" column="title"/>
+        <result property="picdesc" column="picdesc"/>
+        <result property="assess" column="assess"/>
+        <result property="cost" column="cost"/>
+        <result property="dealStatus" column="deal_status"/>
+
+
+        <result property="patientRealname" column="patient_realname"/>
+        <result property="patientRealavatars" column="patient_realavatars"/>
+        <result property="patientWxopenid" column="patient_wxopenid"/>
+        <result property="doctorRealname" column="doc_realname"/>
+        <result property="doctorRealavatars" column="doc_realavatars"/>
+        <result property="doctorHospital" column="doc_hospital"/>
+        <result property="doctorWxopenid" column="doctor_wxopenid"/>
+        <result property="doconline" column="doc_online"/>
+        <result property="patonline" column="pat_online"/>
+        <result property="type" column="type"/>
+
+
+        <collection property="consultLogs" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
+            <result property="consultId" column="consult_id"/>
+            <result property="ctype" column="ctype"/>
+            <result property="message" column="message"/>
+            <result property="image" column="image"/>
+            <result property="video" column="video"/>
+            <result property="replytime" column="replytime"/>
+            <result property="identity" column="identity"/>
+        </collection>
+    </resultMap>
+
+    <select id="getConsultDetailById"  resultMap="consultDetailResultMap">
+       select c.id,c.create_time,c.server_time,c.title,c.type,c.label,c.deal_status,c.picdesc,c.complete_time,c.cost,c.assess,p.online pat_online,d.online doc_online,
+        p.realname patient_realname,p.realavatars patient_realavatars,p.wxopenid patient_wxopenid,
+        d.realname doc_realname,d.realavatars doc_realavatars,doc.hospital doc_hospital,d.wxopenid doctor_wxopenid,
+        l.id consult_id,l.ctype,l.message,l.image,l.video,l.replytime,l.identity from tbl_z_v_member_consult c
+
+        left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
+        left JOIN tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid
+        left join tbl_z_v_member_doctor doc on d.wxopenid = doc.wxopenid
+        left join tbl_z_v_member_consult_log l on c.id = l.consult_id where  c.id=#{id} order by l.replytime asc
+
+    </select>
+
+    <!--获取医生的基本认证信息-->
+    <select id="getDoctorBaseInfoByWxopenid" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select * from tbl_z_v_member_doctor where wxopenid = #{wxopenid}
+    </select>
+    <!--申请成为医生-->
+    <insert id="applyBecomeDoctor" parameterType="zyrs.xyz.obadmin.bean.WxappMember">
+        replace into tbl_z_v_member_doctor (wxopenid,education,good_field,hospital,card_face,card_back,certificate_doctor,certificate_practice) value(#{wxopenid},#{education},#{goodField},#{hospital},#{cardFace},#{cardBack},#{certificateDoctor},#{certificatePractice})
+    </insert>
+
+
+    <!--查询医生余额统计-->
+    <select id="getDoctorBalanceDetail" resultType="zyrs.xyz.obadmin.bean.VdoctorBalance">
+        select sum,used,available,freeze
+           from
+           (select sum(cost) sum from tbl_z_v_member_consult where doctor_wxopenid = #{wxopenid} and deal_status <![CDATA[<]]> 4) as s
+          ,(select sum(cost) used from tbl_z_v_member_consult where doctor_wxopenid = #{wxopenid} and isbalance = 1) as u
+          ,(select sum(cost) available from tbl_z_v_member_consult where doctor_wxopenid = #{wxopenid} and deal_status = 3 and isbalance = 0) as a
+          ,(select sum(cost) freeze from tbl_z_v_member_consult where doctor_wxopenid = #{wxopenid} and deal_status = 2) as f
+    </select>
+
+    <!--医生接单-->
+    <update id="doctorReceiptConsult">
+        UPDATE  tbl_z_v_member_consult set deal_status = 2 ,doctor_wxopenid = #{param1},server_time = #{param3} where id = #{param2}
+    </update>
+    <!--设置 消息已读-->
+    <update id="setConsultDoctorReadedById">
+         UPDATE  tbl_z_v_member_consult set docnoread = 0 where id = #{id}
+    </update>
+    <update id="setConsultPatientReadedById">
+        UPDATE  tbl_z_v_member_consult set patnoread = 0 where id = #{id}
+    </update>
+
+    <!--发送消息-->
+    <insert id="sendChatMessage" parameterType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
+        INSERT into  tbl_z_v_member_consult_log (consult_id,ctype,message,image,video,identity) VALUE (#{consultId},#{ctype},#{messageEncode},#{image},#{video},#{identity})
+    </insert>
+    <!--检查服务完成状态-->
+    <update id="checkConsultStatusIsCompleteCount">
+         update tbl_z_v_member_consult c set c.deal_status = 3,c.complete_time = #{param2}
+           where
+          (select count(id) from tbl_z_v_member_consult_log where consult_id=#{param1} and identity=3 and c.type = 1) <![CDATA[ >= ]]> 6 and id = #{param1}
+    </update>
+     <update id="checkConsultStatusIsCompleteTime">
+         update tbl_z_v_member_consult  set deal_status = 3  where  #{param2} > complete_time and type > 1 and id = #{param1}
+     </update>
+
+    <!--未读消息+1-->
+    <update id="setConsultPatientNOReadAdd">
+        update tbl_z_v_member_consult set patnoread = patnoread + 1 where id = #{id}
+    </update>
+    <update id="setConsultDoctorNOReadAdd">
+        update tbl_z_v_member_consult set docnoread = docnoread + 1 where id = #{id}
+    </update>
+
+    <!--设置评价内容-->
+    <update id="setConsultAssess">
+        update tbl_z_v_member_consult set assess = #{param2} where id = #{param1}
+    </update>
+
+    <!--获取医生的咨询套餐-->
+    <select id="getDoctorConsultMeal" resultType="zyrs.xyz.obadmin.bean.VdoctorMeal">
+        select * from tbl_z_v_member_consult_cost where wxopenid = #{wxopenid} order by consult_type asc
+    </select>
+    <!--删除医生套餐-->
+    <delete id="deleteDoctorConsultMeal">
+        DELETE  from tbl_z_v_member_consult_cost where wxopenid = #{wxopenid}
+    </delete>
+    <!--更新医生套餐-->
+    <insert id="updateDoctorConsultMeal" parameterType="zyrs.xyz.obadmin.bean.VdoctorMeal">
+      replace into tbl_z_v_member_consult_cost (id,wxopenid,consult_type,money,month_num) VALUE (#{id},#{wxopenid},#{consultType},#{money},#{monthNum})
+    </insert>
+
+    <!--获取我的医生-->
+    <select id="userInfoAndMydoctor" resultType="zyrs.xyz.obadmin.bean.WxappMember">
+       select DISTINCT d.wxopenid,m.realavatars,m.realname,d.hospital from tbl_z_v_member_consult c left join tbl_z_v_member_doctor d on c.doctor_wxopenid = d.wxopenid left join tbl_wxapp_member m on d.wxopenid = m.wxopenid  where c.patient_wxopenid = #{wxopenid} and c.deal_status>1 order by c.id desc
     </select>
 </mapper>

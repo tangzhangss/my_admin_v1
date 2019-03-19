@@ -78,13 +78,13 @@
         select * from tbl_weixin_merchant where oid = #{obId}
     </select>
 
-    <select id="getWxappMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select id,avatars,openid,wxopenid,nickname,gender,`identity`  from tbl_wxapp_member where openid=#{param1} and oid=#{param2}
+    <select id="getWxappMember"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select id,avatars,openid,wxopenid,nickname,gender,`identity`  from tbl_wxapp_member where openid=#{param1} and oid=#{param2} limit 0,1
     </select>
 
     <!--插入用户 or 更新用户-->
     <insert id="insertOrUpdateMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember">
-          INSERT  into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})   on duplicate key update id = #{id},openid = #{openid},unionid = #{unionid},gender=#{gender},avatars=#{avatars},nickname=#{nickname},oid=#{oid},province=#{province},city=#{city}
+          INSERT  into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})   on duplicate key update openid = #{openid},unionid = #{unionid},gender=#{gender},avatars=#{avatars},nickname=#{nickname},oid=#{oid},province=#{province},city=#{city}
     </insert>
 
     <!--更新用户公众号openid-->
@@ -118,4 +118,10 @@
     <select id="getMemberBaseInfoByWxopenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
        select realname,contact from tbl_wxapp_member where oid = #{param2} and wxopenid = #{param1}
     </select>
+
+    <!--设置用户的在线状态-->
+    <update id="setMemberIsOnline">
+        UPDATE tbl_wxapp_member set online = #{param2} where id= #{param1}
+    </update>
+
 </mapper>
