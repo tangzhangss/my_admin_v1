@@ -12,7 +12,15 @@ public class WeixinTemplate {
     private String remark;//备注——理解和微信公众平台模板标题对应
     private String touser;//用户的openID
     private String adminOpenid;//管理者微信openid
+    private Integer oid;//项目id
 
+    public Integer getOid() {
+        return oid;
+    }
+
+    public void setOid(Integer oid) {
+        this.oid = oid;
+    }
 
     public String getRemark() {
         return remark;

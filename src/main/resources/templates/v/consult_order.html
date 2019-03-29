@@ -50,6 +50,49 @@
     .noread{
         color: #ff9352;
     }
+    .imgbox{
+        display: flex;
+    }
+   .imgbox img{
+       width:100px;
+       margin:5px 5px;
+   }
+    .col{
+        margin:10px 0;
+    }
+    .col label{
+        margin-right:10px;
+    }
+    .contentchat{
+        height:400px;
+        overflow: auto;
+        margin: 5px 0;
+    }
+    .contentchat .one{
+        margin:5px 0;
+    }
+    .contentchat .one .user{
+        display: flex;;
+        justify-content: space-between;
+        height: 40px;
+        line-height: 40px;
+    }
+    .contentchat .one .user .name{
+        font-weight: bold;
+        font-size: 20px;
+    }
+    .contentchat .one .user .time{
+        color: #ccc;
+    }
+    .contentchat .one .msg{
+        padding:5px;
+        background-color: #D0D0D0;
+        color: white;
+        border-radius: 5px;
+    }
+    .contentchat img{
+        width:80px;
+    }
 
 
 </style>
@@ -72,6 +115,7 @@
 
                 <table class="table table-hover">
                     <tr>
+                        <td>ID</td>
                         <th>患者</th>
                         <th th:if="${status!=1}">医生</th>
                         <th>提交时间</th>
@@ -80,19 +124,26 @@
                         <th>咨询主题</th>
                         <th>金额</th>
                         <th>查看详情</th>
+                        <th>退款</th>
                     </tr>
                     <tr th:each="consult:${vmemberConsults}">
+                        <td  th:text="${consult.id}"></td>
                         <td class="person">
-                          <img class="avatars"  th:src="${consult.patientRealavatars}"/>
-                          <span th:text="${consult.patientRealname}"></span>
-                          <span th:text="'['+${consult.patientContact}+']'"></span>
-                          <span class="noread" th:if="${status==2}" th:text="'未读:'+${consult.patnoread}"></span>
+                         <a th:href="'/wxapp_v/patient_detail?id='+${consult.patId}">
+                             <img class="avatars"  th:src="${consult.patientRealavatars}"/>
+                             <span th:text="${consult.patientRealname}"></span>
+                             <!--<span th:text="'['+${consult.patientContact}+']'"></span>-->
+                             <span class="noread" th:if="${status==2}" th:text="'['+${consult.patnoread}+']'"></span>
+                         </a>
+
                         </td>
                         <td class="person" th:if="${status!=1}">
-                            <img class="avatars" th:src="${consult.doctorRealavatars}"/>
-                            <span th:text="${consult.doctorRealname}"></span>
-                            <span th:text="'['+${consult.doctorContact}+']'"></span>
-                            <span class="noread" th:if="${status==2}" th:text="'未读:'+${consult.docnoread}"></span>
+                           <a th:href="'/wxapp_v/doctor_detail?id='+${consult.docId}">
+                             <img class="avatars" th:src="${consult.doctorRealavatars}"/>
+                             <span th:text="${consult.doctorRealname}"></span>
+                             <!--<span th:text="'['+${consult.doctorContact}+']'"></span>-->
+                             <span class="noread" th:if="${status==2}" th:text="'['+${consult.docnoread}+']'"></span>
+                           </a>
                         </td>
                         <td th:text="${consult.createTime}"></td>
                         <td th:if="${status!=1}" th:text="${consult.serverTime}"></td>
@@ -100,7 +151,10 @@
                         <td th:text="${consult.type eq 1?consult.label:'套餐'}"></td>
                         <td th:text="'￥'+${consult.cost}"></td>
                         <td class="operate">
-                            <img src="/static/img/tools/detail.png" />
+                            <img th:onclick="openChatModal([[${consult}]])" src="/static/img/tools/detail.png" />
+                        </td>
+                        <td>
+                            <button th:if="${consult.dealStatus!=4}" type="button" class="btn btn-danger" th:onclick="refundConsultWithId([[${consult.id}]])">退款</button>
                         </td>
                     </tr>
                 </table>
@@ -126,20 +180,101 @@
 
 </div>
 
-<div class="modal fade" id="consult_chat_modal" tabindex="-1" role="dialog">
+<div class="modal fade bs-example-modal-lg" id="consult_chat_modal" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title meal_modal_title" >咨询聊天记录</h4>
-                <input type="hidden"  class="meal_modal_wxopenid"/>
+                <h4 class="modal-title meal_modal_title" >
+                  <span>(医生){{consult.doctorRealname}}</span> 和 <span>（患者）{{consult.patientRealname}}</span>的咨询聊天记录
+                </h4>
             </div>
+            <div class="modal-body">
+                <label>聊天内容:</label>
+                <hr/>
+                <div class="col contentchat">
+
+                    <div class="one" v-for="log in consult.consultLogs">
+                        <div v-if="log.identity == 2" class="user">
+                           <span class="name" style="color: red;">{{consult.patientRealname}}</span><span class="time">{{log.replytime}}</span>
+                        </div>
+                        <div v-else class="user">
+                            <span class="name" style="color: dodgerblue;">{{consult.doctorRealname}}</span><span class="time">{{log.replytime}}</span>
+                        </div>
+
+                        <span class="msg" v-if="log.ctype==1">
+                            {{log.messageDecode}}
+                        </span>
+                        <div class="img" v-if="log.ctype==2">
+                            <a v-bind:href="log.image" target="_blank">
+                                <img v-bind:src="log.image">
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <hr/>
+                <div v-if="consult.type == 1">
+                    <div class="col">
+                        <label>咨询:</label>{{consult.label}}
+                    </div>
+                    <div class="col">
+                        <label>内容:</label>{{consult.title}}
+                    </div>
+                    <div class="col">
+                        <label>图片描述:</label>
+                        <div class="imgbox">
+                            <div class="img" v-for="image in images">
+                                <a v-bind:href="image" target="_blank">
+                                    <img v-bind:src="image">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div v-else class="col">
+                    <label style="color: orange;">套餐咨询</label>
+                </div>
+                <div class="col">
+                    <label>评价:</label>{{consult.assessDecode}}
+                </div>
             </div>
+          </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
 <script>
+    const consultbox = new Vue({
+        el:"#consult_chat_modal",
+        data:{
+            consult:{
+                doctorRealname:'',
+                patientRealname:'',
+            },
+            images:[]
+        }
+    })
+    function openChatModal(e){
+        consultbox.consult = e;
+        console.log(consultbox.consult);
+        consultbox.images = consultbox.consult.picdesc?consultbox.consult.picdesc.split("@>|<@"):[];
+        $("#consult_chat_modal").modal('show');
+    }
+    function refundConsultWithId(id){
+        if(confirm("您正在退款,咨询ID:"+id)){
+            $.ajax({
+                url:"/wxapp_v/refund_consult",
+                data:{"id":id},
+                success:function(res){
+                    if(res=="0"){
+                        window.location.reload();
+                    }else{
+                        mylayer.msg(res);
+                    }
 
+                }
+            })
+        }
+    }
 </script>
 </body>
 </html>

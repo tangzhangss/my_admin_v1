@@ -17,7 +17,7 @@
         font-size: 15px;
     }
     .section .col{
-        margin:5px 0;
+        margin:10px 0;
     }
     .section .col span{
         margin: 0 10px;
@@ -67,7 +67,8 @@
                 <div class="left">
                     <div class="col">
                         ID:<span th:text="${patient.id}"></span>
-                        总充值:<span style="color: orange;font-size: 20px" th:text="${cost}"></span>(元)
+                        总充值:<span style="color: orange;font-size: 20px" th:text="${cost}"></span>
+                        余额:<span style="color: dodgerblue;font-size: 20px" th:text="${balance}"></span>
                     </div>
                     <div class="col">
                         openid:<span  th:text="${patient.openid}"></span>
@@ -103,7 +104,7 @@
                       <div class="info">
                           咨询:<span th:text="${consult.label}"></span>
                           医生:<span th:text="${consult.doctorRealname}"></span>
-                          评价:<span th:text="${consult.assess}"></span>
+                          评价:<span th:text="${consult.assessDecode}"></span>
                       </div>
                   </div>
              </div>

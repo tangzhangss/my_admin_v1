@@ -33,7 +33,8 @@ public class VmemberConsult {
     private String doctorRealavatars;//医生头像
     private String doctorContact;//医生联系
     private String doctorHospital;//坐诊医院
-
+    private Integer patId;//id
+    private Integer docId;//id
     private String patientRealname;//患者姓名
     private String patientContact;//患者联系
     private String patientRealavatars;//患者头像
@@ -44,6 +45,22 @@ public class VmemberConsult {
     private Integer docnoread;
     private Integer patonline;
     private Integer doconline;
+
+    public Integer getPatId() {
+        return patId;
+    }
+
+    public void setPatId(Integer patId) {
+        this.patId = patId;
+    }
+
+    public Integer getDocId() {
+        return docId;
+    }
+
+    public void setDocId(Integer docId) {
+        this.docId = docId;
+    }
 
     public String getDoctorContact() {
         return doctorContact;

@@ -45,11 +45,36 @@ public interface WxappMapper {
 
     WxappBank getUserBank(String openid,Integer oid);
 
-    Double getMemberBlanceByOpenid(String openid,Integer oid);
-
-    void updateMemberBlanceByOpenid(String openid,Integer oid, Double money);
+    Double getMemberBlanceByOpenidAndOid(String openid,Integer oid);
 
     WxappMember getMemberBaseInfoByWxopenidAndOid(String wxopenid, Integer oid);
 
     void setMemberIsOnline(Integer id, int online);
+
+    void insertWeixinOrder(WeixinOrder weixinOrder);
+
+    Integer selectOrderStatusByOuttradeno(String outTradeNo);
+
+
+    void setOrderPayAmount(String outTradeNo, double total_fee);
+
+    WeixinOrder getWeixinOrderByOuttradeno(String outTradeNo);
+
+    String getUserWxopenidByOpenidAndOid(String openid,Integer oid);
+
+    void updateMemberBlanceByOpenidAndOid(String wxopenid,Integer oid, Double money);
+
+    void insertMemberBlance(String wxopenid, Integer oid, Double balance);
+
+    void setOrderStatus(WeixinOrder orderStatus);
+
+    WeixinOrder getWeixinOrderById(Integer id);
+
+    WxappMember getMemberBaseInfoByOpenidAndOid(String openid, Integer oid);
+
+    List<WeixinTemplate> getWeixinTemplate(Integer obId);
+
+    void insertOrUpdateTemplate(WeixinTemplate insertOrUpdateTemplate);
+
+    void deleteTemplate(String id);
 }

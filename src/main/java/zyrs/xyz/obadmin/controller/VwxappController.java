@@ -28,6 +28,8 @@ public class VwxappController {
 
     @Autowired
     private VwxappService vWxappService;
+    @Autowired
+    private WxappService wxappService;
 
     /**
      * 渲染  所有用户信息
@@ -151,11 +153,14 @@ public class VwxappController {
         int oid = ((User)map.get("current_user")).getObId();
 
         //获取总花费金额 包含余额.....
-        Double cost =vWxappService.getPatientConsultSumMoney(patient.getWxopenid(),oid);
+        Double cost =vWxappService.getPatientConsultSumMoney(patient.getOpenid(),oid);
+       //获取用户余额
+        Double balance = wxappService.getMemberBlanceByOpenidAndOid(patient.getWxopenid(),oid);
 
         map.put("patient",patient);
         map.put("patientConsultLog",patientConsultLog);
         map.put("cost",cost==null?0:cost);
+        map.put("balance",balance==null?0:balance);
 
         return "/v/patient_detail";
     }
@@ -178,8 +183,6 @@ public class VwxappController {
         PageInfo<?> appsPageInfo = new PageInfo<>(vmemberConsults);
 
         //一对多的时候 总数为错误  会算上所有条数
-        appsPageInfo.setTotal(vmemberConsults.size());
-
         map.put("vmemberConsults",vmemberConsults);
 
         map.put("pageinfo",appsPageInfo);
@@ -187,6 +190,65 @@ public class VwxappController {
         map.put("status",status);
 
         return "/v/consult_order";
+    }
+
+    /**
+     * 医生收益明细
+     *
+     * 所有医生....不管平台
+     * @return
+     */
+    @RequestMapping("doctor_account")
+    public String doctorIncomes(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like){
+
+        User user = (User) map.get("current_user");
+
+        map.put("vdoctorincomes",vWxappService.getDoctorIncomes(like,user.getObId()));
+
+
+        return "/v/doctor_account";
+    }
+
+    /**
+     * 患者充值记录
+     * @return
+     */
+    @RequestMapping("patient_recharge")
+    public String patientRecharge(Map<String,Object> map,@RequestParam(value="like",defaultValue = "")String like ,@RequestParam(value="pageNo",defaultValue = "1")Integer pageNo){
+
+        User user = (User) map.get("current_user");
+
+
+        PageHelper.startPage(pageNo, 10);
+        //获取所有的用户信息
+        List<WeixinOrder> weixinOrders = vWxappService.getUserOrder(like,user.getObId());
+
+        PageInfo<?> appsPageInfo = new PageInfo<>(weixinOrders);
+
+        //一对多的时候 总数为错误  会算上所有条数
+
+        map.put("weixinOrders",weixinOrders);
+
+        map.put("pageinfo",appsPageInfo);
+
+
+        return "/v/patient_recharge";
+    }
+
+
+    @ResponseBody
+    @RequestMapping("refund_consult")
+    public String refundConsult(@RequestParam("id")Integer id,Map<String,Object> map){
+        User user = (User) map.get("current_user");
+
+        try{
+            vWxappService.refundConsult(id,user.getObId());
+        }catch (Exception e){
+            e.printStackTrace();
+            return "退款失败!";
+        }
+
+        return "0";
     }
 
 }

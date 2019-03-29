@@ -27,7 +27,6 @@ nav .logo img{
 }
 nav .logo .title{
     width: 250px;
-    float: right;
     overflow: hidden;
 
 }
@@ -39,7 +38,7 @@ nav .menu{
     padding: 0;
     background-color: #fff;
     color: #353535;
-    width: 300px;
+    width: 200px;
 }
 
 nav .menu .blog{

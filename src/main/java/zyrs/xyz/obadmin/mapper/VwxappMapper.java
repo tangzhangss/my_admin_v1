@@ -26,7 +26,7 @@ public interface VwxappMapper {
 
     List<VmemberConsult> getPatientConsultLog(String wxopenid);
 
-    Double getPatientConsultSumMoney(String wxopenid, int oid);
+    Double getPatientConsultSumMoney(String openid, int oid);
 
 
     void modifyUserInfoDoctorByWxopenid(WxappMember wxappMembe);
@@ -90,4 +90,14 @@ public interface VwxappMapper {
     void updateDoctorConsultMeal(VdoctorMeal vdoctorMeal);
 
     List<VmemberConsult> getConsultOrderList(String like, Integer oid, Integer status);
+
+    void balanceDoctorIncome(String openid);
+
+    List<WeixinOrder> getUserOrder(String like, Integer oid);
+
+    void delOrder(Integer id);
+
+    void refundOrder(Integer id);
+
+    void updateConsultDealStatus(Integer id, int i);
 }

@@ -79,10 +79,19 @@ public class WxappService {
         //base64
         wxappMember.setNicknameEncodeBase64();
 
-         wxappMapper.insertOrUpdateMember(wxappMember);
 
-        //获取返回
-          wxappMember = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
+         //获取返回
+        WxappMember wxappMember1 = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
+
+        if(wxappMember1 == null){
+            //设置id 因为没有ID为插入 二不是更新
+            wxappMapper.insertOrUpdateMember(wxappMember);
+            wxappMember = wxappMapper.getWxappMember(wxappMember.getOpenid(),wxappMember.getOid());
+        }else{
+            wxappMember.setId(wxappMember1.getId());
+            wxappMapper.insertOrUpdateMember(wxappMember);
+            wxappMember.setIdentity(wxappMember1.getIdentity());
+        }
 
         //更新or插入
         return wxappMember;
@@ -118,5 +127,55 @@ public class WxappService {
 
     public void setMemberIsOnline(Integer id, int online) {
         wxappMapper.setMemberIsOnline(id,online);
+    }
+
+    public void insertWeixinOrder(WeixinOrder weixinOrder) {
+        wxappMapper.insertWeixinOrder(weixinOrder);
+    }
+
+    public Integer selectOrderStatusByOuttradeno(String outTradeNo) {
+        return wxappMapper.selectOrderStatusByOuttradeno(outTradeNo);
+    }
+
+    @Transactional
+    public void setOrderPayAmount(String outTradeNo) {
+        //加用户的余额
+        //查询订单 openid > wxopenid 和 money
+        WeixinOrder weixinOrder = wxappMapper.getWeixinOrderByOuttradeno(outTradeNo);
+
+        //查询用户的wxopenid
+        String wxopenid = wxappMapper.getUserWxopenidByOpenidAndOid(weixinOrder.getOpenid(),weixinOrder.getOid());
+
+        //查询是否存在改患者的月记录查询ID
+        Double money = wxappMapper.getMemberBlanceByOpenidAndOid(wxopenid,weixinOrder.getOid());
+
+        if(money == null){
+            //插入
+            wxappMapper.insertMemberBlance(wxopenid,weixinOrder.getOid(),weixinOrder.getMoney());
+        }else{
+            //更新余额
+            wxappMapper.updateMemberBlanceByOpenidAndOid(wxopenid,weixinOrder.getOid(),money+weixinOrder.getMoney());
+        }
+
+    }
+
+    public void setOrderStatus(WeixinOrder orderStatus) {
+        wxappMapper.setOrderStatus(orderStatus);
+    }
+
+    public Double getMemberBlanceByOpenidAndOid(String wxopenid, int oid) {
+        return wxappMapper.getMemberBlanceByOpenidAndOid(wxopenid,oid);
+    }
+
+    public List<WeixinTemplate> getWeixinTemplate(Integer obId) {
+        return wxappMapper.getWeixinTemplate(obId);
+    }
+
+    public void insertOrUpdateTemplate(WeixinTemplate insertOrUpdateTemplate) {
+        wxappMapper.insertOrUpdateTemplate(insertOrUpdateTemplate);
+    }
+
+    public void deleteTemplate(String id) {
+        wxappMapper.deleteTemplate(id);
     }
 }

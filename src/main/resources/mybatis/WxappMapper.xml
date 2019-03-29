@@ -96,6 +96,9 @@
     <select id="getUserWxopenidById" resultType="java.lang.String">
         select wxopenid from tbl_wxapp_member where id =#{id}
     </select>
+    <select id="getUserWxopenidByOpenidAndOid" resultType="java.lang.String">
+          select wxopenid from tbl_wxapp_member where openid =#{param1} and oid = #{param2}
+    </select>
 
     <!--绑定银行卡-->
     <select id="getUserBank" resultType="zyrs.xyz.obadmin.bean.WxappBank">
@@ -107,16 +110,22 @@
     </insert>
 
     <!--查询__更改用户余额-->
-    <select id="getMemberBlanceByOpenid" resultType="java.lang.Double">
+    <select id="getMemberBlanceByOpenidAndOid" resultType="java.lang.Double">
         select balance from tbl_wxapp_balance where openid = #{param1} and oid=#{param2}
     </select>
-    <update id="updateMemberBlanceByOpenid">
+    <update id="updateMemberBlanceByOpenidAndOid">
         update tbl_wxapp_balance set balance = #{param3} where openid = #{param1} and oid=#{param2}
     </update>
+    <insert id="insertMemberBlance">
+        INSERT tbl_wxapp_balance (oid,openid,balance) VALUE (#{param2},#{param1}, #{param3})
+    </insert>
 
     <!--获取用户的基本信息 通过oid wxopenid-->
     <select id="getMemberBaseInfoByWxopenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
        select realname,contact from tbl_wxapp_member where oid = #{param2} and wxopenid = #{param1}
+    </select>
+    <select id="getMemberBaseInfoByOpenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
+        select realname,contact,w from tbl_wxapp_member where oid = #{param2} and openid = #{param1}
     </select>
 
     <!--设置用户的在线状态-->
@@ -124,4 +133,36 @@
         UPDATE tbl_wxapp_member set online = #{param2} where id= #{param1}
     </update>
 
+    <!--新增微信订单-->
+    <insert id="insertWeixinOrder" parameterType="zyrs.xyz.obadmin.bean.WeixinOrder">
+          insert into tbl_weixin_order (oid,openid,money,out_trade_no) value(#{oid},#{openid},#{money},#{outTradeNo})
+    </insert>
+    <!--查询 设置订单状态-->
+    <select id="selectOrderStatusByOuttradeno" resultType="java.lang.Integer">
+         select state from tbl_weixin_order where out_trade_no = #{outTradeNo}
+    </select>
+    <update id="setOrderStatus" parameterType="zyrs.xyz.obadmin.bean.WeixinOrder">
+         UPDATE tbl_weixin_order SET  state = #{state},remark=#{remark},pay_time=#{payTime} ,bank_type=#{bankType} ,amount=#{amount}   where out_trade_no=#{outTradeNo}
+    </update>
+    <update id="setOrderPayAmount">
+          UPDATE tbl_weixin_order SET  amount = #{param2}  where out_trade_no=#{param1}
+    </update>
+    <select id="getWeixinOrderByOuttradeno" resultType="zyrs.xyz.obadmin.bean.WeixinOrder">
+        select * from tbl_weixin_order where  out_trade_no=#{outTradeNo}
+    </select>
+    <select id="getWeixinOrderById" resultType="zyrs.xyz.obadmin.bean.WeixinOrder">
+        select * from tbl_weixin_order where  id=#{id}
+    </select>
+
+    <!--获取项目的模板标签-->
+    <select id="getWeixinTemplate"  resultType="zyrs.xyz.obadmin.bean.WeixinTemplate">
+        select * from tbl_weixin_template where oid = #{obId}
+    </select>
+    <!--插入更新模板消息-->
+    <insert id="insertOrUpdateTemplate" parameterType="zyrs.xyz.obadmin.bean.WeixinTemplate">
+        replace into tbl_weixin_template (id,template_id,url,admin_openid,remark,oid) VALUE (#{id},#{templateId},#{url},#{adminOpenid},#{remark},#{oid})
+    </insert>
+    <delete id="deleteTemplate">
+        DELETE  from tbl_weixin_template where id = #{id}
+    </delete>
 </mapper>

@@ -215,4 +215,56 @@ public class WxappController {
         }
 
     }
+
+    /**
+     * 模板消息 设置
+     * @return
+     */
+    @RequestMapping("template")
+    public String updateMerchant(Map<String,Object> map){
+        //获取当前项目的模板消息
+        User user = (User)map.get("current_user");
+
+        List<WeixinTemplate> weixinTemplates = wxappService.getWeixinTemplate(user.getObId());
+
+        map.put("weixinTemplates",weixinTemplates);
+
+        return "wxapp/template";
+    }
+
+    /**
+     * 插入更新模板消息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("insert_or_update_template")
+    public String insertOrUpdateTemplate(WeixinTemplate template,Map<String,Object> map){
+        User user = (User)map.get("current_user");
+        template.setOid(user.getObId());
+        try{
+            wxappService.insertOrUpdateTemplate(template);
+            return "操作成功！";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
+    }
+
+    /**
+     * 删除模板消息
+     * @return
+     */
+    @ResponseBody
+    @RequestMapping("delete_template")
+    public String deleteTemplate(@RequestParam("id")String id){
+
+        try{
+            wxappService.deleteTemplate(id);
+            return "操作成功！";
+        }catch (Exception e){
+            return e.getMessage();
+        }
+
+    }
+
 }

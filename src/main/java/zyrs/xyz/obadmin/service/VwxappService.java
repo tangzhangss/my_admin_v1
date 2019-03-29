@@ -8,6 +8,7 @@ import zyrs.xyz.obadmin.bean.*;
 import zyrs.xyz.obadmin.mapper.VwxappMapper;
 import zyrs.xyz.obadmin.mapper.WxappMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -70,8 +71,8 @@ public class VwxappService {
         return vwxappMapper.getPatientConsultLog(wxopenid);
     }
 
-    public Double getPatientConsultSumMoney(String wxopenid, int oid) {
-        return vwxappMapper.getPatientConsultSumMoney(wxopenid,oid);
+    public Double getPatientConsultSumMoney(String openid, int oid) {
+        return vwxappMapper.getPatientConsultSumMoney(openid,oid);
     }
 
     public void modifyUserInfo(WxappMember wxappMember) {
@@ -91,7 +92,7 @@ public class VwxappService {
     @Transactional
     public String createConsultOrder(VmemberConsult vmemberConsult) {
         //查询余额
-        Double balance =wxappMapper.getMemberBlanceByOpenid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid());
+        Double balance =wxappMapper.getMemberBlanceByOpenidAndOid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid());
         balance = balance==null?0:balance;
         //比较余额
         Double money = balance - vmemberConsult.getCost();
@@ -99,7 +100,7 @@ public class VwxappService {
             return "余额不足,请先在‘个人中心’-> ‘充值’之后再进行咨询，您的咨询信息将会保留。";
         }else{
           //更改余额
-          wxappMapper.updateMemberBlanceByOpenid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid(),money);
+          wxappMapper.updateMemberBlanceByOpenidAndOid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid(),money);
           //创建订单
           vwxappMapper.createConsultOrder(vmemberConsult);
           //改变用户身份为患者
@@ -111,7 +112,7 @@ public class VwxappService {
 
     public String createConsultOrderMeal(VmemberConsult vmemberConsult) {
         //查询余额
-        Double balance =wxappMapper.getMemberBlanceByOpenid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid());
+        Double balance =wxappMapper.getMemberBlanceByOpenidAndOid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid());
         balance = balance==null?0:balance;
         //比较余额
         Double money = balance - vmemberConsult.getCost();
@@ -119,7 +120,7 @@ public class VwxappService {
             return "余额不足,请先在‘个人中心’-> ‘充值’之后再进行咨询";
         }else{
             //更改余额
-            wxappMapper.updateMemberBlanceByOpenid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid(),money);
+            wxappMapper.updateMemberBlanceByOpenidAndOid(vmemberConsult.getPatientWxopenid(),vmemberConsult.getOid(),money);
 
             //设置服务时间
             vmemberConsult.setServerTime(String.valueOf(System.currentTimeMillis()));
@@ -242,6 +243,73 @@ public class VwxappService {
            }else{
                return vwxappMapper.getConsultOrderList(like,oid,status);
            }
+    }
 
+
+    public List<VdoctorIncome> getDoctorIncomes(String like,Integer oid) {
+
+        like = "%"+like+"%";
+
+        List<VdoctorIncome>  vdoctorincomes = new ArrayList<>();
+          //先查询所有医生姓名信息。。。。医生账单只有全V健康可见...
+         List<WxappMember> wxappMembers = vwxappMapper.getDoctorList(like,oid);
+
+         for(WxappMember wxappMember: wxappMembers){
+            VdoctorIncome vdoctorIncome = new VdoctorIncome();
+            vdoctorIncome.setRealname(wxappMember.getRealname());
+            vdoctorIncome.setRealAvatars(wxappMember.getRealavatars());
+            //获取账户
+            vdoctorIncome.setVdoctorBalance(vwxappMapper.getDoctorBalanceDetail(wxappMember.getWxopenid()));
+            //银行信息。。。。项目id
+            vdoctorIncome.setWxappBank(wxappMapper.getUserBank(wxappMember.getWxopenid(),oid));
+
+            vdoctorincomes.add(vdoctorIncome);
+        }
+
+        return vdoctorincomes;
+    }
+
+    public void balanceDoctorIncome(String openid) {
+          vwxappMapper.balanceDoctorIncome(openid);
+    }
+
+
+
+    public List<WeixinOrder> getUserOrder(String like, Integer oid) {
+
+        like = "%"+like+"%";
+        return vwxappMapper.getUserOrder(like,oid);
+    }
+
+    @Transactional
+    public void refundOrder(Integer id) {
+        vwxappMapper.refundOrder(id);
+        //患者余额减少
+        //获取 订单金额 ... 订单用户openid 项目id
+        WeixinOrder weixinOrder = wxappMapper.getWeixinOrderById(id);
+        //获取用户信息
+        String wxopenid = wxappMapper.getUserWxopenidByOpenidAndOid(weixinOrder.getOpenid(),weixinOrder.getOid());
+        //获取用户余额
+        Double balance = wxappMapper.getMemberBlanceByOpenidAndOid(wxopenid,weixinOrder.getOid());
+        Double money = balance - weixinOrder.getMoney();
+
+        wxappMapper.updateMemberBlanceByOpenidAndOid(wxopenid,weixinOrder.getOid(),money);
+    }
+
+    public void delOrder(Integer id) {
+        vwxappMapper.delOrder(id);
+    }
+
+    @Transactional
+    public void refundConsult(Integer id,Integer oid) {
+        //状态改变
+        vwxappMapper.updateConsultDealStatus(id,4);
+        //查询咨询用户的wxopenid
+        VmemberConsult vmemberConsult = vwxappMapper.getConsultDetailById(id);
+        String wxopenid = vmemberConsult.getPatientWxopenid();
+        //医生金额增加
+        Double money = wxappMapper.getMemberBlanceByOpenidAndOid(wxopenid,oid);
+
+        wxappMapper.updateMemberBlanceByOpenidAndOid(wxopenid,oid,money+Double.valueOf(vmemberConsult.getCost()));
     }
 }

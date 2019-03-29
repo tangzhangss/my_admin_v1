@@ -178,7 +178,6 @@ public class WxappMember {
     }
 
     public void setCreateTime(String createTime) {
-        System.out.println(createTime);
         //去掉timestamp后面的0
         this.createTime = createTime.substring(0,createTime.lastIndexOf(":"));
     }

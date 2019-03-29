@@ -12,9 +12,9 @@
         select <include refid="base_column"></include> from tbl_wxapp_member where (nickname like #{param2} or openid = #{param1}) and oid = #{param3}  order by id desc
     </select>
 
-    <!--医生列表信息  查询医生不需要 oid 子项目 不能查询医生-->
+    <!--医生列表信息  查询医生 -->
     <select id="getDoctorList" resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select d.id,m.realavatars,m.realname,m.birthday,m.gender,m.contact,d.hospital,d.good_field,d.level,d.isaudit,d.wxopenid from tbl_z_v_member_doctor d LEFT join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where  realname like #{param1} or hospital like #{param1} or contact like #{param1} order by id desc
+        select d.id,m.realavatars,m.realname,m.birthday,m.gender,m.contact,d.hospital,d.good_field,d.level,d.isaudit,d.wxopenid from tbl_z_v_member_doctor d LEFT join  tbl_wxapp_member m  on d.wxopenid = m.wxopenid where  (realname like #{param1} or hospital like #{param1} or contact like #{param1}) and m.oid = #{param2} order by id desc
     </select>
 
     <!--医生详情信息 通过id-->
@@ -64,8 +64,8 @@
     <select id="getPatientList" resultMap="patientInfoResultMap">
           select
             m.id m_id,m.realavatars m_realavatars,m.gender m_gender,m.contact m_contact,m.birthday m_birthday,m.realname m_realname,d.gender d_gender,d.contact d_contact,d.realname d_realname
-         from tbl_wxapp_member m,tbl_wxapp_member d  where  m.oid=#{param2} and m.identity = 2 and  d.wxopenid = (SELECT c.doctor_wxopenid FROM tbl_z_v_member_consult c WHERE c.patient_wxopenid = m.wxopenid GROUP BY c.doctor_wxopenid ORDER BY COUNT(c.id) DESC LIMIT 0,1)
-         and (m.realname like #{param1} or m.contact like #{param1} or d.realname like #{param1}) order by m.id desc
+         from tbl_wxapp_member m left join  tbl_wxapp_member d on d.identity = 3 left join (select patient_wxopenid,doctor_wxopenid from tbl_z_v_member_consult GROUP BY doctor_wxopenid ORDER BY COUNT(id) DESC) c  on d.wxopenid = c.doctor_wxopenid and m.wxopenid = c.patient_wxopenid  where  m.oid=#{param2} and m.identity = 2
+          and (m.realname like #{param1} or m.contact like #{param1} or d.realname like #{param1}) order by m.id desc
     </select>
 
 
@@ -151,6 +151,7 @@
         <result property="cost" column="cost"/>
         <result property="type" column="type"/>
         <result property="docnoread" column="docnoread"/>
+        <result property="patId" column="pat_id"/>
         <result property="patientRealname" column="patient_realname"/>
         <result property="patientGender" column="gender"/>
         <result property="patientBirthday" column="birthday"/>
@@ -174,10 +175,14 @@
         <result property="completeTime" column="complete_time"/>
         <result property="dealStatus" column="deal_status"/>
         <result property="label" column="label"/>
+        <result property="title" column="title"/>
         <result property="assess" column="assess"/>
         <result property="cost" column="cost"/>
+        <result property="picdesc" column="picdesc"/>
         <result property="type" column="type"/>
         <result property="patnoread" column="patnoread"/>
+        <result property="patId" column="pat_id"/>
+        <result property="docId" column="doc_id"/>
         <result property="docnoread" column="docnoread"/>
         <result property="doctorRealname" column="doc_realname"/>
         <result property="doctorContact" column="doc_contact"/>
@@ -186,14 +191,13 @@
         <result property="patientRealavatars" column="pat_realavatars"/>
         <result property="doctorRealavatars" column="doc_realavatars"/>
 
-        <collection property="consultLogs" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
-            <result property="ctype" column="ctype"/>
-            <result property="message" column="message"/>
-            <result property="image" column="image"/>
-            <result property="video" column="video"/>
-            <result property="replytime" column="replytime"/>
+        <collection property="consultLogs" select="getConsultLogs" column="id" ofType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
         </collection>
     </resultMap>
+    <!--查询咨询聊天界面-->
+    <select id="getConsultLogs" resultType="zyrs.xyz.obadmin.bean.VmemberConsultLog">
+         select * from tbl_z_v_member_consult_log where consult_id=#{id}
+    </select>
     <!--患者查询 咨询消息列表 没有完成的-->
     <select id="getPatientConsultList" resultMap="patientConsultListResultMap">
         select c.id,c.create_time,c.server_time,c.label,c.complete_time,c.deal_status,c.assess,c.patnoread,
@@ -233,7 +237,7 @@
     </select>
     <!-- 医生查询  获取新的预约咨询记录-->
     <select id="getConsultNewList" resultMap="doctorConsultListResultMap">
-        select c.id,c.create_time,c.server_time,c.title,c.label,c.complete_time,c.deal_status,c.assess,c.cost,p.gender,c.type,
+        select c.id,c.create_time,c.server_time,c.title,c.label,c.complete_time,c.deal_status,c.assess,c.cost,p.gender,c.type,p.id pat_id,
         p.realname patient_realname,p.realavatars patient_realavatars,p.contact pat_contact from tbl_z_v_member_consult c
         left join tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
         where c.deal_status = 1 order by c.create_time desc
@@ -241,20 +245,18 @@
 
     <!---获取所有的咨询信息-->
     <select id="getConsultOrderList" resultMap="allConsultListResultMap">
-       select c.id,c.label,c.complete_time,c.create_time,c.server_time,c.assess,c.deal_status,c.type,c.cost,c.docnoread,c.patnoread,
-        d.realname doc_realname,d.contact doc_contact,d.realavatars doc_realavatars,p.realname pat_realname,p.contact pat_contact,p.realavatars pat_realavatars,
-        l.ctype,l.message,l.image,l.video,l.replytime
+       select c.id,c.label,c.complete_time,c.create_time,c.server_time,c.assess,c.deal_status,c.type,c.cost,c.docnoread,c.patnoread,p.id pat_id,doc.id doc_id,c.title,c.picdesc,
+        d.realname doc_realname,d.contact doc_contact,d.realavatars doc_realavatars,p.realname pat_realname,p.contact pat_contact,p.realavatars pat_realavatars
         from tbl_z_v_member_consult c
         left JOIN tbl_wxapp_member p on c.patient_wxopenid = p.wxopenid
         left JOIN tbl_wxapp_member d on c.doctor_wxopenid = d.wxopenid
         left join tbl_z_v_member_doctor doc on d.wxopenid = doc.wxopenid
-        left join tbl_z_v_member_consult_log l on c.id = l.consult_id
         where
         (d.realname like #{param1} or d.contact like #{param1} or p.realname like #{param1} or p.contact like #{param1} )
         and
         c.deal_status = #{param3}
         and p.oid = #{param2}
-        order by c.id desc,l.id asc
+        order by c.id desc
     </select>
 
    <!--获取某条咨询的信息-->
@@ -384,4 +386,24 @@
     <select id="userInfoAndMydoctor" resultType="zyrs.xyz.obadmin.bean.WxappMember">
        select DISTINCT d.wxopenid,m.realavatars,m.realname,d.hospital from tbl_z_v_member_consult c left join tbl_z_v_member_doctor d on c.doctor_wxopenid = d.wxopenid left join tbl_wxapp_member m on d.wxopenid = m.wxopenid  where c.patient_wxopenid = #{wxopenid} and c.deal_status>1 order by c.id desc
     </select>
+
+    <!---医生结算-->
+    <update id="balanceDoctorIncome">
+        update  tbl_z_v_member_consult set isbalance = 1 where doctor_wxopenid=#{wxopenid} and deal_status=3
+    </update>
+
+    <!--获取用户订单  所有的，子项目不能查看-->
+    <select id="getUserOrder" resultType="zyrs.xyz.obadmin.bean.WeixinOrder">
+        select o.*,u.realname from tbl_weixin_order o left join tbl_wxapp_member u on o.openid = u.openid where u.realname like #{param1} and o.oid=#{param2} order by o.create_time desc
+    </select>
+
+    <delete id="delOrder">
+        DELETE  from tbl_weixin_order where id = #{id}
+    </delete>
+    <delete id="refundOrder">
+       UPDATE tbl_weixin_order set state = 3 where id = #{id}
+    </delete>
+    <update id="updateConsultDealStatus">
+        update tbl_z_v_member_consult set deal_status =#{param2} where id = #{param1}
+    </update>
 </mapper>

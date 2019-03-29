@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table{
+        margin-top: 20px;
+    }
+    .template .name{
+      font-weight:bold;
+      font-size: 15px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .template .name button{
+        height:30px;
+        line-height:30px;
+        padding:0  10px;
+        text-align: center;
+    }
+    .template .one{
+        margin:10px 0;
+    }
+    .template .one span{
+        margin-right:10px;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+            <div class="border-section">
+                <p>★在使用模板消息前,请到 <a target="_blank" href="https://mp.weixin.qq.com" style="color: green;">微信公众平台</a> 设置模板ID</p>
+            </div>
+            <div class="border-section banner-box">
+                <button type="submit" class="btn btn-info" onclick="openTemplateModal()">增加模板消息</button>
+                 <table class="table table-hover">
+                     <th:block th:each="template:${weixinTemplates}">
+                         <tr class="template">
+                             <td>
+                                 <div class="name" >
+                                     <span th:text="'#'+${template.id}+'  '+${template.remark}"></span>
+                                     <div>
+                                         <button type="button" class="btn btn-default"  th:onclick="deleteTemplate([[${template.id}]])">删除</button>
+                                         <button type="button" class="btn btn-success" th:onclick="openTemplateModal([[${template}]])">修改</button>
+                                     </div>
+
+                                 </div>
+                                 <div class="box">
+                                     <div class="one">
+                                         <span>模板ID:</span><span th:text="${template.templateId}"></span>
+                                     </div>
+
+                                     <div class="one" th:if="${template.adminOpenid!=null}">
+                                         <span>管理者:</span><span th:text="${template.adminOpenid}"></span>
+                                     </div>
+                                     <div class="one" th:if="${template.url!=''}">
+                                         <span>url:</span><span th:text="${template.url}"></span>
+                                     </div>
+                                 </div>
+                             </td>
+                         </tr>
+                     </th:block>
+                 </table>
+
+            </div>
+        </div>
+    </section>
+</div>
+
+<!--增加 模板消息静态框-->
+<div id="template-modal" style="display: none;">
+            <div class="modal-body">
+                <form class="template-form">
+                    <div class="form-group">
+                        <label>ID</label>
+                        <input readonly  type="text" class="form-control"  name="id"  v-bind:value="template.id"/>
+                    </div>
+                    <div class="form-group">
+                        <label>微信模板消息ID</label>
+                        <input type="text" class="form-control"  name="templateId"    v-bind:value="template.templateId"/>
+                    </div>
+                    <div class="form-group">
+                        <label>url(查看详情进入链接，没有请留空)</label>
+                        <input type="text" class="form-control"  name="url"   v-bind:value="template.url"/>
+                    </div>
+                    <div class="form-group">
+                        <label>管理者Openid(如：发送购买成功消息给用户，同时推一条给管理者)</label>
+                        <input type="text" class="form-control"  name="adminOpenid"  v-bind:value="template.adminOpenid"/>
+                    </div>
+                    <div class="form-group">
+                        <label>备注</label>
+                        <input type="text" class="form-control"  name="remark"  v-bind:value="template.remark"/>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-success" id="template-save" onclick="templateSave()">保存</button>
+            </div>
+</div>
+
+<script>
+  function openTemplateModal(o){
+      console.log(o);
+      template_vue.template = o || {};
+      mylayer.openModal($("#template-modal"),"模板消息编辑",["800px","500px"]);
+  }
+
+   function templateSave(){
+      let data = $(".template-form").serialize();
+      console.log(data);
+      $.ajax({
+          url:'/wxapp/insert_or_update_template',
+          data:data,
+          success:function(e){
+              mylayer.msg(e);
+              setTimeout(()=>{
+                  window.location.reload()
+             },500);
+          }
+      })
+  }
+
+  const template_vue = new Vue({
+      el:"#template-modal",
+      data:{
+          template:{}
+      }
+  })
+  //删除模板消息
+  function deleteTemplate(id) {
+      if(confirm("您正在删除模板消息，ID:"+id)){
+          $.ajax({
+              url:'/wxapp/delete_template',
+              data:{"id":id},
+              success:function(e){
+                  mylayer.msg(e);
+                  setTimeout(()=>{
+                      window.location.reload()
+              },500);
+              }
+          })
+      }
+  }
+</script>
+</body>
+</html>
