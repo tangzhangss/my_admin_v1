@@ -20,9 +20,9 @@ public class AliyunOss {
     private static String endpoint = "http://oss-cn-beijing.aliyuncs.com";
 
     //oss用户_非主用户
-    private static String accessKeyID = "LTAIyEbHDEEdSrH5";
+    private static String accessKeyID = ".................";
     //oss用户_非主用户
-    private static String accessKeySecret = "C9fdLHsaSp6UJAkwsLJ3EPdZIEnE7Z";
+    private static String accessKeySecret = "...............";
 
     //图片样式
     private static String pictureStyle = "ob-picture-style";
