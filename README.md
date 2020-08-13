@@ -5,7 +5,11 @@
 
 
 ### 服务器不维护了，贴几张现在（202008版本的项目截图）
-![image](./0.png)
+![image](https://ob-admin.oss-cn-beijing.aliyuncs.com/0.png)
+![image](https://ob-admin.oss-cn-beijing.aliyuncs.com/1.png)
+![image](https://ob-admin.oss-cn-beijing.aliyuncs.com/2.png)
+![image](https://ob-admin.oss-cn-beijing.aliyuncs.com/3.png)
+![image](https://ob-admin.oss-cn-beijing.aliyuncs.com/4.png)
 
 
 --------------------------------------------------------------------------
