@@ -1,0 +1,85 @@
+[v-cloak] {
+    display: none !important;
+}
+* {
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+html {
+    /* moz-user-select: -moz-none; */
+    -moz-user-select: none;
+    -o-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+input,textarea{
+    border: none;
+    -moz-user-select: text;
+    -o-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+}
+
+.font8{
+    font-size:8px;
+}
+.font10{
+    font-size:10px;
+}
+.font12{
+    font-size:12px;
+}
+.font18{
+    font-size:18px;
+}
+.font22{
+    font-size:22px;
+}
+.font20{
+    font-size:20px;
+}
+.font24{
+    font-size:24px;
+}
+.bold{
+    font-weight: bold;
+}
+pre{
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+.tz_half_border_after:after{
+    position: absolute;
+    content:" ";
+    height: 1px;
+    bottom : 0;
+    left : 0;
+    right: 0;
+    border-bottom: 1px solid #e5e5e5;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+}
+.tz_half_border_before:before{
+    position: absolute;
+    content:" ";
+    height: 1px;
+    top : 0;
+    left : 0;
+    right: 0;
+    border-bottom: 1px solid #e5e5e5;
+    transform: scaleY(.5);
+    -webkit-transform: scaleY(.5);
+    -webkit-transform-origin: 0 0;
+    transform-origin: 0 0;
+    box-sizing: border-box;
+}

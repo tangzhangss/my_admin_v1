@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table *{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table .isaudit span{
+        color: white;
+        padding:5px 10px;
+        box-shadow: 1px 1px 5px 1px #bbbbbb;
+    }
+    .table .operate img{
+        width: 50px;
+        height:30px;
+        cursor: pointer;
+    }
+    .members .avatars img{
+        width:40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .operator{
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .operator input{
+        width: 260px;
+        margin-right:5px;
+        float: right;
+    }
+    .operator button{
+        float: right;
+    }
+    .state{
+        font-weight:bold
+    }
+    .table > tbody > tr > td{
+        border-top: 1px solid #f5f5f5;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+
+            <div class="border-section banner-box">
+
+                <form class="operator" action="/wxapp/member_recharge">
+                    <button type="submit" class="btn btn-success" style="background-color: #1aad19;" >查找</button>
+                    <input name="like"  type="text" placeholder="订单号，手机号码" class="form-control"/>
+                </form>
+
+                <table class="table table-hover members">
+                    <tr>
+                        <th>ID</th>
+                        <th>用户</th>
+                        <th>订单号</th>
+                        <th>付款金额</th>
+                        <th>到账金额</th>
+                        <th>付款银行</th>
+                        <th>创建时间</th>
+                        <th>付款时间</th>
+                        <th>状态</th>
+                        <th>操作</th>
+                    </tr>
+                    <tr th:each="weixinOrder:${weixinOrders}">
+                        <td th:text="${weixinOrder.id}"></td>
+                        <td th:text="${weixinOrder.realname}"></td>
+                        <td th:text="${weixinOrder.outTradeNo}"></td>
+                        <td th:text="${weixinOrder.amount}"></td>
+                        <td th:text="${weixinOrder.money}"></td>
+                        <td th:text="${weixinOrder.bankType}"></td>
+                        <td th:text="${weixinOrder.createTime}"></td>
+                        <td th:text="${weixinOrder.payTime}"></td>
+                        <td class="state">
+                            <span style="color: red;" th:if="${weixinOrder.state == 0}">
+                                未付款
+                            </span>
+                            <span style="color: green;" th:if="${weixinOrder.state == 1}">
+                                已付款
+                            </span>
+                            <span style="color: red;" th:if="${weixinOrder.state == 2}">
+                                付款失败,<span th:text="${weixinOrder.remark}"></span>
+                            </span>
+                            <span style="color: #D3D4D3;" th:if="${weixinOrder.state == 3}">
+                                已退款,<span th:text="${weixinOrder.remark}"></span>
+                            </span>
+                        </td>
+
+                        <td class="operate">
+                            <text th:if="${weixinOrder.state == 0 || weixinOrder.state == 2}">
+                                <!--未付款--> <button type="button" class="btn btn-default" th:onclick="delOrderWithId([[${weixinOrder.id}]])">删除</button>
+                            </text>
+                            <text th:if="${weixinOrder.state == 1}">
+                                <!--已付款--> <button type="button" class="btn btn-info" th:onclick="refundOrderWithId([[${weixinOrder.id}]])">退款</button>
+                            </text>
+                        </td>
+                    </tr>
+                </table>
+
+                <div aria-label="..." class="pagination-box">
+                    <div class="selectpageNo">共<span th:text="${pageinfo.pages}"></span>页,  <span th:text="${pageinfo.total}"></span>条记录</div>
+                    <ul class="pagination">
+                        <li><a href="/wxapp/member_recharge?pageNo=1">首页</a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum -3}"  th:text="${pageinfo.list.pageNum -3}" th:if="${pageinfo.list.pageNum -3} > 0"></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum -2}"  th:text="${pageinfo.list.pageNum -2}" th:if="${pageinfo.list.pageNum -2} > 0"></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum -1}" th:text="${pageinfo.list.pageNum -1}" th:if="${pageinfo.list.pageNum -1} > 0"></a></li>
+                        <li class="active"><a href="#" th:text="${pageinfo.list.pageNum}"><span class="sr-only">(current)</span></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum +1}" th:text="${pageinfo.list.pageNum +1}" th:if="${pageinfo.list.pageNum +1} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum +2}" th:text="${pageinfo.list.pageNum +2}" th:if="${pageinfo.list.pageNum +2} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.list.pageNum +3}" th:text="${pageinfo.list.pageNum +3}" th:if="${pageinfo.list.pageNum +3} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/member_recharge?pageNo='+${pageinfo.pages}">尾页</a></li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+
+<script>
+    //退款
+    function refundOrderWithId(id){
+        new Vue().$confirm('您正在退款订单,ID:,'+id+' ,是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+          $.ajax({
+            url:"/yidu/web/refundOrder",
+            data:{"id":id},
+            success:function(res){
+                if(res=="0"){
+                    window.location.reload();
+                }else{
+                    new Vue().$notify.error({
+                        title: '错误',
+                        message: res,
+                        duration: 0
+                    });
+                }
+            }
+        })
+    }).catch(() => {
+            new Vue().$message({
+            type: 'info',
+            message: '已取消退款'
+           });
+    });
+   }
+
+    //删除
+    function delOrderWithId(id){
+
+        new Vue().$confirm('您正在删除订单，ID:,'+id+' ,是否继续?', '提示', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+        }).then(() => {
+          $.ajax({
+            url:"/yidu/web/delOrder",
+            data:{"id":id},
+            success:function(res){
+                window.location.reload();
+             }
+         })
+    }).catch(() => {
+            new Vue().$message({
+                type: 'info',
+                message: '已取消删除'
+            });
+    });
+    }
+</script>
+</body>
+</html>

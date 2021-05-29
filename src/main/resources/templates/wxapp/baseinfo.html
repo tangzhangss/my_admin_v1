@@ -16,7 +16,6 @@
     .wxapp-box{
         width:100%;
         margin-top: 20px;
-        border-top: 1px solid #e7e7e7;
         padding-top: 10px;
     }
     .wxapp-box label{
@@ -25,6 +24,9 @@
     .wxapp-box input{
         height: 40px;
         margin: 6.6px 0px;
+        border-top:none;
+        border-left:none;
+        border-right:none;
     }
     .wxapp-box .radio{
         width:20px;
@@ -50,23 +52,21 @@
 <div class="container-box">
     <aside th:replace="/public/aside::aside"></aside>
 
-    <section>
+    <section class="tass-scroll">
         <div class="section">
             <div class="border-section">
-                <div>
+                <div style="padding: 5px 0">
                     <label>项目</label> <span th:text="${ob.name}">xxxxxx</span> <label style="margin-left: 100px;">维护截至时间</label> <span th:text="${#dates.format(ob.holdDate,'yyyy-MM-dd')}">xxxxxx</span>
                 </div>
-                <div style="  border-top: 1px solid #e7e7e7;padding-top: 10px;">
+                <div style="padding-top: 10px;">
                     <label>Logo</label><br/>
                     <img th:src="${ob.logo}" class="img-circle" style="width: 100px;height: 100px;"/><br/>
                     <button type="button" class="layui-btn" id="logo-select">
                         <i class="layui-icon">&#xe67c;</i>上传
                     </button>
                     <script th:inline="javascript">
-
                         //开启layui上传图片组件
                         mylayer.upload("#logo-select",function(res){
-                            console.log("上传图片成功:",res);
                             let oid=[[${ob.id}]];
                             $.ajax({
                                 url:"/ob/modify_logo",
@@ -76,7 +76,6 @@
                                 }
                             })
                         },function(res){
-                            console.log("上传图片失败:",res);
                             mylayer.msg(res);
                         });
                     </script>
@@ -84,7 +83,7 @@
 
                 <div class="wxapp-box" id="wxapp-box">
                     <div class="col">
-                        <label>小程序状态</label>
+                        <label>小程序状态<span class="mark">不使用，不用管</span></label>
                         <div class="radio-select">
                             <span>使用中:</span> <input  type="radio"  v-on:click="changeStatus(1)" v-bind:checked="wxapp.status==1?'checked':''" name="status" class="radio">
                             <span>审核中: </span><input name="status" v-on:click="changeStatus(2)" v-bind:checked="wxapp.status==2?'checked':''" type="radio" class="radio">
@@ -92,19 +91,19 @@
 
                     </div>
                     <div class="col">
-                        <label >AppID(小程序AppID)</label>
+                        <label >AppID(小程序 or 公众号)</label>
                         <input type="text" class="appid form-control" placeholder="appid"  v-bind:value="wxapp.appid"/>
                     </div>
                     <div class="col">
-                        <label>AppSecret(小程序密钥)</label>
+                        <label>AppSecret(对应的开发者密钥)</label>
                         <input type="text" class="secret form-control"  placeholder="secret" v-bind:value="wxapp.secret"/>
                     </div>
                     <div class="col">
-                        <label >GZAppID(小程序绑定公众号AppID)</label>
+                        <label >GZAppID(小程序绑定公众号AppID)<span class="mark">公众号项目此处不填写，请在上面配置</span></label>
                         <input type="text" class="gzappid form-control" placeholder="gzappid"  v-bind:value="wxapp.gzappid"/>
                     </div>
                     <div class="col">
-                        <label>GZAppSecret(小程序绑定公众号密钥)</label>
+                        <label>GZAppSecret(小程序绑定公众号密钥)<span class="mark">公众号项目此处不填写，请在上面配置</span></label>
                         <input type="text" class="gzsecret form-control"  placeholder="gzsecret" v-bind:value="wxapp.gzsecret"/>
                     </div>
 
@@ -145,7 +144,11 @@
                         url:"/ob/add_or_update_wxapp",
                         data:{"appid":appid,"secret":secret,"gzappid":gzappid,"gzsecret":gzsecret,"id": my_wxapp.wxapp.id,"obId":obId,"status":my_wxapp.wxapp.status},
                         success:function(){
-                            mylayer.msg("操作成功!");
+                            my_wxapp.$notify({
+                                title: '成功',
+                                message: '主体基本信息已更新',
+                                type: 'success'
+                            });
                         }
                     })
                 })

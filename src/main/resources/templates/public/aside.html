@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 
-    <aside  th:fragment="aside">
-
-        <div class="aside-item" th:each="menu : ${menuList}">
+    <aside  th:fragment="aside" class="tass-scroll">
+        <div class="aside-item" th:each="menu:${menuList}">
              <img th:src="${menu.menuLogo}"/>
              <span th:text="${menu.name}"></span>
 
-             <div class="item-one" th:each="option : ${menu.menuSecondList}">
+             <div class="item-one" th:each="option:${menu.menuSecondList}">
                  <a  th:class="${current_user.selectedMenuId}==${option.id}?'item-selected':''"  th:text="${option.name}"  th:onclick="menu_selected([[${option.url}]],[[${option.id}]])">
                      交互错误!
                  </a>
@@ -19,7 +18,7 @@
             //判断菜单有没有失效
             let menuList= [[${menuList}]];
 
-            if(menuList==null || menuList == ''){
+            if(!menuList){
                 window.location.href="/index";
             }
 
@@ -35,6 +34,5 @@
                 window.location.href=url+"&menuId="+id;
             }
         </script>
-
     </aside>
 </html>

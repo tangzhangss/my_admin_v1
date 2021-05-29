@@ -1,0 +1,24 @@
+    
+    <!DOCTYPE html>
+    <html>
+    <head>
+    	<title>测试websocket连接数</title>
+    </head>
+    <body>
+       .............................
+     
+
+    </body>
+      <script type="text/javascript">
+          let count = 0;
+          const webSocketAddr = "ws://127.0.0.1:10005/ws";
+          while(count<2000){
+              let websocket = new WebSocket(webSocketAddr);
+              websocket.onopen=function(event){
+                  console.log(++count);
+              }
+          }
+
+       </script>
+      
+    </html>

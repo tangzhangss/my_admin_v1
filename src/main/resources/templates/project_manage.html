@@ -238,12 +238,12 @@
         if(t == 1){
             //必须要初始化这两个值 不然会先 string - date转换错误
             my_project.project= {
-                "createTime":formatDate(new Date()),
-                "holdDate":formatDate(new Date()),
+                "createTime":COMMON_TOOL.formatDate(new Date()),
+                "holdDate":COMMON_TOOL.formatDate(new Date()),
             };
         }else{
-            v.createTime = formatDate(new Date(v.createTime));
-            v.holdDate = formatDate(new Date(v.holdDate));
+            v.createTime = COMMON_TOOL.formatDate(new Date(v.createTime));
+            v.holdDate = COMMON_TOOL.formatDate(new Date(v.holdDate));
 
             my_project.project= v;
         }
@@ -309,7 +309,7 @@
 
        if(!/^[0-9]+$/.test(v)){
            mylayer.msg("请输入有效的整数值!");
-           return ;
+           return false;
        }
 
        $.ajax({

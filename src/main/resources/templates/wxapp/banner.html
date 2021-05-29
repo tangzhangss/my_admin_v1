@@ -75,7 +75,7 @@
 <div class="container-box">
     <aside th:replace="/public/aside::aside"></aside>
 
-    <section>
+    <section class="tass-scroll">
         <div class="section">
             <div class="border-section">
                 <p>★轮播图模块与编码相关,客户请不要增删修改</p>
@@ -103,8 +103,8 @@
                                        <div class="one">
                                            <img class="url" th:src="${bannerChild.url}"/>
                                            <div style="display: none" class="operation">
-                                               <img src="/static/img/wxapp/del.png" class="del" th:onclick="delBannerChild([[${bannerChild.id}]])"/>
-                                               <img src="/static/img/wxapp/edit.png" class="edit" th:onclick="updateBannerChildEdit([[${bannerChild}]],[[${banner.id}]])"/>
+                                               <img src="/static/tzss-img/wxapp/del.png" class="del" th:onclick="delBannerChild([[${bannerChild.id}]])"/>
+                                               <img src="/static/tzss-img/wxapp/edit.png" class="edit" th:onclick="updateBannerChildEdit([[${bannerChild}]],[[${banner.id}]])"/>
                                            </div>
                                        </div>
                                    </th:block>

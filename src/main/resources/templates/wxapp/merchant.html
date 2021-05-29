@@ -99,7 +99,11 @@
             url:'/wxapp/update_merchant',
             data:data,
             success:function(e){
-                mylayer.msg(e);
+                new Vue().$notify({
+                    title: '成功',
+                    message: '商户平台信息已修改',
+                    type: 'success'
+                });
             }
         })
     })

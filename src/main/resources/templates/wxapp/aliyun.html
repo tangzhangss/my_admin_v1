@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    label{
+        margin-right: 20px;
+    }
+    .wxapp-box{
+        width:100%;
+        margin-top: 20px;
+        padding-top: 10px;
+    }
+    .wxapp-box label{
+        display: block;
+    }
+    .wxapp-box input{
+        height: 40px;
+        margin: 6.6px 0px;
+        border-top:none;
+        border-left:none;
+        border-right:none;
+    }
+    .wxapp-box .radio{
+        width:20px;
+        height: 20px;
+        display: inline-block;
+        margin-right: 20px;
+    }
+    .wxapp-box .radio-select{
+        height: 40px;
+        line-height: 40px;
+        margin-bottom: 10px;
+        display: flex;
+        align-items: center;
+    }
+    #save{
+        float: right;
+        margin: 50px 0;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section class="tass-scroll">
+        <div class="section">
+
+            <div class="border-section" id="app">
+                <h2>对象存储oss</h2>
+                <div style="margin-top: 5px;color: red">
+                    *oss其他配置不支持修改<br/>
+                    *bucket 默认my1admin (根据项目自行设置,阿里云控制台和项目模块配置类中配置必须保持一致)<br/>
+                    *图片处理默认 my1admin-picture-style （选择性创建）<br/>
+                </div>
+                <div class="wxapp-box" id="wxapp-box">
+                    <div class="col">
+                        <label>endpoint</label>
+                        <input type="text" class="secret form-control"  placeholder="endpoint" v-model="aliyun.ossEndpoint"/>
+                    </div>
+                    <div class="col">
+                        <label>accessKeyID</label>
+                        <input type="text" class="appid form-control" placeholder="accessKeyID"  v-model="aliyun.ossAccessKeyID"/>
+                    </div>
+                    <div class="col">
+                        <label>accessKeySecret</label>
+                        <input type="text" class="secret form-control"  placeholder="accessKeySecret" v-model="aliyun.ossAccessKeySecret"/>
+                    </div>
+
+                    <button  class="btn btn-success" id="save" @click="save">提交</button>
+                </div>
+            </div>
+
+            <script th:inline="javascript">
+                var vm = new Vue({
+                    el:"#app",
+                    data:{
+                        aliyun:{
+                            "ossAccessKeyID":"",
+                            "ossAccessKeySecret":'',
+                            "ossEndpoint":"",
+                            "obid":0
+                        }
+                    },
+                    created(){
+                        let aliyun = [[${aliyun}]];
+                        let that = this;
+                        if (aliyun==null){
+                            //创建
+                            COMMON_TOOL.postData("/wxapp/aliyun",{},function(res){
+                                COMMON_TOOL.checkApiResult(res,function(){
+                                    that.obId = res.data;
+                                })
+                            })
+                        }else{
+                            this.aliyun=aliyun;
+                        }
+                    },
+                    methods:{
+                        save:function(){
+
+                            COMMON_TOOL.putData("/wxapp/aliyun/oss",this.aliyun,function(res){
+                                COMMON_TOOL.checkApiResult(res,function(){
+                                    vm.$notify({
+                                        title: '成功',
+                                        message: '对象存储oss配置已更改',
+                                        type: 'success'
+                                    });
+                                })
+                            })
+                        }
+                    }
+                });
+            </script>
+        </div>
+    </section>
+</div>
+
+<script>
+</script>
+</body>
+</html>

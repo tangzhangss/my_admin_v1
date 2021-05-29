@@ -1,0 +1,119 @@
+html *{
+    box-sizing: border-box;
+    -moz-box-sizing:border-box; /* Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+/**
+滚动条样式 谷歌浏览器有效
+ */
+::-webkit-scrollbar{
+    width:3px;
+    background: none;
+    height: 30vh;
+}
+::-webkit-scrollbar-thumb{
+    background-color: rgba(144,147,153,.3);
+}
+<!-- pre标签不换行 -->
+pre{
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    background: none;
+    border: none;
+}
+/**
+vue初次渲染  抖动
+*/
+[v-cloak] {
+  display: none !important;
+}
+body{
+    background-color: #f8f9fb;
+    font-size:14px;
+    padding: 0;
+    overflow-x:hidden;
+}
+.container-box{
+    display: flex;
+    overflow: hidden;
+}
+.container-box >section{
+    height: 100%;
+    padding-top: 20px;
+    overflow: auto;
+}
+section{
+    width:90%;
+    text-align: left;
+    padding: 0 2%;
+}
+.section{
+    width:100%;
+    text-align: left;
+    margin: 0 auto;
+}
+/**不可操作**/
+.disabled{
+    background-color: #ccc;
+}
+a:hover{
+    text-decoration: none;
+}
+
+/**主键**/
+.primary-key{
+    font-weight: 700;
+}
+/**右侧模块**/
+.border-section{
+    border: 1px solid #ededed;
+    background-color: white;
+    padding:10px 30px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    width:100%;
+}
+.select-fixed-width{
+    width: 1000px;
+}
+.mark{
+    color: red;
+    padding:2px 5px;
+}
+/**分页**/
+.pagination-box{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #337ab7;
+    box-shadow: none;
+    padding: 0;
+}
+
+/**字体大小**/
+.font18{
+    font-size: 18px;
+}
+.font16{
+    font-size: 16px;
+}
+.font20{
+    font-size: 20px;
+}
+.font14{
+    font-size: 14px;
+}
+.bold{
+    font-weight: bold;
+}
+/**
+element ui css
+**/
+.el-notification__title{
+    text-align: left;
+}
+.el-dialog{
+    overflow: hidden;
+}

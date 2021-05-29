@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="zyrs.xyz.obadmin.mapper.WxappMapper">
+<mapper namespace="cn.zy2018.myadmin.mapper.WxappMapper">
    <sql id="column">
       id,appid,secret,gzappid,gzsecret,ob_id,status
    </sql>
 
-    <select id="getWxappInfoByObId" resultType="zyrs.xyz.obadmin.bean.Wxapp">
+    <select id="getWxappInfoByObId" resultType="cn.zy2018.myadmin.entity.Wxapp">
         select <include refid="column"></include> from tbl_wxapp where ob_id  = #{obId}
     </select>
     <!--更新项目的appid secret-->
-    <insert id="addOrUpdateWxapp" parameterType="zyrs.xyz.obadmin.bean.Wxapp">
+    <insert id="addOrUpdateWxapp" parameterType="cn.zy2018.myadmin.entity.Wxapp">
         replace into tbl_wxapp(id,appid,secret,ob_id,status,gzappid,gzsecret) value(#{id},#{appid},#{secret},#{obId},#{status},#{gzappid},#{gzsecret})
     </insert>
 
@@ -42,7 +42,7 @@
 
 
     <!--轮播图-->
-    <resultMap id="getWxappBannerByOidResultMap" type="zyrs.xyz.obadmin.bean.Banner">
+    <resultMap id="getWxappBannerByOidResultMap" type="cn.zy2018.myadmin.entity.Banner">
         <!--必须以菜单的id为主-->
         <id property="id" column="id"/>
         <result property="number" column="number"/>
@@ -50,7 +50,7 @@
         <result property="width" column="width"/>
         <result property="height" column="height"/>
 
-        <collection property="bannerChild" ofType="zyrs.xyz.obadmin.bean.BannerChild">
+        <collection property="bannerChild" ofType="cn.zy2018.myadmin.entity.BannerChild">
             <result property="id" column="bcid"/>
             <result property="url" column="url"/>
             <result property="target" column="target"/>
@@ -71,20 +71,27 @@
 
     <!--商户平台-->
     <insert id="updateMerchant">
-        replace into tbl_weixin_merchant value(#{mchid},#{mchkey},#{tradeType},#{body},#{sslcertPath},#{sslkeyPath},#{rootPath},#{oid})
+       INSERT  into tbl_weixin_merchant(mchid,mchkey,trade_type,body,sslcert_path,sslkey_path,root_path,oid) value(#{mchid},#{mchkey},#{tradeType},#{body},#{sslcertPath},#{sslkeyPath},#{rootPath},#{oid})
+         on duplicate key update mchid = #{mchid}, mchkey = #{mchkey},trade_type=#{tradeType},body=#{body},sslcert_path=#{sslcertPath},sslkey_path=#{sslkeyPath},root_path=#{rootPath}
     </insert>
 
-    <select id="getWxappMerchantInfo" resultType="zyrs.xyz.obadmin.bean.WxappMerchant">
+    <select id="getWxappMerchantInfo" resultType="cn.zy2018.myadmin.entity.WxappMerchant">
         select * from tbl_weixin_merchant where oid = #{obId}
     </select>
+    <select id="getMemberBaseInfoById" resultType="cn.zy2018.myadmin.entity.WxappMember">
+        select id,realavatars,realname,nickname,avatars,contact,birthday,gender,openid from tbl_wxapp_member where id = #{id} limit 0,1
+    </select>
+    <select id="selectMemberIdentityById" resultType="java.lang.Integer">
+        select identity from tbl_wxapp_member where id = #{id} limit 0,1
+    </select>
 
-    <select id="getWxappMember"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select id,avatars,openid,wxopenid,nickname,gender,`identity`  from tbl_wxapp_member where openid=#{param1} and oid=#{param2} limit 0,1
+    <select id="getWxappMember"  resultType="cn.zy2018.myadmin.entity.WxappMember">
+        select id,avatars,openid,wxopenid,nickname,gender,`identity`,contact,realname,realavatars  from tbl_wxapp_member where openid=#{param1} and oid=#{param2} limit 0,1
     </select>
 
     <!--插入用户 or 更新用户-->
-    <insert id="insertOrUpdateMember" parameterType="zyrs.xyz.obadmin.bean.WxappMember">
-          INSERT  into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nickname},#{oid},#{province},#{city})   on duplicate key update openid = #{openid},unionid = #{unionid},gender=#{gender},avatars=#{avatars},nickname=#{nickname},oid=#{oid},province=#{province},city=#{city}
+    <insert id="insertOrUpdateMember" parameterType="cn.zy2018.myadmin.entity.WxappMember">
+          INSERT  into tbl_wxapp_member(id,openid,unionid,gender,avatars,nickname,oid,province,city,realavatars,realname) value(#{id},#{openid},#{unionid},#{gender},#{avatars},#{nicknameEncodeBase64},#{oid},#{province},#{city},#{avatars},#{nickname})   on duplicate key update openid = #{openid},unionid = #{unionid},gender=#{gender},avatars=#{avatars},nickname=#{nicknameEncodeBase64},oid=#{oid},province=#{province},city=#{city}
     </insert>
 
     <!--更新用户公众号openid-->
@@ -101,12 +108,12 @@
     </select>
 
     <!--绑定银行卡-->
-    <select id="getUserBank" resultType="zyrs.xyz.obadmin.bean.WxappBank">
+    <select id="getUserBank" resultType="cn.zy2018.myadmin.entity.WxappBank">
         select * from tbl_wxapp_bank where openid = #{param1} and oid = #{param2}
     </select>
     
-    <insert id="modifyUserBank"  parameterType="zyrs.xyz.obadmin.bean.WxappBank">
-        replace into tbl_wxapp_bank value(#{id},#{oid},#{openid},#{card},#{account})
+    <insert id="insertOrUpdateBankUserBank"  parameterType="cn.zy2018.myadmin.entity.WxappBank">
+        replace into tbl_wxapp_bank (id,oid,openid,card,account,name,record)value(#{id},#{oid},#{openid},#{card},#{account},#{name},#{record})
     </insert>
 
     <!--查询__更改用户余额-->
@@ -121,11 +128,15 @@
     </insert>
 
     <!--获取用户的基本信息 通过oid wxopenid-->
-    <select id="getMemberBaseInfoByWxopenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
-       select realname,contact from tbl_wxapp_member where oid = #{param2} and wxopenid = #{param1}
+    <select id="getMemberBaseInfoByWxopenidAndOid"  resultType="cn.zy2018.myadmin.entity.WxappMember">
+       select realname,contact,realavatars from tbl_wxapp_member where oid = #{param2} and wxopenid = #{param1}
     </select>
-    <select id="getMemberBaseInfoByOpenidAndOid"  resultType="zyrs.xyz.obadmin.bean.WxappMember">
-        select realname,contact,w from tbl_wxapp_member where oid = #{param2} and openid = #{param1}
+    <select id="getMemberBaseInfoByOpenidAndOid"  resultType="cn.zy2018.myadmin.entity.WxappMember">
+        select id,realname,contact,nickname,openid,avatars,realavatars from tbl_wxapp_member where oid = #{param2} and openid = #{param1}
+    </select>
+    <!--获取用户所有信息 通过手机号查找-->
+    <select id="getMemberUserInfoByLikeAndOid" resultType="cn.zy2018.myadmin.entity.WxappMember">
+        SELECT  * from tbl_wxapp_member where oid=#{param2} and contact like #{param1} order by id desc
     </select>
 
     <!--设置用户的在线状态-->
@@ -134,35 +145,63 @@
     </update>
 
     <!--新增微信订单-->
-    <insert id="insertWeixinOrder" parameterType="zyrs.xyz.obadmin.bean.WeixinOrder">
+    <insert id="insertWeixinOrder" parameterType="cn.zy2018.myadmin.entity.WeixinOrder">
           insert into tbl_weixin_order (oid,openid,money,out_trade_no) value(#{oid},#{openid},#{money},#{outTradeNo})
     </insert>
     <!--查询 设置订单状态-->
     <select id="selectOrderStatusByOuttradeno" resultType="java.lang.Integer">
          select state from tbl_weixin_order where out_trade_no = #{outTradeNo}
     </select>
-    <update id="setOrderStatus" parameterType="zyrs.xyz.obadmin.bean.WeixinOrder">
+    <update id="setOrderStatus" parameterType="cn.zy2018.myadmin.entity.WeixinOrder">
          UPDATE tbl_weixin_order SET  state = #{state},remark=#{remark},pay_time=#{payTime} ,bank_type=#{bankType} ,amount=#{amount}   where out_trade_no=#{outTradeNo}
     </update>
     <update id="setOrderPayAmount">
           UPDATE tbl_weixin_order SET  amount = #{param2}  where out_trade_no=#{param1}
     </update>
-    <select id="getWeixinOrderByOuttradeno" resultType="zyrs.xyz.obadmin.bean.WeixinOrder">
+    <select id="getWeixinOrderByOuttradeno" resultType="cn.zy2018.myadmin.entity.WeixinOrder">
         select * from tbl_weixin_order where  out_trade_no=#{outTradeNo}
     </select>
-    <select id="getWeixinOrderById" resultType="zyrs.xyz.obadmin.bean.WeixinOrder">
+    <select id="getWeixinOrderById" resultType="cn.zy2018.myadmin.entity.WeixinOrder">
         select * from tbl_weixin_order where  id=#{id}
     </select>
 
     <!--获取项目的模板标签-->
-    <select id="getWeixinTemplate"  resultType="zyrs.xyz.obadmin.bean.WeixinTemplate">
+    <select id="getWeixinTemplate"  resultType="cn.zy2018.myadmin.entity.WeixinTemplate">
         select * from tbl_weixin_template where oid = #{obId}
     </select>
     <!--插入更新模板消息-->
-    <insert id="insertOrUpdateTemplate" parameterType="zyrs.xyz.obadmin.bean.WeixinTemplate">
+    <insert id="insertOrUpdateTemplate" parameterType="cn.zy2018.myadmin.entity.WeixinTemplate">
         replace into tbl_weixin_template (id,template_id,url,admin_openid,remark,oid) VALUE (#{id},#{templateId},#{url},#{adminOpenid},#{remark},#{oid})
     </insert>
     <delete id="deleteTemplate">
         DELETE  from tbl_weixin_template where id = #{id}
     </delete>
+
+    <!--获取用户订单  所有的-->
+    <select id="getUserOrder" resultType="cn.zy2018.myadmin.entity.WeixinOrder">
+        select o.*,u.realname from tbl_weixin_order o left join tbl_wxapp_member u on o.openid = u.openid where (o.out_trade_no=#{param1} or  u.contact=#{param1})  and o.oid=#{param2} order by o.id desc
+    </select>
+    <select id="getAllUserOrder" resultType="cn.zy2018.myadmin.entity.WeixinOrder">
+        select o.*,u.realname from tbl_weixin_order o left join tbl_wxapp_member u on o.openid = u.openid where o.oid=#{param2} order by o.id desc
+    </select>
+
+    <update id="updateMemberContactById">
+        update tbl_wxapp_member set contact = #{param2} where id = #{param1}
+    </update>
+
+    <!---插入用户信息 -->
+    <insert id="insertMemberWithSimple" parameterType="cn.zy2018.myadmin.entity.WxappMember">
+        insert into tbl_wxapp_member (oid,openid) values (#{oid},#{openid})
+    </insert>
+
+    <!--获取阿里云配置-->
+    <select id="selectAliyunConfByObid" resultType="cn.zy2018.myadmin.entity.Aliyun">
+        select * from tbl_aliyun where obid=#{obId} limit 0,1
+    </select>
+    <insert id="insertAliyunConf">
+        insert tbl_aliyun (obid) value (#{obId})
+    </insert>
+    <update id="updateAliyunConfOss" parameterType="cn.zy2018.myadmin.entity.Aliyun">
+        update tbl_aliyun set oss_access_key_id=#{ossAccessKeyID},oss_access_key_secret=#{ossAccessKeySecret},oss_endpoint=#{ossEndpoint} where obid=#{obid}
+    </update>
 </mapper>

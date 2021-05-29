@@ -61,21 +61,21 @@
             <div class="menuset-item" th:each="menu : ${allMenuList}">
 
                 ▍<span th:text="${menu.name}"></span>
-                 <img th:onclick="openEditModal(1,[[${menu}]])"  src="/static/img/tools/edit.png"/>
-                 <img th:onclick="delMenu(1,[[${menu.id}]],[[${#lists.size(menu.menuSecondList)}]])" src="/static/img/tools/del.png"/>
+                 <img th:onclick="openEditModal(1,[[${menu}]])"  src="/static/tzss-img/tools/edit.png"/>
+                 <img th:onclick="delMenu(1,[[${menu.id}]],[[${#lists.size(menu.menuSecondList)}]])" src="/static/tzss-img/tools/del.png"/>
 
                 <div class="item-one" th:each="option : ${menu.menuSecondList}">
 
                     <a  th:text="${option.name}">
                         交互错误!
                     </a>
-                    <img th:onclick="openEditModal(2,[[${option}]])"  src="/static/img/tools/edit.png"/>
-                    <img th:onclick="delMenu(2,[[${option.id}]])" src="/static/img/tools/del.png"/>
+                    <img th:onclick="openEditModal(2,[[${option}]])"  src="/static/tzss-img/tools/edit.png"/>
+                    <img th:onclick="delMenu(2,[[${option.id}]])" src="/static/tzss-img/tools/del.png"/>
                 </div>
-                <img th:onclick="openEditModal(2,undefined,[[${menu.id}]])"  src="/static/img/tools/add.png" class="item-one add-item"/>
+                <img th:onclick="openEditModal(2,undefined,[[${menu.id}]])" src="/static/tzss-img/tools/add.png" class="item-one add-item"/>
             </div>
             <div class="menuset-item">
-                ▍<img th:onclick="openEditModal(1)"  src="/static/img/tools/add.png" class="add-item"/>
+                ▍<img th:onclick="openEditModal(1)" src="/static/tzss-img/tools/add.png" class="add-item"/>
             </div>
 
         </div>
@@ -134,6 +134,12 @@
             <label class="layui-form-label">上级</label>
             <div class="layui-input-block">
                 <input type="text" name="menuParent"   v-bind:value="menu.menuParent"  lay-verify="required|number" placeholder="id" autocomplete="off" class="layui-input"/>
+            </div>
+        </div>
+        <div class="layui-form-item" v-if="mtype==2">
+            <label class="layui-form-label">项目Id</label>
+            <div class="layui-input-block">
+                <input type="text" name="obid"   v-bind:value="menu.obid"  lay-verify="required|number" placeholder="obid" autocomplete="off" class="layui-input"/>
             </div>
         </div>
 

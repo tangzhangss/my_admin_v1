@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<!--单独引入外部文件 下滑  layui.js 会导致  请求回调 原因不知-->
+<head th:replace  ="/public/head :: head"></head>
+
+<style>
+    .banner-box{
+        width: 100%;
+    }
+    .table *{
+        text-align: center;
+        vertical-align: middle;
+    }
+    .table .doctor{
+        background-color: #00CCFF;
+
+    }
+    .table .patient{
+        background-color: #EF5AA1;
+
+    }
+    .table .realname span{
+        color: white;
+        padding:5px 10px;
+        box-shadow: 1px 1px 5px 1px #bbbbbb;
+    }
+    .members .avatars img{
+        width:40px;
+        height: 40px;
+        border-radius: 40px;
+    }
+    .operator{
+        margin: 20px 0;
+        width: 100%;
+        overflow: hidden;
+    }
+    .operator input{
+        width: 260px;
+        margin-right:5px;
+        float: right;
+    }
+    .operator button{
+        float: right;
+    }
+    .table > tbody > tr > td{
+        border-top: 1px solid #f5f5f5;
+    }
+</style>
+<body>
+<nav th:replace="/public/head::nav"></nav>
+
+<div class="container-box">
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section>
+        <div class="section">
+
+            <div class="border-section banner-box">
+
+                <form class="operator" action="/wxapp/alluser">
+                    <button type="submit" class="btn btn-success" style="background-color: #1aad19;" onclick="javascript:mylayer.load();">查找</button>
+                    <input name="like"  type="text" placeholder="手机号" class="form-control"/>
+                </form>
+
+                <table class="table table-hover members">
+                    <tr>
+                        <th>ID</th>
+                        <th>微信头像</th>
+                        <th>地区</th>
+                        <th>性别</th>
+                        <th>微信名</th>
+                        <th>真实姓名</th>
+                        <th>手机号</th>
+                        <th>注册时间</th>
+                    </tr>
+                    <tr th:each="member:${members}">
+                        <td th:text="${member.id}"></td>
+                        <td class="avatars">
+                            <img th:src="${member.avatars}"/>
+                        </td>
+                        <td th:text="${member.province}+ '-'+ ${member.city}"></td>
+                        <td th:text="${member.sex}"></td>
+                        <td th:text="${member.nicknameDecodeBase64}"></td>
+                        <td class="realname" th:text="${member.realname}">
+                        </td>
+                        <td th:text="${member.contact}"></td>
+                        <td th:text="${member.createTime}"></td>
+                    </tr>
+                </table>
+
+                <div aria-label="..." class="pagination-box">
+                    <div class="selectpageNo">共<span th:text="${pageinfo.pages}"></span>页,  <span th:text="${pageinfo.total}"></span>条记录</div>
+                    <ul class="pagination">
+                        <li><a href="/wxapp/alluser?pageNo=1">首页</a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum -3}"  th:text="${pageinfo.list.pageNum -3}" th:if="${pageinfo.list.pageNum -3} > 0"></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum -2}"  th:text="${pageinfo.list.pageNum -2}" th:if="${pageinfo.list.pageNum -2} > 0"></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum -1}" th:text="${pageinfo.list.pageNum -1}" th:if="${pageinfo.list.pageNum -1} > 0"></a></li>
+                        <li class="active"><a href="#" th:text="${pageinfo.list.pageNum}"><span class="sr-only">(current)</span></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum +1}" th:text="${pageinfo.list.pageNum +1}" th:if="${pageinfo.list.pageNum +1} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum +2}" th:text="${pageinfo.list.pageNum +2}" th:if="${pageinfo.list.pageNum +2} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.list.pageNum +3}" th:text="${pageinfo.list.pageNum +3}" th:if="${pageinfo.list.pageNum +3} <= ${pageinfo.pages}"></a></li>
+                        <li><a th:href="'/wxapp/alluser?pageNo='+${pageinfo.pages}">尾页</a></li>
+                    </ul>
+                </div>
+                <script>
+                    //点击 加载...
+                    $(".pagination li:not(.active)").click(function(e){
+                        mylayer.load();
+                    })
+                </script>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+</body>
+</html>

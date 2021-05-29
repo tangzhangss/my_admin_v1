@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace  ="/public/head :: head"></head>
+
+<body>
+
+<nav th:replace="/public/head::nav"></nav>
+
+
+<div  class="container-box">
+
+    <aside th:replace="/public/aside::aside"></aside>
+
+    <section id="app" v-cloak>
+
+        <div class="section border-section">
+
+        </div>
+    </section>
+
+</div>
+
+<script  th:inline="javascript">
+
+
+    const  vm = new Vue({
+        el: '#app',
+        data: {
+        },
+        created(){
+        },
+        methods: {
+
+        }
+    })
+
+</script>
+</body>
+</html>

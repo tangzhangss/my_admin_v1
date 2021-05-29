@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="zyrs.xyz.obadmin.mapper.UserMapper">
+<mapper namespace="cn.zy2018.myadmin.mapper.UserMapper">
 
     <sql id="column">
         id,username,password,level
     </sql>
 
-    <select id="getUserByUsername" resultType="zyrs.xyz.obadmin.bean.User">
+    <select id="getUserByUsername" resultType="cn.zy2018.myadmin.entity.User">
         select <include refid="column"></include>,prev_oid ob_id  from tbl_user where username = #{username}
     </select>
 
     <!--获取所有 客户 信息-->
-    <select id="get_all_user_list" resultType="zyrs.xyz.obadmin.bean.User">
+    <select id="get_all_user_list" resultType="cn.zy2018.myadmin.entity.User">
         select <include refid="column"></include> from tbl_user where level <![CDATA[<>]]> 1
     </select>
     <!--更新用户信息 插入-->
@@ -27,4 +27,8 @@
     <update id="updatePrevObId">
          update  tbl_user set prev_oid = #{param2} where id = #{param1}
     </update>
+
+    <select id="getObjectByUserIdAndOid" resultType="java.lang.Integer">
+        select id from tbl_object where user_id=#{param1} and id = #{param2}
+    </select>
 </mapper>

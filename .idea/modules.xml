@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ob-admin.iml" filepath="$PROJECT_DIR$/ob-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/my-admin-liusir.iml" filepath="$PROJECT_DIR$/.idea/my-admin-liusir.iml" />
     </modules>
   </component>
 </project>

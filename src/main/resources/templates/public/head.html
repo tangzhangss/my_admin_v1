@@ -3,51 +3,63 @@
 <head  th:fragment="head">
    <meta charset="UTF-8">
    <meta name="管理后台" content="微信,小程序,后台管理系统">
+   <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <link rel="shortcut icon" href="/static/tzss-img/logo.png"/>
+
    <title>
-       逐运 | 管理系统
+       TZCC-REN-ADMIN-SYSTEM
    </title>
-    <script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="/static/jquery/jquery.min.js"></script>
+    <script src="/static/jquery/jquery-nicescroll.js"></script>
     <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/static/bootstrap-3.3.7-dist/css/bootstrap.min.css">
     <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script src="/static/bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
 
     <link rel="stylesheet"  type="text/css"  href="/static/layui/css/layui.css" charset="utf-8"/>
-
     <script  src="/static/layui/layui.js"> </script>
-    <link rel="stylesheet" type="text/css" href="/static/css/head.css" charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/app.css" charset="utf-8"/>
-    <link rel="stylesheet" type="text/css" href="/static/css/aside.css" charset="utf-8"/>
-    <script  src="/static/js/util.js"> </script>
-    <script  src="/static/js/init.js" defer > </script>
+
+    <link rel="stylesheet" type="text/css" href="/static/tzss-css/head.css" charset="utf-8"/>
+    <link rel="stylesheet" type="text/css" href="/static/tzss-css/aside.css" charset="utf-8"/>
+
+    <!--全局css解决 个框架css 冲突问题-->
+    <link rel="stylesheet" type="text/css" href="/static/tzss-css/app.css" charset="utf-8"/>
+    <script  src="/static/tzss-js/util.js"> </script>
+    <script src="/static/tzss-js/init.js" defer > </script>
     <!--引入vue.js-->
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="/static/elementui/vue.js"></script>
+
+    <!-- 引入element ui 样式 -->
+    <link rel="stylesheet" href="/static/elementui/index.css">
+    <!-- 引入组件库 -->
+    <script src="/static/elementui/index.js"></script>
+
+    <script src="/static/tzss-js/common_tool.js"></script>
 
 </head>
 
-<nav  th:fragment="nav">
+<nav  th:fragment="nav" class="tass-head-nav">
     <div class="logo">
-        <img  src="/static/img/zyrs.png" alt="逐运"/>
+        <img  src="/static/tzss-img/logo.png"/>
         <div class="title">
-            逐运 | 后台管理系统
+            TZCC-REN-ADMIN-SYSTEM
         </div>
     </div>
 
     <div class="menu">
-            <div class="blog menu-item"><a href="http://www.zywl.site" target="_blank">博客</a></div>
-
-            <ul class="layui-nav info"  th:if="${current_user} != null">
+        <ul class="layui-nav info"  th:if="${current_user} != null">
                 <li class="layui-nav-item">
                     <a href="javascript:;" class="menu-item-info">
                         <span class="layui-icon">&#xe667</span>
                         <div id="myInfo">
                             <img  th:if="${current_user.logo ne ''}" th:src="${current_user.logo}"class="layui-nav-img"/>
-                            <img  th:if="${current_user.logo eq ''}" src="/static/img/zyrs.png" class="layui-nav-img"/>
+                            <img th:if="${current_user.logo eq ''}" src="/static/tzss-img/logo.png" class="layui-nav-img"/>
                             <span class="layui-icon">&#xe625;</span>
                         </div>
                     </a>
                 </li>
                 <li class="layui-nav-child " id="myInfo-other">
+                    <a href="/index" style="color: #576b95;">首页</a>
                     <a href="/logout" style="color: #576b95;">退出</a>
                 </li>
            </ul>
@@ -56,17 +68,9 @@
         $("#myInfo").click(function(){
             $("#myInfo-other").toggle();
         })
-
         $("#myInfo-other").mouseleave(function(){
             $("#myInfo-other").hide();
         })
-    </script>
-
-    <!--全局消息提示框-->
-    <script th:inline="javascript">
-         if([[${errmsg}]] != null){
-             mylayer.msg([[${errmsg}]]);
-         }
     </script>
 </nav>
 

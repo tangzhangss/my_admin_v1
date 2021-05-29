@@ -21,6 +21,9 @@
             color: #707070;
             box-shadow: 1px 1px 5px 2px #ccc;
         }
+        .project-select-box .one:nth-last-child(n+2){
+            margin-right: 10px;
+        }
         .project-select-box .one .t{
             color: black;
         }
@@ -71,9 +74,21 @@
                     data:{"id":id},
                     success:function(res){
                         console.log("项目信息:",res);
-                        if(res.length == 1){
+                        if(res.length<1){
+                            my_project.$alert('您的账号尚未开通项目权限！', '提示', {
+                                confirmButtonText: '确定',
+                                callback: function(action){
+                                    //清除登录状态
+                                    window.location.href="/logout";
+                                }
+                            });
+                            return false;
+                        }else if(res.length == 1){
                             window.location.href="/index?oid="+res[0].id
                         }
+
+                        //弹出静态框
+                        $('#project_select_modal').modal();
                         my_project.obList = res;
                     }
                 })

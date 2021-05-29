@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="zyrs.xyz.obadmin.mapper.ObMapper">
+<mapper namespace="cn.zy2018.myadmin.mapper.ObMapper">
 
-    <select id="getObInfoByUserId" resultType="zyrs.xyz.obadmin.bean.Ob">
+    <select id="getObInfoByUserId" resultType="cn.zy2018.myadmin.entity.Ob">
         select  id,name,logo,owner from tbl_object where user_id = #{id}
     </select>
 
     <!--菜单列表-->
-    <resultMap id="getMenuResultMap" type="zyrs.xyz.obadmin.bean.Menu">
+    <resultMap id="getMenuResultMap" type="cn.zy2018.myadmin.entity.Menu">
 
         <id property="id" column="id"/>
         <result property="name" column="name"/>
@@ -15,24 +15,26 @@
         <result property="menuType" column="menu_type"/>
         <result property="level" column="level"/>
 
-        <collection property="menuSecondList" ofType="zyrs.xyz.obadmin.bean.MenuSecond">
+        <collection property="menuSecondList" ofType="cn.zy2018.myadmin.entity.MenuSecond">
             <id property="id" column="ms_id"/>
             <result property="name" column="ms_name"/>
             <result property="url" column="ms_url"/>
             <result property="menuType" column="ms_type"/>
             <result property="menuParent" column="menu_parent"/>
+            <result property="obid" column="obid"/>
         </collection>
 
     </resultMap>
 
     <!--菜单-项目  1对多列表-->
-    <resultMap id="getMenuProjectResultMap" type="zyrs.xyz.obadmin.bean.MenuProject">
+    <resultMap id="getMenuProjectResultMap" type="cn.zy2018.myadmin.entity.MenuProject">
          <!--必须以菜单的id为主-->
         <id property="mid" column="id"/>
-        <result property="id" column="mp_id"/>
+
         <result property="mname" column="name"/>
 
-        <collection property="obList" ofType="zyrs.xyz.obadmin.bean.Ob">
+        <collection property="obList" ofType="cn.zy2018.myadmin.entity.Ob">
+            <result property="mpid" column="mp_id"/>
             <result property="name" column="o_name"/>
             <result property="logo" column="o_logo"/>
         </collection>
@@ -60,18 +62,18 @@
    </select>
 
     <select id="getMenuWithAdmin" resultMap="getMenuResultMap">
-        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 and (ms.menu_type = 1  or  ms.menu_type is null ) order by m.level asc, m.id asc, ms.id asc;
+        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent,ms.obid from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent where m.menu_type = 1 and (ms.menu_type = 1  or  ms.menu_type is null ) order by m.level asc, m.id asc, ms.id asc;
     </select>
 
     <select id="getMenu" resultMap="getMenuResultMap">
-        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent order by m.level asc;
+        select  m.id,m.name,m.menu_logo,m.menu_type,m.level,ms.id ms_id,ms.name ms_name,ms.url ms_url,ms.menu_type ms_type,ms.menu_parent,ms.obid from  tbl_menu m left join tbl_menu_second ms on m.id = ms.menu_parent order by m.level asc;
     </select>
 
-    <insert id="add_or_update_menu" parameterType="zyrs.xyz.obadmin.bean.Menu" useGeneratedKeys="true">
+    <insert id="add_or_update_menu" parameterType="cn.zy2018.myadmin.entity.Menu" useGeneratedKeys="true">
         replace into tbl_menu value(#{id},#{name},#{menuType},#{menuLogo},#{level})
     </insert>
-    <insert id="add_or_update_menuSecond" parameterType="zyrs.xyz.obadmin.bean.MenuSecond" useGeneratedKeys="true">
-        replace into tbl_menu_second value(#{id},#{name},#{url},#{menuType},#{menuParent})
+    <insert id="add_or_update_menuSecond" parameterType="cn.zy2018.myadmin.entity.MenuSecond" useGeneratedKeys="true">
+        replace into tbl_menu_second value(#{id},#{name},#{url},#{menuType},#{menuParent},#{obid})
     </insert>
 
     <!--删除菜单-->
@@ -83,10 +85,10 @@
     </delete>
 
     <!--项目信息-->
-    <select id="get_all_project_list" resultType="zyrs.xyz.obadmin.bean.Ob">
+    <select id="get_all_project_list" resultType="cn.zy2018.myadmin.entity.Ob">
         select * from tbl_object order by status asc,user_id asc
     </select>
-    <insert id="add_or_update_project" parameterType="zyrs.xyz.obadmin.bean.Ob" useGeneratedKeys="true">
+    <insert id="add_or_update_project" parameterType="cn.zy2018.myadmin.entity.Ob" useGeneratedKeys="true">
         replace into tbl_object value(#{id},#{owner},#{name},#{logo},#{descr},#{createTime},#{holdDate},#{holdCost},#{holdIns},#{userId},#{status})
     </insert>
     <select id="getObCountInfoById" resultType="java.lang.Integer">
@@ -105,13 +107,13 @@
         update tbl_object set status = 3 where NOW() > DATE_ADD(hold_date,INTERVAL 1 MONTH);
     </update>
 
-    <select id="getObInfoById" resultType="zyrs.xyz.obadmin.bean.Ob">
+    <select id="getObInfoById" resultType="cn.zy2018.myadmin.entity.Ob">
         select  id,logo,name,hold_date from tbl_object where id = #{id}
     </select>
 
     <!--获取菜单-项目列表-->
     <select id="getMenuProjectsList" resultMap="getMenuProjectResultMap">
-        select m.id,m.name,mp.id mp_id,o.name o_name,o.logo o_logo from  tbl_menu_project as mp right join tbl_menu_second as m   on mp.mid=m.id left join tbl_object as o on mp.oid = o.id where m.menu_type <![CDATA[<>]]> 1 order by id asc
+        select m.id,m.name,mp.id mp_id,o.name o_name,o.logo o_logo from  tbl_menu_project as mp right join tbl_menu_second as m   on mp.mid=m.id left join tbl_object as o on mp.oid = o.id where m.menu_type <![CDATA[<>]]> 1 order by m.obid asc
     </select>
     <select id="getMenuProjectCountByMidAndOid" resultType="java.lang.Integer">
          select count(id) from tbl_menu_project where mid = #{param1} and oid=#{param2}

@@ -8,6 +8,10 @@
         display: flex!important;
         flex-wrap: wrap;
     }
+    .menu_project{
+        box-sizing: border-box;
+        margin-bottom: 50px;
+    }
     .menu_project .item-one{
         background-color: white;
         padding: 10px;
@@ -31,32 +35,31 @@
         color: #1E9FFF;
         cursor: pointer;
     }
+    .layui-colla-title{
+        background-color: #f9f9f9;
+    }
 </style>
 <body>
 <nav th:replace="/public/head::nav"></nav>
 
 <div class="container-box">
     <aside th:replace="/public/aside::aside"></aside>
-
     <section>
-        <div class="section">
-
-            <div class="layui-collapse menu_project">
-                 <div class="layui-colla-item" th:each="mp:${menuProjects}">
-                     <h2 class="layui-colla-title">
-                         <span class="title" th:text="${mp.mname}">二级菜单标题</span>
-                     </h2>
-                     <div class="layui-colla-content" style="background-color: white">
-                         <div class="item-one" th:each="pro:${mp.obList}">
-                             <img th:src="${pro.logo}"/>
-                             <span th:text="${pro.name}"></span>
-                             <span class="glyphicon glyphicon-remove" style="color: red; cursor: pointer;" th:onclick="deleteMenuProject(this,[[${mp.id}]])"></span>
-                         </div>
-                         <div class="item-one addMenuProject" data-toggle="modal" data-target="#add-project-modal"  th:onclick="openAddMenuProjectModal([[${mp.mid}]])">
-                             <span class="glyphicon glyphicon-plus"></span>
-                         </div>
-                     </div>
-                 </div>
+        <div class="layui-collapse menu_project">
+            <div class="layui-colla-item" th:each="mp:${menuProjects}">
+                <h2 class="layui-colla-title">
+                    <span class="title" th:text="${mp.mname}">二级菜单标题</span>
+                </h2>
+                <div class="layui-colla-content" style="background-color: white">
+                    <div class="item-one" th:each="pro:${mp.obList}">
+                        <img th:src="${pro.logo}"/>
+                        <span th:text="${pro.name}"></span>
+                        <span class="glyphicon glyphicon-remove" style="color: red; cursor: pointer;" th:onclick="deleteMenuProject(this,[[${pro.mpid}]])"></span>
+                    </div>
+                    <div class="item-one addMenuProject" data-toggle="modal" data-target="#add-project-modal"  th:onclick="openAddMenuProjectModal([[${mp.mid}]])">
+                        <span class="glyphicon glyphicon-plus"></span>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

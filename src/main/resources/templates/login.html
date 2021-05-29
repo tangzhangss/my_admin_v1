@@ -7,8 +7,8 @@
     .box{
         margin: 20px 0 0 0;
         width: 100%;
-        height:500px;
-        background-image: url("/static/img/login/logo.jpg");
+        height:460px;
+        background-image: url("/static/tzss-img/login/logo.jpg");
         background-size:100% 100%;
         background-repeat: no-repeat;
     }
@@ -88,18 +88,21 @@
         margin: 20px 0;
         width: 100%;
     }
-    .right{
+    .btm-right{
         color:#999;
         text-align: center;
-        padding-bottom: 6px;
+        height: 50px;
+        line-height: 50px;
+        color: white;
         font-size: 25px;
+        background-color: gray;
     }
 </style>
 <body>
 
 <nav th:replace="/public/head::nav"></nav>
 
-<div class="box">
+<div class="box" id="app">
    <div class="mark-title">
        <p>让代码成为艺术</p>
        <br/>
@@ -121,46 +124,59 @@
                     <input type="checkbox" name="rememberMe"/><span>记住密码</span>
                 </div>
                 <!--<a href="">忘记密码</a>-->
-                <div  class="layui-btn  layui-btn-warm" onclick="formSubmit()">登录</div>
+                <div  class="layui-btn  layui-btn-warm"  @click="formSubmit">登录</div>
             </div>
-
-
-
-            <script>
-                function formSubmit(){
-                    $.ajax({
-                        url:"/user_login",
-                        type:'POST',
-                        data:$("form").serialize(),
-                        success:function(data){
-                          console.log("登录成功返回信息:",data);
-
-                          //客户返回的是客户id_用于选择管理项目
-                          if(/^[1-9]+$/.test(data)){
-                              console.log("客户选择需要管理的项目...");
-                              //设置可选择项目
-                              setSelectedProject(data);
-                              //弹出静态框
-                              $('#project_select_modal').modal();
-                          }else  if(data == 0){
-                              window.location.href = "/index"
-                          }else{
-                              mylayer.msg(data);
-                          }
-
-                          return false;
-                        }
-                    })
-                    return false;
-                }
-            </script>
         </form>
     </div>
 </div>
+
+
+
+<script>
+    const vm =   new Vue({
+        el: '#app',
+        data: function() {
+            return {
+
+            }
+        },
+        methods: {
+            formSubmit(){
+                let that = this;
+                $.ajax({
+                    url:"/user_login",
+                    type:'POST',
+                    data:$("form").serialize(),
+                    success:function(data){
+                        console.log("登录成功返回信息:",data);
+                        //客户返回的是客户id_用于选择管理项目
+                        if(/^[1-9]+$/.test(data)){
+                            console.log("客户选择需要管理的项目...");
+
+                            //设置可选择项目
+                            setSelectedProject(data);
+
+                        }else  if(data == 0){
+                            window.location.href = "/index"
+                        }else{
+                            that.$notify.error({
+                                title: '错误',
+                                message: data.message
+                            });
+                        }
+
+                        return false;
+                    }
+                })
+                return false;
+            }
+        }
+    })
+</script>
 <!--项目选择 静态框-->
 <div th:replace  ="/public/tool :: project_select_modal"></div>
-<img class="bottom-img" src="/static/img/login/bottom.jpg"/>
+<img class="bottom-img" src="/static/tzss-img/login/bottom.jpg"/>
 
-<div class="right">copyright © 2018-2024  合作微信|电话 15520449931  ^_^</div>
+<div class="btm-right">copyright © 2018-2024 contact 15520449931 </div>
 </body>
 </html>
